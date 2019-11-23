@@ -1,0 +1,23 @@
+<p>login works!</p>
+
+<div>
+    <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Email">
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Format d'email non valide
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Champs requis
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input type="password" matInput placeholder="Mot de passe">
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+                Champs requis
+            </mat-error>
+        </mat-form-field>
+    </form>
+    <button mat-raised-button color="primary">Se connecter</button>
+    <button mat-raised-button color="accent" routerLink="/signup">S'inscrire</button>
+</div>

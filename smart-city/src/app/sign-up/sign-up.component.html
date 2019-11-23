@@ -1,0 +1,48 @@
+<p>sign-up works!</p>
+<div>
+    <form class="form">
+
+        <mat-form-field class="elem-form">
+          <input matInput placeholder="Email" (focusout)="setEmail($event)" name="email">
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Format d'email non valide
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Champs requis
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="elem-form">
+            <input type="password" matInput placeholder="Mot de passe" (focusout)="setPassword($event)">
+        </mat-form-field>
+
+        <mat-form-field class="elem-form">
+                <input type="password" matInput placeholder="Confirmer mot de passe" (focusout)="setPasswordConfirm($event)">
+        </mat-form-field>
+
+        <mat-form-field class="elem-form">
+            <input matInput placeholder="Nom">
+        </mat-form-field>
+
+        <mat-form-field class="elem-form">
+                <input matInput placeholder="Localité">
+            </mat-form-field>
+
+        <mat-label>Code Postal</mat-label>
+        <mat-select (focusout)="setPostCode($event)">
+            <mat-option *ngFor="let code of postCodes" [value]="code">
+                {{code}}
+            </mat-option>
+        </mat-select>
+
+        <mat-form-field class="elem-form">
+            <span matPrefix>+32 &nbsp;</span>
+            <input type="tel" matInput placeholder="Telephone">
+        </mat-form-field>
+
+        <mat-form-field class="elem-form">
+            <textarea matInput placeholder="Description"></textarea>
+        </mat-form-field>
+    </form>
+    <button mat-raised-button color="primary">Valider</button>
+</div>
