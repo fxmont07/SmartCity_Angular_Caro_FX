@@ -6,10 +6,16 @@ export interface Company {
     address : string;
 }
 
-export interface PeriodicElement {
-    name: string;
-    position: number;
-    weight: number;
-    symbol: string;
-  }
+export class CompanyForm {
+    public email : string;
+        public password : string;
+        public name : string;
+        public locality : string;
+        public postCode : string;
+        public street : string;
+        public streetNumber : string;
+        public phone : string;
+        public description : string;
+    constructor () {}
+}
 

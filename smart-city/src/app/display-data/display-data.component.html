@@ -7,9 +7,10 @@
     </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="colToDisplay"></tr>
-    <tr mat-row *matRowDef="let row; columns: colToDisplay;"></tr>
+    <tr mat-row *matRowDef="let row; columns: colToDisplay;" (click)="selectElement(row)"></tr>
 </table>
-
-<button mat-button color="primary">Primary</button>
-<button mat-button color="primary">Primary</button>
-<button mat-button color="primary">Primary</button>
+<div id="wrapperButtons">
+  <button mat-raised-button color="primary" (click)="addElement()">Ajouter</button>
+  <button mat-raised-button color="accent" (click)="editElement()">Modifier</button>
+  <button mat-raised-button color="warn" (click)="deleteElement()">Supprimer</button>
+</div>

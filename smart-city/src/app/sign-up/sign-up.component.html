@@ -1,9 +1,8 @@
 <p>sign-up works!</p>
 <div>
     <form class="form">
-
         <mat-form-field class="elem-form">
-          <input matInput placeholder="Email" (focusout)="setEmail($event)" name="email">
+          <input matInput placeholder="Email" required (focusout)="setEmail($event)" name="email" [formControl]="emailFormControl" >
           <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
             Format d'email non valide
           </mat-error>
@@ -13,15 +12,17 @@
         </mat-form-field>
 
         <mat-form-field class="elem-form">
-            <input type="password" matInput placeholder="Mot de passe" (focusout)="setPassword($event)">
+            <input type="password" matInput placeholder="Mot de passe" required (focusout)="setPassword($event)" [formControl]="requisFormControl">
+            <mat-error *ngIf="requisFormControl.hasError('required')" [formControl]="requisFormControl">
+                Champs requis
+            </mat-error>
         </mat-form-field>
 
         <mat-form-field class="elem-form">
-                <input type="password" matInput placeholder="Confirmer mot de passe" (focusout)="setPasswordConfirm($event)">
-        </mat-form-field>
-
-        <mat-form-field class="elem-form">
-            <input matInput placeholder="Nom">
+            <input matInput placeholder="Nom" required [formControl]="requisFormControl">
+            <mat-error *ngIf="requisFormControl.hasError('required')" [formControl]="requisFormControl">
+                Champs requis
+            </mat-error>
         </mat-form-field>
 
         <mat-form-field class="elem-form">
@@ -34,6 +35,14 @@
                 {{code}}
             </mat-option>
         </mat-select>
+
+        <mat-form-field class="elem-form">
+            <input matInput placeholder="Rue">
+        </mat-form-field>
+
+        <mat-form-field class="elem-form">
+            <input matInput placeholder="Numéro de la rue">
+        </mat-form-field>
 
         <mat-form-field class="elem-form">
             <span matPrefix>+32 &nbsp;</span>

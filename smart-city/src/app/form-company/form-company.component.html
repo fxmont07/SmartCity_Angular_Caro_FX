@@ -1,0 +1,55 @@
+<p>form-company works!</p>
+
+<div>
+<h1>Formulaire de l'entreprise</h1>
+    <mat-form-field class="elem-form">
+        <input matInput placeholder="Email" required name="email" [formControl]="emailFormControl" [(ngModel)]="companyModel.email">
+        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Format d'email non valide
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+            Champs requis
+        </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="elem-form">
+            <input type="password" matInput placeholder="Mot de passe" required [formControl]="requisFormControl" [(ngModel)]="companyModel.password">
+            <mat-error *ngIf="requisFormControl.hasError('required')" [formControl]="requisFormControl">
+                Champs requis
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="elem-form">
+            <input matInput placeholder="Nom" required [(ngModel)]="companyModel.name">
+            <mat-error *ngIf="requisFormControl.hasError('required')" >
+                Champs requis
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="elem-form">
+                <input matInput placeholder="Localité" [(ngModel)]="companyModel.locality">
+            </mat-form-field>
+
+        <mat-label>Code Postal</mat-label>
+        <mat-select [(ngModel)]="companyModel.postCode">
+            <mat-option *ngFor="let code of postCodes" [value]="code">
+                {{code}}
+            </mat-option>
+        </mat-select>
+        <mat-form-field class="elem-form">
+            <input matInput placeholder="Rue" [(ngModel)]="companyModel.street">
+        </mat-form-field>
+
+        <mat-form-field class="elem-form">
+            <input matInput placeholder="Numéro de la rue" [(ngModel)]="companyModel.streetNumber">
+        </mat-form-field>
+        <mat-form-field class="elem-form">
+            <span matPrefix>+32 &nbsp;</span>
+            <input type="tel" matInput placeholder="Telephone" [(ngModel)]="companyModel.phone">
+        </mat-form-field>
+
+        <mat-form-field class="elem-form">
+            <textarea matInput placeholder="Description" [(ngModel)]="companyModel.description"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="addCompany()">Valider</button>
+</div>

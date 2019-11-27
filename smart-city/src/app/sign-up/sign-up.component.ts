@@ -13,9 +13,12 @@ export class SignUpComponent implements OnInit {
     Validators.email,
   ]);
 
+  requisFormControl = new FormControl('', [
+    Validators.required,
+  ]);
+
   email : string;
   password : string;
-  passwordConfirm : string;
   name : string;
   locality : string;
   postCode : string;
@@ -49,9 +52,6 @@ export class SignUpComponent implements OnInit {
 
   }
 
-  setPasswordConfirm(event) {
-
-  }
 
   setName(event) {
   }
