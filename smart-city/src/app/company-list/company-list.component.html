@@ -1,5 +1,10 @@
 <p>company-list works!</p>
 
-<app-display-data [data]="companies" [colNames]="headers" >
+
+<app-display-data [data]="companies" [colNames]="headers" 
+
+(editEvent)="editCompany($event)"
+(deleteEvent)="deleteCompany($event)" 
+(addEvent)="addCompany($event)">
 
 </app-display-data>

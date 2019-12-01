@@ -1,0 +1,73 @@
+<p>form-student works!</p>
+
+<button mat-raised-button color="primary" routerLink="/students">Retour</button>
+<div id="wrapper">
+<h1>Formulaire de l'étudiant</h1>
+<form (ngSubmit)="addStudent()" [formGroup]="form">
+        <mat-form-field class="elem-form">
+            <input type="text" matInput placeholder="Email" required formControlName="email" [(ngModel)]="studentModel.email">
+            <mat-error *ngIf="form.get('email').hasError('email')">
+                Format d'email non valide
+            </mat-error>
+            <mat-error *ngIf="form.get('email').hasError('required')">
+                Champs requis
+            </mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="elem-form">
+            <input type="text" matInput placeholder="Nom"  required formControlName="name" [(ngModel)]="studentModel.name">
+            <mat-error *ngIf="form.get('name').hasError('required')">
+                Champs requis
+            </mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="elem-form">
+                <input type="text" matInput placeholder="Prénom" required formControlName="name" [(ngModel)]="studentModel.name">
+                <mat-error *ngIf="form.get('firstname').hasError('required')">
+                    Champs requis
+                </mat-error>
+        </mat-form-field>
+
+        <span formGroupName="address">
+            <mat-form-field class="elem-form">
+                <input matInput placeholder="Localité" [(ngModel)]="studentModel.address.locality" formControlName="locality">
+            </mat-form-field>
+    
+            <mat-form-field class="elem-form">
+                <mat-label>Code Postal</mat-label>
+                <mat-select [(ngModel)]="studentModel.address.postCode" formControlName="postCode">
+                    <mat-option *ngFor="let code of postCodes" [value]="code">
+                        {{code}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+            <mat-form-field class="elem-form">
+                <input matInput placeholder="Rue" [(ngModel)]="studentModel.address.street" formControlName="street">
+            </mat-form-field>
+    
+            <mat-form-field class="elem-form">
+                <input matInput placeholder="Numéro de la rue" [(ngModel)]="studentModel.address.streetNumber" formControlName="streetNumber">
+            </mat-form-field>
+        </span>
+    
+        <mat-form-field class="elem-form">
+            <span matPrefix>+32 &nbsp;</span>
+            <input type="tel" matInput placeholder="Telephone" [(ngModel)]="studentModel.phone" formControlName="phone">
+        </mat-form-field>
+
+        <mat-label>Sections</mat-label>
+        <mat-select [(ngModel)]="studentModel.section" formControlName="section">
+            <mat-option *ngFor="let section of sections" [value]="section">
+                {{section}}
+            </mat-option>
+        </mat-select>
+        <button id=button mat-raised-button color="primary" (click)="addStudent()" [disabled]="!form.valid">Valider</button>
+        <p>
+            Status {{form.status}}
+    
+            Status {{form.value}}
+        </p>
+    </form>
+    
+</div>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Company } from '../model/company';
+import { CompanyTable } from '../model/company';
 import { FormCompanyComponent } from '../form-company/form-company.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CompanyService } from '../service/company.service';
 
 @Component({
   selector: 'app-company-list',
@@ -8,56 +10,24 @@ import { FormCompanyComponent } from '../form-company/form-company.component';
   styleUrls: ['./company-list.component.css']
 })
 export class CompanyListComponent implements OnInit {
-  companies: Array<Company>;
+  companies: Array<CompanyTable>;
   headers: Array<string>;
 
-  selectedCompany : any;
-  constructor() {
-    this.headers = new Array<string>();
-    this.companies = new Array<Company>();
+  constructor(private router : Router, private route : ActivatedRoute, private serviceCompany : CompanyService) {
+    this.headers = serviceCompany.getHeadersCompany();
+    this.companies = serviceCompany.getCompaniesTable(); // Mieux ngInit ou ici?
   }
 
   ngOnInit() {
-    this.headers.push("id");
-    this.headers.push("name");
-    this.headers.push("email");
-    this.headers.push("address");
 
-    this.companies.push({
-      id: 1,
-      name: "Test1",
-      email: "rere",
-      address: "adr"
-    });
-    this.companies.push({
-      id: 2,
-      name: "Test1",
-      email: "rere",
-      address: "adr"
-    });
-    this.companies.push({
-      id: 3,
-      name: "Test1",
-      email: "rere",
-      address: "adr"
-    });
-    this.companies.push({
-      id: 4,
-      name: "Test1",
-      email: "rere",
-      address: "adr"
-    });
   }
 
   addCompany() {
-    console.log("coucou");
-    this.companies.push({
-      id: 25,
-      name: "Test1",
-      email: "rere",
-      address: "adr"
-    });
-    this.companies=[...this.companies];
+    this.router.navigate(["/formcompany"]);
+  }
+
+  editCompany(company: CompanyTable){
+    this.router.navigate(["/formcompany/", company.id] ); // Si cv pas cest , et pas +
   }
 
   deleteCompany(event) {

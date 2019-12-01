@@ -1,21 +1,24 @@
 // Interface used in view company crud
-export interface Company {
+export interface CompanyTable {
     id : number;
     name : string;
     email : string;
-    address : string;
+    locality : string;
 }
 
-export class CompanyForm {
-    public email : string;
-        public password : string;
-        public name : string;
-        public locality : string;
-        public postCode : string;
-        public street : string;
-        public streetNumber : string;
-        public phone : string;
-        public description : string;
-    constructor () {}
+export interface CompanyForm {
+     email : string;
+     password : string;
+     name : string;
+     address : {
+        locality : string;
+        postCode : string;
+        street : string;
+        streetNumber : string;
+     };
+     phone : string;
+     description : string;
 }
+
+
 

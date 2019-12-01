@@ -1,57 +1,67 @@
-<p>sign-up works!</p>
-<div>
-    <form class="form">
-        <mat-form-field class="elem-form">
-          <input matInput placeholder="Email" required (focusout)="setEmail($event)" name="email" [formControl]="emailFormControl" >
-          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-            Format d'email non valide
-          </mat-error>
-          <mat-error *ngIf="emailFormControl.hasError('required')">
-            Champs requis
-          </mat-error>
-        </mat-form-field>
+<p>form-company works!</p>
 
+<button mat-raised-button color="primary" routerLink="/companies">Retour</button>
+<div id="wrapper">
+<h1>Formulaire de l'entreprise</h1>
+<form (ngSubmit)="addCompany()" [formGroup]="form">
         <mat-form-field class="elem-form">
-            <input type="password" matInput placeholder="Mot de passe" required (focusout)="setPassword($event)" [formControl]="requisFormControl">
-            <mat-error *ngIf="requisFormControl.hasError('required')" [formControl]="requisFormControl">
+            <input type="text" matInput placeholder="Email" required formControlName="email" [(ngModel)]="companyModel.email">
+            <mat-error *ngIf="form.get('email').hasError('email')">
+                Format d'email non valide
+            </mat-error>
+            <mat-error *ngIf="form.get('email').hasError('required')">
                 Champs requis
             </mat-error>
         </mat-form-field>
-
+    
         <mat-form-field class="elem-form">
-            <input matInput placeholder="Nom" required [formControl]="requisFormControl">
-            <mat-error *ngIf="requisFormControl.hasError('required')" [formControl]="requisFormControl">
+            <input type="password" matInput placeholder="Mot de passe" required formControlName="password" [(ngModel)]="companyModel.password">
+            <mat-error *ngIf="form.get('password').hasError('required')">
+                Champs requis
+            </mat-error>
+            <mat-error *ngIf="form.get('password').hasError('minlength')">
+                Minimum 8 caractères
+            </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field class="elem-form">
+            <input type="text" matInput placeholder="Nom"  required formControlName="name" [(ngModel)]="companyModel.name">
+            <mat-error *ngIf="form.get('name').hasError('required')">
                 Champs requis
             </mat-error>
         </mat-form-field>
-
-        <mat-form-field class="elem-form">
-                <input matInput placeholder="Localité">
+    
+        <span formGroupName="address">
+            <mat-form-field class="elem-form">
+                <input matInput placeholder="Localité" [(ngModel)]="companyModel.address.locality" formControlName="locality">
             </mat-form-field>
-
-        <mat-label>Code Postal</mat-label>
-        <mat-select (focusout)="setPostCode($event)">
-            <mat-option *ngFor="let code of postCodes" [value]="code">
-                {{code}}
-            </mat-option>
-        </mat-select>
-
-        <mat-form-field class="elem-form">
-            <input matInput placeholder="Rue">
-        </mat-form-field>
-
-        <mat-form-field class="elem-form">
-            <input matInput placeholder="Numéro de la rue">
-        </mat-form-field>
-
+    
+            <mat-form-field class="elem-form">
+                <mat-label>Code Postal</mat-label>
+                <mat-select [(ngModel)]="companyModel.address.postCode" formControlName="postCode">
+                    <mat-option *ngFor="let code of postCodes" [value]="code">
+                        {{code}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+            <mat-form-field class="elem-form">
+                <input matInput placeholder="Rue" [(ngModel)]="companyModel.address.street" formControlName="street">
+            </mat-form-field>
+    
+            <mat-form-field class="elem-form">
+                <input matInput placeholder="Numéro de la rue" [(ngModel)]="companyModel.address.streetNumber" formControlName="streetNumber">
+            </mat-form-field>
+        </span>
+    
         <mat-form-field class="elem-form">
             <span matPrefix>+32 &nbsp;</span>
-            <input type="tel" matInput placeholder="Telephone">
-        </mat-form-field>
-
+            <input type="tel" matInput placeholder="Telephone" [(ngModel)]="companyModel.phone" formControlName="phone">
+        </mat-form-field>1
+    
         <mat-form-field class="elem-form">
-            <textarea matInput placeholder="Description"></textarea>
+            <textarea matInput placeholder="Description" [(ngModel)]="companyModel.description" formControlName="description"></textarea>
         </mat-form-field>
+        <button id=button mat-raised-button color="primary" (click)="addCompany()" [disabled]="!form.valid">Valider</button>
     </form>
-    <button mat-raised-button color="primary">Valider</button>
 </div>

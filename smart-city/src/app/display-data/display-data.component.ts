@@ -1,12 +1,8 @@
-import { Component, OnInit, Input, Output, ViewChild } from '@angular/core';
-import { Company } from '../model/company';
+import { Component, OnInit, Input, Output } from '@angular/core';
+import { CompanyTable } from '../model/company';
 import { EventEmitter } from '@angular/core';
-import { MatTableModule } from '@angular/material/table';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { MatPaginator} from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-display-data',
@@ -23,18 +19,21 @@ import { MatTableDataSource } from '@angular/material/table';
 export class DisplayDataComponent implements OnInit {
   @Input() colNames : Array<string>;
   @Input() colToDisplay : Array<string>;
-  @Input() data : Array<Company>;
+  @Input() data : Array<CompanyTable>;
 
   @Output() addEvent = new EventEmitter<any>();
   @Output() editEvent = new EventEmitter<any>();
   @Output() deleteEvent = new EventEmitter<any>();
 
+  selection = new SelectionModel<CompanyTable>(false, []);
   selectedElement : any;
+
+  @Input() routeAdd : any;
 
   constructor() {
       this.colNames = new Array<string>();
       this.colToDisplay = new Array<string>(); // Use wich a associatif table
-      this.data = new Array<Company>();
+      this.data = new Array<CompanyTable>();
   }
 
   ngOnInit() {

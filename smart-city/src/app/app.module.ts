@@ -23,6 +23,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FormCompanyComponent } from './form-company/form-company.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { FormSectionComponent } from './form-section/form-section.component';
+import { SectionListComponent } from './section-list/section-list.component'; 
+import { CompanyResolver } from './company-resolver';
+import { StudentResolver } from './student-resolver';
+import { StudentListComponent } from './student-list/student-list.component';
+import { FormStudentComponent } from './form-student/form-student.component';
+import { StudentService } from './service/student.service';
 
 
 
@@ -45,9 +53,38 @@ const routes: Routes = [
     component : CompanyListComponent,
   },
   {
-    path : 'addcompany',
+    path : 'sections',
+    component : SectionListComponent,
+  },
+  {
+    path : 'formcompany',
     component : FormCompanyComponent,
-  }
+  },
+  {
+    path : 'formcompany/:id',
+    component : FormCompanyComponent,
+    resolve : {company: CompanyResolver}
+  },
+  {
+    path : 'addsection',
+    component : FormSectionComponent,
+  },
+  {
+    path : 'students',
+    component : StudentListComponent,
+  },
+  {
+    path : 'formstudent',
+    component : FormStudentComponent,
+  },
+  {
+    path : 'formstudent/:id',
+    component : FormStudentComponent,
+    resolve : {student: StudentResolver}
+  },
+  
+  
+  
 ];
 
 @NgModule({
@@ -57,15 +94,22 @@ const routes: Routes = [
     CompanyListComponent,
     LoginComponent,
     SignUpComponent,
-    FormCompanyComponent
+    FormCompanyComponent,
+    FormSectionComponent,
+    SectionListComponent,
+    StudentListComponent,
+    FormStudentComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    HttpClientModule,
     FormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     MatTableModule,
+    MatCheckboxModule,
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
