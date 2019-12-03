@@ -26,13 +26,18 @@ import { FormCompanyComponent } from './form-company/form-company.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { FormSectionComponent } from './form-section/form-section.component';
 import { SectionListComponent } from './section-list/section-list.component'; 
-import { CompanyResolver } from './company-resolver';
-import { StudentResolver } from './student-resolver';
 import { StudentListComponent } from './student-list/student-list.component';
 import { FormStudentComponent } from './form-student/form-student.component';
 import { StudentService } from './service/student.service';
-
-
+import { CriterionListComponent } from './criterion-list/criterion-list.component';
+import { FormCriterionComponent } from './form-criterion/form-criterion.component';
+import { CompanyResolver } from './form-company/company-resolver';
+import { StudentResolver } from './form-student/student-resolver';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatListModule} from '@angular/material/list';
+import {MatRadioModule} from '@angular/material/radio'; 
+import { OfferDetailsComponent } from './offer-details/offer-details.component';
 
 const routes: Routes = [
   {
@@ -82,6 +87,23 @@ const routes: Routes = [
     component : FormStudentComponent,
     resolve : {student: StudentResolver}
   },
+  {
+    path : 'criterions',
+    component : CriterionListComponent,
+  },
+  {
+    path : 'formcriterion',
+    component : FormCriterionComponent,
+  },
+  {
+    path : 'formcriterion/:id',
+    component : FormCriterionComponent,
+   //TODO: resolve : {criterion: CriterionResolver}
+  },
+  {
+    path : 'offerdetails', // TODO: id
+    component : OfferDetailsComponent,
+  },
   
   
   
@@ -98,7 +120,11 @@ const routes: Routes = [
     FormSectionComponent,
     SectionListComponent,
     StudentListComponent,
-    FormStudentComponent
+    FormStudentComponent,
+    CriterionListComponent,
+    FormCriterionComponent,
+    NavBarComponent,
+    OfferDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -110,7 +136,10 @@ const routes: Routes = [
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     MatTableModule,
     MatCheckboxModule,
+    MatRadioModule,
     MatInputModule,
+    MatListModule,
+    MatMenuModule,
     MatButtonModule,
     MatSelectModule,
     NgxDatatableModule,

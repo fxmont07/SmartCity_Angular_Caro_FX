@@ -2,8 +2,8 @@ import { Injectable, } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { CompanyForm } from './model/company';
-import { CompanyService } from './service/company.service';
+import { CompanyService } from '../service/company.service';
+import { CompanyForm } from '../model/company';
 
 
 @Injectable({

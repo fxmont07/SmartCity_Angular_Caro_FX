@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SectionForm } from '../model/section';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
+import { SectionService } from '../service/section.service';
 
 @Component({
   selector: 'app-form-section',
@@ -9,22 +10,18 @@ import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '
 })
 export class FormSectionComponent implements OnInit {
 
-  form : FormGroup;
-  sectionModel : SectionForm;
+  form: FormGroup;
+  sectionModel: SectionForm;
+  isACreation: boolean;
 
-  constructor() { 
+  constructor(private sectionService : SectionService) { 
     this.form = this.createFormGroup();
   }
 
   ngOnInit() {
-    this.sectionModel = {
-      name : null
-    }
   }
 
-  addSection() {
-    console.log(this.sectionModel);
-  }
+
 
   createFormGroup() {
     return new FormGroup({
@@ -34,5 +31,14 @@ export class FormSectionComponent implements OnInit {
         ]
       ),
     });
+  }
+
+  updateSection() {
+    const sectionUpdated = this.form.value;
+    if(this.isACreation) {
+      this.sectionService.addSection();
+    } else {
+      this.sectionService.updateSection();
+    }
   }
 }

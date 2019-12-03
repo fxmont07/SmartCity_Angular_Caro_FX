@@ -1,0 +1,27 @@
+<p>form-criterion works!</p>
+
+
+<button mat-raised-button color="primary" routerLink="/criterions">Retour</button>
+<div id="wrapper">
+    <h1>Formulaire du critère</h1>
+    <form (ngSubmit)="updateCriterion()" [formGroup]="form">
+
+        <mat-form-field class="elem-form">
+            <input type="text" matInput placeholder="Decritpion" required formControlName="description">
+            <mat-error *ngIf="form.get('description').hasError('required')">
+                Champs requis
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="elem-form">
+            <mat-label>Section</mat-label>
+            <mat-select required formControlName="section">
+                <mat-option *ngFor="let section of getAllSections()" [value]="section">
+                    {{section}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        
+        <button id=button mat-raised-button color="primary" [disabled]="!form.valid">Valider</button>
+    </form>
+</div>

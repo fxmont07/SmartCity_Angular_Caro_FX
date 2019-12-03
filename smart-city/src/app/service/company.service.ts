@@ -11,7 +11,6 @@ export class CompanyService {
   company : CompanyForm;
 
   constructor() {
-
     this.headersCompany.push("id");
     this.headersCompany.push("name");
     this.headersCompany.push("email");

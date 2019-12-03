@@ -15,42 +15,25 @@ export class FormCompanyComponent implements OnInit {
   form: FormGroup;
   postCodes: Array<string>;
   companyModel: CompanyForm;
+  isACreation : boolean;
 
   constructor(private route: ActivatedRoute, private companyService: CompanyService) {
     this.form = this.createFormGroup();
+    this.isACreation = true;
   }
 
   ngOnInit() {
-  
-   
   this.route.data
-      //TODO: appeler le service pour récupérer sur base de l'id le détail de la compagnie
-      //this.service.getHero(params.get('id')))
-      .subscribe((data: {company: CompanyForm} ) => {
+      .subscribe((data: {company: CompanyForm}) => {
         console.log(data);
         if(data.company != undefined) {
           this.companyModel = data.company;
           console.log(this.companyModel);
-          //TODO: patcher le formulaire : https://angular.io/guide/reactive-forms
           this.form.patchValue(this.companyModel);
-        } else {
-           this. companyModel = {
-            name: null,
-            address: {
-              locality: null,
-              street: null,
-              streetNumber: null,
-              postCode: null,
-            }
-          } as CompanyForm;
-        }
-       });
+          this.isACreation = false;
+        } 
+      });
   }
-
-  addCompany() {
-    console.log(this.companyModel); //TODO: 
-  }
-
 
   createFormGroup() {
     return new FormGroup({
@@ -81,10 +64,14 @@ export class FormCompanyComponent implements OnInit {
       description: new FormControl('')
     });
   }
-  //TODO: retirer le mot control des et faire des controle pour tous les champs pour pouvoir utilisé les lignes 83 et 49 
+
   updateCompany() {
-    const companyUpdated= this.form.value;
+    const companyUpdated = this.form.value;
     console.log(companyUpdated);
-    //this.companyService.update(companyUpdated);
+    if(this.isACreation) {
+      //this.companyService.addCompany(companyUpdated);
+    } else {
+      //this.companyService.update(companyUpdated)
+    }
   }
 }

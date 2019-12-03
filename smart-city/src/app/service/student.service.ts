@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import { StudentTable, StudentForm } from '../model/student';
 import { Observable, of } from 'rxjs';
+import { StudentTable, StudentForm } from '../model/student';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentService {
-  studentsTable : Array<StudentTable>;
-  headersStudent : Array<string>;
-  company : StudentForm;
+  private studentsTable : Array<StudentTable>;
+  private headersStudent : Array<string>;
 
   constructor() {
     this.studentsTable = new Array<StudentTable>();
@@ -56,6 +55,7 @@ export class StudentService {
             locality: student.locality,  
           }, 
         } as StudentForm);
+        //TODO:null all champs + propre
     }
   }
 }

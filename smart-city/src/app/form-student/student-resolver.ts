@@ -2,8 +2,9 @@ import { Injectable, } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { StudentService } from './service/student.service';
-import { StudentForm } from './model/student';
+import { StudentForm } from '../model/student';
+import { StudentService } from '../service/student.service';
+
 
 @Injectable({
     providedIn: 'root'

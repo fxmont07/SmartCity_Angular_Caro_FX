@@ -4,13 +4,13 @@
 <button mat-raised-button color="primary" routerLink="/sections">Retour</button>
 <div id="wrapper">
 <h1>Formulaire de la section</h1>
-<form (ngSubmit)="addSection()" [formGroup]="form">
+<form (ngSubmit)="updateSection()" [formGroup]="form">
     <mat-form-field class="elem-form">
-        <input matInput placeholder="Name" required formControlName="nameControl" [(ngModel)]="sectionModel.name">
-        <mat-error *ngIf="form.get('nameControl').hasError('required')">
+        <input matInput placeholder="Name" required formControlName="nameControl">
+        <mat-error *ngIf="form.get('name').hasError('required')">
             Champs requis
         </mat-error>
         </mat-form-field>
-    <button id=button mat-raised-button color="primary" (click)="addSection()" [disabled]="!form.valid">Valider</button>
+    <button id=button mat-raised-button color="primary" [disabled]="!form.valid">Valider</button>
 </form>
 </div>

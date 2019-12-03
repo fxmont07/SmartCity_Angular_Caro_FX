@@ -34,5 +34,9 @@ export class CompanyListComponent implements OnInit {
     this.companies = this.companies.filter(c => c.id != event.id);
     this.companies=[...this.companies];
   }
+
+  getHeaders() {
+    return this.headers;
+  }
 }
 

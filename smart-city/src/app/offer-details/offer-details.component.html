@@ -1,0 +1,22 @@
+<p>offer-details works!</p>
+
+<div id="wrapper">
+    <mat-form-field>
+        <input matInput placeholder="Label de l'offre">
+    </mat-form-field>
+    
+    <mat-form-field>
+        <textarea matInput placeholder="Description du stage"></textarea>
+    </mat-form-field>
+
+    <h2>Profil recherché</h2>
+    <mat-list>
+        <mat-list-item  *ngFor="let c of getCriterionsValue(); let index"> 
+            <span>{{c.description}}</span>
+            <mat-radio-group>
+                <mat-radio-button type="radio" [checked]="c.isMandatory" value="1" (click)="setIsMandatoryWithIndex(index, true)">Obligatoire</mat-radio-button>
+                <mat-radio-button type="radio" [checked]="!c.isMandatory" value="2" (click)="setIsMandatoryWithIndex(index, false)">Interdit</mat-radio-button>
+            </mat-radio-group>
+        </mat-list-item>
+    </mat-list>
+</div>
