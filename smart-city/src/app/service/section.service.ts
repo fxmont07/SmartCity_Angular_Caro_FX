@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SectionForm, SectionTable } from '../model/section';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,9 +9,9 @@ import { SectionForm, SectionTable } from '../model/section';
 export class SectionService {
   sectionsTable = new Array<SectionTable>();
   headersSection = new  Array<string>();
-  section : SectionForm;
+  private apiBaseUrl : string = "https://api20191130111944.azurewebsites.net"
   
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   addSection() {
 
@@ -23,7 +25,12 @@ export class SectionService {
     return this.headersSection;
   }
 
-  getSectionTable() {
-    return this.sectionsTable;
+  getSectionTable() : Observable<SectionTable[]>{
+   // return this.sectionsTable;
+    return this.http.get<SectionTable[]>(`${this.apiBaseUrl}/Section`);
+  }
+
+  swat() {
+   
   }
 }

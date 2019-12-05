@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ViewChild } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DisplayDataComponent } from './display-data/display-data.component';
@@ -12,12 +11,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterModule, Routes } from '@angular/router';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { MatSelectModule } from '@angular/material/select';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatNativeDateModule} from '@angular/material/core';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
@@ -38,6 +33,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import {MatRadioModule} from '@angular/material/radio'; 
 import { OfferDetailsComponent } from './offer-details/offer-details.component';
+import { ApiModule } from './api/api.module';
 
 const routes: Routes = [
   {
@@ -130,6 +126,7 @@ const routes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    ApiModule.forRoot({rootUrl: 'https://localhost:5001'}), //https://api20191130111944.azurewebsites.net
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
@@ -149,7 +146,8 @@ const routes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [],
+  providers: [
+],
   bootstrap: [AppComponent],
   entryComponents: [FormCompanyComponent]
 })

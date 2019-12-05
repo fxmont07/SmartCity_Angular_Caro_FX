@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CompanyTable, CompanyForm } from '../model/company';
 import { Observable, from, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,9 @@ export class CompanyService {
   headersCompany = new  Array<string>();
   company : CompanyForm;
 
-  constructor() {
+  private apiBaseUrl : string = "https://api20191130111944.azurewebsites.net/"
+
+  constructor(private http: HttpClient) {
     this.headersCompany.push("id");
     this.headersCompany.push("name");
     this.headersCompany.push("email");
@@ -60,4 +63,8 @@ export class CompanyService {
   getCompaniesTable() {
     return this.companiesTable;
   }
+
+  // getCompaniesTable() : Observable<CompanyTable>{
+  //   return this.http.get<CompanyTable>(`${this.apiBaseUrl}\/company`);
+  // }
 }
