@@ -4,13 +4,13 @@ import { Company } from './company';
 import { Section } from './section';
 import { CriterionOffer } from './criterion-offer';
 export interface Offer {
-  sectionId?: number;
+  companyId?: number;
   id?: number;
+  description?: string;
   other?: string;
   addressId?: number;
-  companyId?: number;
-  description?: string;
   titleJob?: string;
+  sectionid?: number;
   address?: Address;
   company?: Company;
   section?: Section;

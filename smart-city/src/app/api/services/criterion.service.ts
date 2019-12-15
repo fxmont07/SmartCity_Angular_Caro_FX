@@ -7,15 +7,19 @@ import { StrictHttpResponse as __StrictHttpResponse } from '../strict-http-respo
 import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
-import { CriterionDTO } from '../models/criterion-dto';
 import { Criterion } from '../models/criterion';
+import { CriterionDTO } from '../models/criterion-dto';
 @Injectable({
   providedIn: 'root',
 })
 class CriterionService extends __BaseService {
-  static readonly getCriterionIdSectionPath = '/Criterion/{idSection}';
-  static readonly postCriterionAddPath = '/Criterion/add';
+  static readonly getCriterionPath = '/Criterion';
+  static readonly putCriterionPath = '/Criterion';
   static readonly deleteCriterionPath = '/Criterion';
+  static readonly getCriterionPageSizeIndexPath = '/Criterion/{pageSize}/{index}';
+  static readonly getCriterionIdPath = '/Criterion/{id}';
+  static readonly getCriterionBySectionIdSectionPath = '/Criterion/BySection/{idSection}';
+  static readonly postCriterionAddPath = '/Criterion/add';
 
   constructor(
     config: __Configuration,
@@ -25,17 +29,15 @@ class CriterionService extends __BaseService {
   }
 
   /**
-   * @param idSection undefined
    * @return Success
    */
-  getCriterionIdSectionResponse(idSection: number): __Observable<__StrictHttpResponse<Array<CriterionDTO>>> {
+  getCriterionResponse(): __Observable<__StrictHttpResponse<Array<Criterion>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
-
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/Criterion/${idSection}`,
+      this.rootUrl + `/Criterion`,
       __body,
       {
         headers: __headers,
@@ -46,31 +48,30 @@ class CriterionService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Array<CriterionDTO>>;
+        return _r as __StrictHttpResponse<Array<Criterion>>;
       })
     );
   }
   /**
-   * @param idSection undefined
    * @return Success
    */
-  getCriterionIdSection(idSection: number): __Observable<Array<CriterionDTO>> {
-    return this.getCriterionIdSectionResponse(idSection).pipe(
-      __map(_r => _r.body as Array<CriterionDTO>)
+  getCriterion(): __Observable<Array<Criterion>> {
+    return this.getCriterionResponse().pipe(
+      __map(_r => _r.body as Array<Criterion>)
     );
   }
 
   /**
    * @param body undefined
    */
-  postCriterionAddResponse(body?: Criterion): __Observable<__StrictHttpResponse<null>> {
+  putCriterionResponse(body?: Criterion): __Observable<__StrictHttpResponse<null>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
     __body = body;
     let req = new HttpRequest<any>(
-      'POST',
-      this.rootUrl + `/Criterion/add`,
+      'PUT',
+      this.rootUrl + `/Criterion`,
       __body,
       {
         headers: __headers,
@@ -88,8 +89,8 @@ class CriterionService extends __BaseService {
   /**
    * @param body undefined
    */
-  postCriterionAdd(body?: Criterion): __Observable<null> {
-    return this.postCriterionAddResponse(body).pipe(
+  putCriterion(body?: Criterion): __Observable<null> {
+    return this.putCriterionResponse(body).pipe(
       __map(_r => _r.body as null)
     );
   }
@@ -127,9 +128,170 @@ class CriterionService extends __BaseService {
       __map(_r => _r.body as null)
     );
   }
+
+  /**
+   * @param params The `CriterionService.GetCriterionPageSizeIndexParams` containing the following parameters:
+   *
+   * - `pageSize`:
+   *
+   * - `index`:
+   *
+   * @return Success
+   */
+  getCriterionPageSizeIndexResponse(params: CriterionService.GetCriterionPageSizeIndexParams): __Observable<__StrictHttpResponse<Array<Criterion>>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/Criterion/${params.pageSize}/${params.index}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<Array<Criterion>>;
+      })
+    );
+  }
+  /**
+   * @param params The `CriterionService.GetCriterionPageSizeIndexParams` containing the following parameters:
+   *
+   * - `pageSize`:
+   *
+   * - `index`:
+   *
+   * @return Success
+   */
+  getCriterionPageSizeIndex(params: CriterionService.GetCriterionPageSizeIndexParams): __Observable<Array<Criterion>> {
+    return this.getCriterionPageSizeIndexResponse(params).pipe(
+      __map(_r => _r.body as Array<Criterion>)
+    );
+  }
+
+  /**
+   * @param id undefined
+   * @return Success
+   */
+  getCriterionIdResponse(id: number): __Observable<__StrictHttpResponse<CriterionDTO>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/Criterion/${id}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<CriterionDTO>;
+      })
+    );
+  }
+  /**
+   * @param id undefined
+   * @return Success
+   */
+  getCriterionId(id: number): __Observable<CriterionDTO> {
+    return this.getCriterionIdResponse(id).pipe(
+      __map(_r => _r.body as CriterionDTO)
+    );
+  }
+
+  /**
+   * @param idSection undefined
+   * @return Success
+   */
+  getCriterionBySectionIdSectionResponse(idSection: number): __Observable<__StrictHttpResponse<CriterionDTO>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/Criterion/BySection/${idSection}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<CriterionDTO>;
+      })
+    );
+  }
+  /**
+   * @param idSection undefined
+   * @return Success
+   */
+  getCriterionBySectionIdSection(idSection: number): __Observable<CriterionDTO> {
+    return this.getCriterionBySectionIdSectionResponse(idSection).pipe(
+      __map(_r => _r.body as CriterionDTO)
+    );
+  }
+
+  /**
+   * @param body undefined
+   */
+  postCriterionAddResponse(body?: Criterion): __Observable<__StrictHttpResponse<null>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = body;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/Criterion/add`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<null>;
+      })
+    );
+  }
+  /**
+   * @param body undefined
+   */
+  postCriterionAdd(body?: Criterion): __Observable<null> {
+    return this.postCriterionAddResponse(body).pipe(
+      __map(_r => _r.body as null)
+    );
+  }
 }
 
 module CriterionService {
+
+  /**
+   * Parameters for getCriterionPageSizeIndex
+   */
+  export interface GetCriterionPageSizeIndexParams {
+    pageSize: number;
+    index: number;
+  }
 }
 
 export { CriterionService }

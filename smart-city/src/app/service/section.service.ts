@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class SectionService {
   sectionsTable = new Array<SectionTable>();
   headersSection = new  Array<string>();
-  private apiBaseUrl : string = "https://api20191130111944.azurewebsites.net"
+
   
   constructor(private http: HttpClient) { }
 
@@ -23,14 +23,5 @@ export class SectionService {
 
   getHeaderSection() {
     return this.headersSection;
-  }
-
-  getSectionTable() : Observable<SectionTable[]>{
-   // return this.sectionsTable;
-    return this.http.get<SectionTable[]>(`${this.apiBaseUrl}/Section`);
-  }
-
-  swat() {
-   
   }
 }

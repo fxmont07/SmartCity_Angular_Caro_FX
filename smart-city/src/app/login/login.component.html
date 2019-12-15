@@ -1,23 +1,26 @@
 <p>login works!</p>
 
 <div>
-    <form class="example-form">
+    <form [formGroup]="form">
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Email">
-          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+          <input matInput placeholder="Email" required formControlName="email">
+          <mat-error *ngIf="form.get('email').hasError('email')">
             Format d'email non valide
           </mat-error>
-          <mat-error *ngIf="emailFormControl.hasError('required')">
-            Champs requis
+          <mat-error *ngIf="form.get('email').hasError('required')">
+              Champs requis
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-            <input type="password" matInput placeholder="Mot de passe">
-            <mat-error *ngIf="emailFormControl.hasError('required')">
-                Champs requis
-            </mat-error>
+            <input type="password" matInput placeholder="Mot de passe" formControlName="password">
+            <mat-error *ngIf="form.get('password').hasError('required')">
+              Champs requis
+          </mat-error>
+          <mat-error *ngIf="form.get('password').hasError('minlength')">
+              Minimum 8 caractères
+          </mat-error>
         </mat-form-field>
     </form>
-    <button mat-raised-button color="primary">Se connecter</button>
+    <button mat-raised-button color="primary" [disabled]="!form.valid">Se connecter</button>
     <button mat-raised-button color="accent" routerLink="/signup">S'inscrire</button>
 </div>

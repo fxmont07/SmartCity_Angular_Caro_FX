@@ -16,8 +16,8 @@
         <mat-form-field class="elem-form">
             <mat-label>Section</mat-label>
             <mat-select required formControlName="section">
-                <mat-option *ngFor="let section of getAllSections()" [value]="section">
-                    {{section}}
+                <mat-option *ngFor="let section of sections" [value]="section.name">
+                    {{section.name}}
                 </mat-option>
             </mat-select>
         </mat-form-field>

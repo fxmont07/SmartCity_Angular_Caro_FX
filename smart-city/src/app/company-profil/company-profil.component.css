@@ -1,0 +1,21 @@
+div {
+    display: flex;
+    width: 500px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:auto;
+    padding: 20px;
+    flex-direction: column;
+    border-radius: 5px;
+}
+
+#wrapper {
+    border: rgb(86, 86, 196) solid 3px;
+}
+
+.elem-form {
+    flex-grow: 1;
+    display: block;
+    margin-bottom: 10px;
+}

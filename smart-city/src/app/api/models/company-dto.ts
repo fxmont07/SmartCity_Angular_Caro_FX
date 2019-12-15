@@ -1,10 +1,11 @@
 /* tslint:disable */
+import { AddressDTO } from './address-dto';
 export interface CompanyDTO {
   id?: number;
-  mail?: string;
+  email?: string;
   name?: string;
   phoneNumber?: string;
   description?: string;
   isPremium?: number;
-  addressId?: number;
+  address?: AddressDTO;
 }

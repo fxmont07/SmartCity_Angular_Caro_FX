@@ -7,8 +7,10 @@ import { StrictHttpResponse as __StrictHttpResponse } from '../strict-http-respo
 import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
-import { CompanyDTO } from '../models/company-dto';
+import { CompanyTable } from '../models/company-table';
 import { Company } from '../models/company';
+import { CompanyDTO } from '../models/company-dto';
+import { CompanyForm } from '../models/company-form';
 @Injectable({
   providedIn: 'root',
 })
@@ -28,7 +30,7 @@ class CompanyService extends __BaseService {
   /**
    * @return Success
    */
-  getCompanyResponse(): __Observable<__StrictHttpResponse<Array<CompanyDTO>>> {
+  getCompanyResponse(): __Observable<__StrictHttpResponse<Array<CompanyTable>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -45,16 +47,16 @@ class CompanyService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Array<CompanyDTO>>;
+        return _r as __StrictHttpResponse<Array<CompanyTable>>;
       })
     );
   }
   /**
    * @return Success
    */
-  getCompany(): __Observable<Array<CompanyDTO>> {
+  getCompany(): __Observable<Array<CompanyTable>> {
     return this.getCompanyResponse().pipe(
-      __map(_r => _r.body as Array<CompanyDTO>)
+      __map(_r => _r.body as Array<CompanyTable>)
     );
   }
 
@@ -96,7 +98,7 @@ class CompanyService extends __BaseService {
    * @param companyId undefined
    * @return Success
    */
-  getCompanyCompanyIdResponse(companyId: number): __Observable<__StrictHttpResponse<Array<CompanyDTO>>> {
+  getCompanyCompanyIdResponse(companyId: number): __Observable<__StrictHttpResponse<CompanyDTO>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -114,7 +116,7 @@ class CompanyService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Array<CompanyDTO>>;
+        return _r as __StrictHttpResponse<CompanyDTO>;
       })
     );
   }
@@ -122,9 +124,9 @@ class CompanyService extends __BaseService {
    * @param companyId undefined
    * @return Success
    */
-  getCompanyCompanyId(companyId: number): __Observable<Array<CompanyDTO>> {
+  getCompanyCompanyId(companyId: number): __Observable<CompanyDTO> {
     return this.getCompanyCompanyIdResponse(companyId).pipe(
-      __map(_r => _r.body as Array<CompanyDTO>)
+      __map(_r => _r.body as CompanyDTO)
     );
   }
 
@@ -132,7 +134,7 @@ class CompanyService extends __BaseService {
    * @param body undefined
    * @return Success
    */
-  postCompanyAddResponse(body?: Company): __Observable<__StrictHttpResponse<Company>> {
+  postCompanyAddResponse(body?: CompanyForm): __Observable<__StrictHttpResponse<Company>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -158,7 +160,7 @@ class CompanyService extends __BaseService {
    * @param body undefined
    * @return Success
    */
-  postCompanyAdd(body?: Company): __Observable<Company> {
+  postCompanyAdd(body?: CompanyForm): __Observable<Company> {
     return this.postCompanyAddResponse(body).pipe(
       __map(_r => _r.body as Company)
     );

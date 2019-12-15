@@ -7,15 +7,20 @@ import { StrictHttpResponse as __StrictHttpResponse } from '../strict-http-respo
 import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
+import { StudentTable } from '../models/student-table';
 import { Student } from '../models/student';
+import { StudentForm } from '../models/student-form';
+import { StudentDTO } from '../models/student-dto';
 import { Offer } from '../models/offer';
 @Injectable({
   providedIn: 'root',
 })
 class StudentService extends __BaseService {
   static readonly getStudentPath = '/Student';
+  static readonly postStudentPath = '/Student';
+  static readonly deleteStudentPath = '/Student';
+  static readonly getStudentStudentIdPath = '/Student/{studentId}';
   static readonly getStudentOfferStudentIdPath = '/Student/offer/{studentId}';
-  static readonly postStudentAddPath = '/Student/add';
 
   constructor(
     config: __Configuration,
@@ -27,7 +32,7 @@ class StudentService extends __BaseService {
   /**
    * @return Success
    */
-  getStudentResponse(): __Observable<__StrictHttpResponse<Array<Student>>> {
+  getStudentResponse(): __Observable<__StrictHttpResponse<Array<StudentTable>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -44,16 +49,122 @@ class StudentService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Array<Student>>;
+        return _r as __StrictHttpResponse<Array<StudentTable>>;
       })
     );
   }
   /**
    * @return Success
    */
-  getStudent(): __Observable<Array<Student>> {
+  getStudent(): __Observable<Array<StudentTable>> {
     return this.getStudentResponse().pipe(
-      __map(_r => _r.body as Array<Student>)
+      __map(_r => _r.body as Array<StudentTable>)
+    );
+  }
+
+  /**
+   * @param body undefined
+   * @return Success
+   */
+  postStudentResponse(body?: StudentForm): __Observable<__StrictHttpResponse<Student>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = body;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/Student`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<Student>;
+      })
+    );
+  }
+  /**
+   * @param body undefined
+   * @return Success
+   */
+  postStudent(body?: StudentForm): __Observable<Student> {
+    return this.postStudentResponse(body).pipe(
+      __map(_r => _r.body as Student)
+    );
+  }
+
+  /**
+   * @param body undefined
+   */
+  deleteStudentResponse(body?: Student): __Observable<__StrictHttpResponse<null>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = body;
+    let req = new HttpRequest<any>(
+      'DELETE',
+      this.rootUrl + `/Student`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<null>;
+      })
+    );
+  }
+  /**
+   * @param body undefined
+   */
+  deleteStudent(body?: Student): __Observable<null> {
+    return this.deleteStudentResponse(body).pipe(
+      __map(_r => _r.body as null)
+    );
+  }
+
+  /**
+   * @param studentId undefined
+   * @return Success
+   */
+  getStudentStudentIdResponse(studentId: number): __Observable<__StrictHttpResponse<StudentDTO>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/Student/${studentId}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<StudentDTO>;
+      })
+    );
+  }
+  /**
+   * @param studentId undefined
+   * @return Success
+   */
+  getStudentStudentId(studentId: number): __Observable<StudentDTO> {
+    return this.getStudentStudentIdResponse(studentId).pipe(
+      __map(_r => _r.body as StudentDTO)
     );
   }
 
@@ -90,42 +201,6 @@ class StudentService extends __BaseService {
   getStudentOfferStudentId(studentId: number): __Observable<Array<Offer>> {
     return this.getStudentOfferStudentIdResponse(studentId).pipe(
       __map(_r => _r.body as Array<Offer>)
-    );
-  }
-
-  /**
-   * @param body undefined
-   * @return Success
-   */
-  postStudentAddResponse(body?: Student): __Observable<__StrictHttpResponse<Student>> {
-    let __params = this.newParams();
-    let __headers = new HttpHeaders();
-    let __body: any = null;
-    __body = body;
-    let req = new HttpRequest<any>(
-      'POST',
-      this.rootUrl + `/Student/add`,
-      __body,
-      {
-        headers: __headers,
-        params: __params,
-        responseType: 'json'
-      });
-
-    return this.http.request<any>(req).pipe(
-      __filter(_r => _r instanceof HttpResponse),
-      __map((_r) => {
-        return _r as __StrictHttpResponse<Student>;
-      })
-    );
-  }
-  /**
-   * @param body undefined
-   * @return Success
-   */
-  postStudentAdd(body?: Student): __Observable<Student> {
-    return this.postStudentAddResponse(body).pipe(
-      __map(_r => _r.body as Student)
     );
   }
 }

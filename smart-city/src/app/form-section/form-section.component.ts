@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SectionForm } from '../model/section';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
-import { SectionService } from '../service/section.service';
+import { SectionService } from '../api/services';
+import { Router, ActivatedRoute } from '@angular/router';
+import { SectionDTO } from '../api/models';
 
 @Component({
   selector: 'app-form-section',
@@ -11,34 +13,51 @@ import { SectionService } from '../service/section.service';
 export class FormSectionComponent implements OnInit {
 
   form: FormGroup;
-  sectionModel: SectionForm;
+  sectionModel: SectionDTO;
   isACreation: boolean;
 
-  constructor(private sectionService : SectionService) { 
+  constructor(
+    private sectionService: SectionService,
+    private router: Router,
+    private route: ActivatedRoute) {
+
     this.form = this.createFormGroup();
+    this.isACreation = true;
   }
 
   ngOnInit() {
+    this.route.data
+      .subscribe((data: { section: SectionDTO }) => {
+        if (data.section != undefined) {
+          this.sectionModel = data.section;
+          this.form.patchValue(this.sectionModel);
+          this.isACreation = false;
+        }
+      });
   }
-
-
 
   createFormGroup() {
     return new FormGroup({
-      nameControl: new FormControl('',  
+      name: new FormControl('',
         [
-        Validators.required,
+          Validators.required,
         ]
       ),
     });
   }
 
   updateSection() {
-    const sectionUpdated = this.form.value;
-    if(this.isACreation) {
-      this.sectionService.addSection();
+    let sectionUpdated: SectionDTO = this.form.value;
+    if (this.isACreation) {
+      this.sectionService
+        .postSectionAdd(sectionUpdated)
+        .subscribe(() =>
+          this.router.navigate(["/sections"])
+        );
     } else {
-      this.sectionService.updateSection();
+      sectionUpdated.id = this.sectionModel.id; //TODO: soucis api sectionId
+      this.sectionService.putSection(sectionUpdated)
+        .subscribe(() => this.router.navigate(["/sections"]));
     }
   }
 }

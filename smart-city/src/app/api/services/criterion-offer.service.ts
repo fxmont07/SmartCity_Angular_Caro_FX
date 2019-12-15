@@ -27,7 +27,7 @@ class CriterionOfferService extends __BaseService {
    * @param offerId undefined
    * @return Success
    */
-  getCriterionOfferOfferIdResponse(offerId: number): __Observable<__StrictHttpResponse<Array<CriterionOfferDTO>>> {
+  getCriterionOfferOfferIdResponse(offerId: number): __Observable<__StrictHttpResponse<CriterionOfferDTO>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -45,7 +45,7 @@ class CriterionOfferService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Array<CriterionOfferDTO>>;
+        return _r as __StrictHttpResponse<CriterionOfferDTO>;
       })
     );
   }
@@ -53,9 +53,9 @@ class CriterionOfferService extends __BaseService {
    * @param offerId undefined
    * @return Success
    */
-  getCriterionOfferOfferId(offerId: number): __Observable<Array<CriterionOfferDTO>> {
+  getCriterionOfferOfferId(offerId: number): __Observable<CriterionOfferDTO> {
     return this.getCriterionOfferOfferIdResponse(offerId).pipe(
-      __map(_r => _r.body as Array<CriterionOfferDTO>)
+      __map(_r => _r.body as CriterionOfferDTO)
     );
   }
 

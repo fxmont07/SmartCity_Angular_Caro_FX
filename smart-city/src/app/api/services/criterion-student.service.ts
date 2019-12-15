@@ -7,9 +7,8 @@ import { StrictHttpResponse as __StrictHttpResponse } from '../strict-http-respo
 import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
-import { Evaluation } from '../models/evaluation';
-import { CriterionStudentDTO } from '../models/criterion-student-dto';
 import { CriterionStudent } from '../models/criterion-student';
+import { CriterionStudentDTO } from '../models/criterion-student-dto';
 @Injectable({
   providedIn: 'root',
 })
@@ -28,7 +27,7 @@ class CriterionStudentService extends __BaseService {
   /**
    * @return Success
    */
-  getCriterionStudentResponse(): __Observable<__StrictHttpResponse<Array<Evaluation>>> {
+  getCriterionStudentResponse(): __Observable<__StrictHttpResponse<Array<CriterionStudent>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -45,16 +44,16 @@ class CriterionStudentService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Array<Evaluation>>;
+        return _r as __StrictHttpResponse<Array<CriterionStudent>>;
       })
     );
   }
   /**
    * @return Success
    */
-  getCriterionStudent(): __Observable<Array<Evaluation>> {
+  getCriterionStudent(): __Observable<Array<CriterionStudent>> {
     return this.getCriterionStudentResponse().pipe(
-      __map(_r => _r.body as Array<Evaluation>)
+      __map(_r => _r.body as Array<CriterionStudent>)
     );
   }
 
@@ -62,7 +61,7 @@ class CriterionStudentService extends __BaseService {
    * @param studentId undefined
    * @return Success
    */
-  getCriterionStudentStudentIdResponse(studentId: number): __Observable<__StrictHttpResponse<Array<CriterionStudentDTO>>> {
+  getCriterionStudentStudentIdResponse(studentId: number): __Observable<__StrictHttpResponse<CriterionStudentDTO>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -80,7 +79,7 @@ class CriterionStudentService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Array<CriterionStudentDTO>>;
+        return _r as __StrictHttpResponse<CriterionStudentDTO>;
       })
     );
   }
@@ -88,9 +87,9 @@ class CriterionStudentService extends __BaseService {
    * @param studentId undefined
    * @return Success
    */
-  getCriterionStudentStudentId(studentId: number): __Observable<Array<CriterionStudentDTO>> {
+  getCriterionStudentStudentId(studentId: number): __Observable<CriterionStudentDTO> {
     return this.getCriterionStudentStudentIdResponse(studentId).pipe(
-      __map(_r => _r.body as Array<CriterionStudentDTO>)
+      __map(_r => _r.body as CriterionStudentDTO)
     );
   }
 

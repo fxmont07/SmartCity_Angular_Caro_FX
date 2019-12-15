@@ -8,7 +8,7 @@ export interface Company {
   password?: string;
   name?: string;
   phoneNumber?: string;
-  mail?: string;
+  email?: string;
   isPremium?: number;
   addressId?: number;
   address?: Address;

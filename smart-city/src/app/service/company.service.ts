@@ -11,8 +11,6 @@ export class CompanyService {
   headersCompany = new  Array<string>();
   company : CompanyForm;
 
-  private apiBaseUrl : string = "https://api20191130111944.azurewebsites.net/"
-
   constructor(private http: HttpClient) {
     this.headersCompany.push("id");
     this.headersCompany.push("name");

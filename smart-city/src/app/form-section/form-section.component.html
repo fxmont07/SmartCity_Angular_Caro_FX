@@ -1,4 +1,3 @@
-<p>form-section works!</p>
 
 
 <button mat-raised-button color="primary" routerLink="/sections">Retour</button>
@@ -6,11 +5,11 @@
 <h1>Formulaire de la section</h1>
 <form (ngSubmit)="updateSection()" [formGroup]="form">
     <mat-form-field class="elem-form">
-        <input matInput placeholder="Name" required formControlName="nameControl">
+        <input matInput placeholder="Name" required formControlName="name">
         <mat-error *ngIf="form.get('name').hasError('required')">
             Champs requis
         </mat-error>
         </mat-form-field>
-    <button id=button mat-raised-button color="primary" [disabled]="!form.valid">Valider</button>
+    <button type="submit" mat-raised-button color="primary" [disabled]="!form.valid">Valider</button>
 </form>
 </div>

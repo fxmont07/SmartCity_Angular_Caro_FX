@@ -2,5 +2,5 @@
 export interface CriterionStudentDTO {
   criterionId?: number;
   studentId?: number;
-  value?: number;
+  isMandatory?: number;
 }

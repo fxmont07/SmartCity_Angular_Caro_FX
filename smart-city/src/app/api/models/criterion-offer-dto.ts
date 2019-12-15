@@ -2,5 +2,5 @@
 export interface CriterionOfferDTO {
   criterionId?: number;
   offerId?: number;
-  value?: number;
+  isMandatory?: number;
 }

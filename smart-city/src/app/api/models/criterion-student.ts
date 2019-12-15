@@ -4,7 +4,7 @@ import { Student } from './student';
 export interface CriterionStudent {
   criterionId?: number;
   studentId?: number;
-  value?: number;
+  isMandatory?: number;
   criterion?: Criterion;
   student?: Student;
 }

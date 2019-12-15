@@ -3,7 +3,6 @@ export interface StudentTable {
     name: string;
     firstname: string;
     email: string;
-    locality: string;
 }
 
 export interface StudentForm {

@@ -7,4 +7,3 @@ export { EvaluationService } from './services/evaluation.service';
 export { OfferService } from './services/offer.service';
 export { SectionService } from './services/section.service';
 export { StudentService } from './services/student.service';
-export { WeatherForecastService } from './services/weather-forecast.service';

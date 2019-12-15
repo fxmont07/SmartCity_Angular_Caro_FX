@@ -12,7 +12,6 @@ import { EvaluationService } from './services/evaluation.service';
 import { OfferService } from './services/offer.service';
 import { SectionService } from './services/section.service';
 import { StudentService } from './services/student.service';
-import { WeatherForecastService } from './services/weather-forecast.service';
 
 /**
  * Provider for all Api services, plus ApiConfiguration
@@ -35,8 +34,7 @@ import { WeatherForecastService } from './services/weather-forecast.service';
     EvaluationService,
     OfferService,
     SectionService,
-    StudentService,
-    WeatherForecastService
+    StudentService
   ],
 })
 export class ApiModule {

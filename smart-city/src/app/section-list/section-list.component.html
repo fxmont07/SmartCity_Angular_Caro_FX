@@ -1,6 +1,12 @@
 <p>section-list works!</p>
 
-<app-display-data [data]="sections" [colNames]="headers" (deleteEvent)="deleteSection($event)">
+<app-display-data 
+    [data]="sections" 
+    [colNames]="headers" 
+    (deleteEvent)="deleteSection($event)"
+    (editEvent)="editSection($event)"
+    (addEvent)="addSection()"
+    >
 
 </app-display-data>
 

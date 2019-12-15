@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CriterionForm } from '../model/criterion';
-import { ActivatedRoute } from '@angular/router';
-import { CriterionService } from '../service/criterion.service';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { CriterionDTO, SectionDTO } from '../api/models';
+import { CriterionService, SectionService } from '../api/services';
 
 @Component({
   selector: 'app-form-criterion',
@@ -10,43 +12,70 @@ import { CriterionService } from '../service/criterion.service';
   styleUrls: ['./form-criterion.component.css']
 })
 export class FormCriterionComponent implements OnInit {
-  form : FormGroup;
-  criterionModel : CriterionForm;
-  isACreation : boolean;
-  constructor(private route: ActivatedRoute, private criterionService: CriterionService) {
+
+  form: FormGroup;
+  criterionModel: CriterionDTO;
+  isACreation: boolean;
+  sections: Array<SectionDTO>
+
+  constructor(
+    private route: ActivatedRoute,
+    private criterionService: CriterionService,
+    private sectionService: SectionService,
+    private router: Router) {
+
+    this.form = this.createFormGroup();
     this.isACreation = true;
-   }
+    this.sections = new Array<SectionDTO>();
+  }
 
   ngOnInit() {
-    this.form = this.createFormGroup();
+    this.route.data
+      .subscribe((data: { criterion: CriterionDTO }) => {
+        if (data.criterion != undefined) {
+          this.criterionModel = data.criterion;
+          this.form.patchValue(this.criterionModel);
+
+          //TODO: patch la section
+          this.isACreation = false;
+        }
+      });
+    this.getAllSections();
   }
 
   createFormGroup() {
     return new FormGroup({
-      description: new FormControl('',  
+      description: new FormControl('',
         [
-        Validators.required,
+          Validators.required,
         ]
       ),
       section: new FormControl('',
-      [
-        Validators.required
-      ])
+        [
+          Validators.required
+        ])
     });
   }
 
-  getAllSections() {
-    return this.criterionService.getAllSections();
-  }
-
   updateCriterion() {
-    const criterionUpdated = this.form.value;
-    if(this.isACreation) {
-      //this.companyService.addCompany(companyUpdated);
+    let criterionUpdated = this.form.value;
+    if (this.isACreation) {
+      this.criterionService
+        .postCriterionAdd(criterionUpdated)
+        .subscribe(() => this.router.navigate(["/criterions"]));
     } else {
-      //this.companyService.update(companyUpdated)
+      criterionUpdated.id = this.criterionModel.id;
+      this.criterionService
+        .putCriterion(criterionUpdated)
+        .subscribe(() => this.router.navigate(["/criterions"]))
     }
   }
 
-  
+  getAllSections() {
+    this.sectionService
+      .getSection()
+      .subscribe((data) => this.sections = data);
+  }
+
+
 }

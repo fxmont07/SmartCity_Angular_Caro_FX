@@ -3,9 +3,9 @@
 <button mat-raised-button color="primary" routerLink="/students">Retour</button>
 <div id="wrapper">
 <h1>Formulaire de l'étudiant</h1>
-<form (ngSubmit)="addStudent()" [formGroup]="form">
+<form (ngSubmit)="updateStudent()" [formGroup]="form">
         <mat-form-field class="elem-form">
-            <input type="text" matInput placeholder="Email" required formControlName="email" [(ngModel)]="studentModel.email">
+            <input type="text" matInput placeholder="Email" required formControlName="email">
             <mat-error *ngIf="form.get('email').hasError('email')">
                 Format d'email non valide
             </mat-error>
@@ -15,59 +15,59 @@
         </mat-form-field>
     
         <mat-form-field class="elem-form">
-            <input type="text" matInput placeholder="Nom"  required formControlName="name" [(ngModel)]="studentModel.name">
-            <mat-error *ngIf="form.get('name').hasError('required')">
+            <input type="text" matInput placeholder="Nom"  required formControlName="lastName">
+            <mat-error *ngIf="form.get('lastName').hasError('required')">
                 Champs requis
             </mat-error>
         </mat-form-field>
     
         <mat-form-field class="elem-form">
-                <input type="text" matInput placeholder="Prénom" required formControlName="name" [(ngModel)]="studentModel.name">
-                <mat-error *ngIf="form.get('firstname').hasError('required')">
+                <input type="text" matInput placeholder="Prénom" required formControlName="firstName">
+                <mat-error *ngIf="form.get('firstName').hasError('required')">
                     Champs requis
                 </mat-error>
         </mat-form-field>
 
         <span formGroupName="address">
+
             <mat-form-field class="elem-form">
-                <input matInput placeholder="Localité" [(ngModel)]="studentModel.address.locality" formControlName="locality">
+                <input matInput placeholder="Localité" formControlName="locality">
             </mat-form-field>
     
             <mat-form-field class="elem-form">
-                <mat-label>Code Postal</mat-label>
-                <mat-select [(ngModel)]="studentModel.address.postCode" formControlName="postCode">
-                    <mat-option *ngFor="let code of postCodes" [value]="code">
-                        {{code}}
-                    </mat-option>
-                </mat-select>
+                <input matInput placeholder="Code Postal"  formControlName="postCode">
             </mat-form-field>
             
             <mat-form-field class="elem-form">
-                <input matInput placeholder="Rue" [(ngModel)]="studentModel.address.street" formControlName="street">
+                <input matInput placeholder="Rue"  formControlName="street">
             </mat-form-field>
     
             <mat-form-field class="elem-form">
-                <input matInput placeholder="Numéro de la rue" [(ngModel)]="studentModel.address.streetNumber" formControlName="streetNumber">
+                <input matInput placeholder="Numéro de la rue" formControlName="streetNumber">
             </mat-form-field>
+
         </span>
     
-        <mat-form-field class="elem-form">
+      <!--   <mat-form-field class="elem-form">
             <span matPrefix>+32 &nbsp;</span>
-            <input type="tel" matInput placeholder="Telephone" [(ngModel)]="studentModel.phone" formControlName="phone">
+            <input type="tel" matInput placeholder="Telephone" formControlName="phoneNumber">
+        </mat-form-field> -->
+
+        <mat-form-field class="elem-form">
+            <input type="tel" matInput placeholder="Question Secrete" formControlName="secretQuestion">
         </mat-form-field>
 
-        <mat-label>Sections</mat-label>
-        <mat-select [(ngModel)]="studentModel.section" formControlName="section">
-            <mat-option *ngFor="let section of sections" [value]="section">
-                {{section}}
+        <mat-form-field class="elem-form">
+            <input type="tel" matInput placeholder="Réponse Secrete" formControlName="answerSecret">
+        </mat-form-field>
+
+        <mat-label>Sections *</mat-label>
+        <mat-select formControlName="section">
+            <mat-option *ngFor="let section of sections" [value]="section" required>
+                {{section.name}}
             </mat-option>
         </mat-select>
-        <button id=button mat-raised-button color="primary" (click)="addStudent()" [disabled]="!form.valid">Valider</button>
-        <p>
-            Status {{form.status}}
-    
-            Status {{form.value}}
-        </p>
+        <button id="button" mat-raised-button color="primary" [disabled]="!form.valid">Valider</button>
     </form>
     
 </div>

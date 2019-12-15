@@ -4,7 +4,7 @@ import { Offer } from './offer';
 export interface CriterionOffer {
   criterionId?: number;
   offerId?: number;
-  value?: number;
+  isMandatory?: number;
   criterion?: Criterion;
   offer?: Offer;
 }

@@ -61,7 +61,7 @@ class EvaluationService extends __BaseService {
    * @param companyId undefined
    * @return Success
    */
-  getEvaluationCompanyIdResponse(companyId: number): __Observable<__StrictHttpResponse<Array<Evaluation>>> {
+  getEvaluationCompanyIdResponse(companyId: number): __Observable<__StrictHttpResponse<Evaluation>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -79,7 +79,7 @@ class EvaluationService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Array<Evaluation>>;
+        return _r as __StrictHttpResponse<Evaluation>;
       })
     );
   }
@@ -87,9 +87,9 @@ class EvaluationService extends __BaseService {
    * @param companyId undefined
    * @return Success
    */
-  getEvaluationCompanyId(companyId: number): __Observable<Array<Evaluation>> {
+  getEvaluationCompanyId(companyId: number): __Observable<Evaluation> {
     return this.getEvaluationCompanyIdResponse(companyId).pipe(
-      __map(_r => _r.body as Array<Evaluation>)
+      __map(_r => _r.body as Evaluation)
     );
   }
 

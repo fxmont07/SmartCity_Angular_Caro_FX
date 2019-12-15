@@ -1,0 +1,49 @@
+<button mat-raised-button color="primary" routerLink="/companyoffer">Retour</button>
+<div id="wrapper">
+    <h1>Formulaire de l'offre</h1>
+    <form (ngSubmit)="updateOffer()" [formGroup]="form">
+
+        <mat-form-field class="elem-form">
+            <input type="text" matInput placeholder="Titre" required formControlName="titleJob">
+            <mat-error *ngIf="form.get('titleJob').hasError('required')">
+                Champs requis
+            </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field class="elem-form">
+            <input type="text" matInput placeholder="Decritpion" required formControlName="description">
+            <mat-error *ngIf="form.get('description').hasError('required')">
+                Champs requis
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="elem-form">
+            <textarea type="text" matInput placeholder="Autre" formControlName="other"></textarea>
+        </mat-form-field>
+
+        <span formGroupName="addressDTO">
+
+            <mat-form-field class="elem-form">
+                <input type="text" matInput placeholder="Rue" formControlName="street">
+            </mat-form-field>
+            
+            <mat-form-field class="elem-form">
+                <input type="text" matInput placeholder="Numéro" formControlName="number">
+            </mat-form-field>
+
+            <mat-form-field class="elem-form">
+                <input type="text" matInput placeholder="Ville" formControlName="locality">
+            </mat-form-field>
+
+            <mat-form-field class="elem-form">
+                <input type="text" matInput placeholder="Code Postal" formControlName="postCode">
+            </mat-form-field>
+
+            <mat-form-field class="elem-form">
+                <input type="text" matInput placeholder="Pays" formControlName="country">
+            </mat-form-field>
+            
+        </span>
+        <button id=button mat-raised-button color="primary" [disabled]="!form.valid">Valider</button>
+    </form>
+</div>

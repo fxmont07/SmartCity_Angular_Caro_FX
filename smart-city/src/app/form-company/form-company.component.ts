@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
-import { CompanyForm } from '../model/company';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
-import { CompanyService } from '../service/company.service';
+import { CompanyForm, CompanyTable } from '../model/company';
+import { ActivatedRoute } from '@angular/router';
+import { CompanyService } from '../api/services';
+
 
 @Component({
   selector: 'app-form-company',
@@ -11,21 +11,22 @@ import { CompanyService } from '../service/company.service';
   styleUrls: ['./form-company.component.css']
 })
 export class FormCompanyComponent implements OnInit {
-  //TODO: regardé si il faut modifier le form car email et mdp peut etre modifier ?
+  
   form: FormGroup;
-  postCodes: Array<string>;
-  companyModel: CompanyForm;
+  companyModel: CompanyTable;
   isACreation : boolean;
 
-  constructor(private route: ActivatedRoute, private companyService: CompanyService) {
+  constructor(
+    private route: ActivatedRoute,
+    private companyService : CompanyService) {
+
     this.form = this.createFormGroup();
     this.isACreation = true;
   }
 
   ngOnInit() {
-  this.route.data
-      .subscribe((data: {company: CompanyForm}) => {
-        console.log(data);
+    this.route.data
+      .subscribe((data: {company: CompanyTable}) => {
         if(data.company != undefined) {
           this.companyModel = data.company;
           console.log(this.companyModel);
@@ -59,6 +60,7 @@ export class FormCompanyComponent implements OnInit {
         postCode: new FormControl(''),
         street: new FormControl(''),
         streetNumber: new FormControl(''),
+        country: new FormControl('', Validators.required)
       }),
       phone: new FormControl(''),
       description: new FormControl('')
@@ -69,7 +71,8 @@ export class FormCompanyComponent implements OnInit {
     const companyUpdated = this.form.value;
     console.log(companyUpdated);
     if(this.isACreation) {
-      //this.companyService.addCompany(companyUpdated);
+      console.log("coucou")
+      this.companyService.postCompanyAdd(companyUpdated);
     } else {
       //this.companyService.update(companyUpdated)
     }

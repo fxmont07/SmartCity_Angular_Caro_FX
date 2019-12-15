@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterLink, Router, RouterEvent } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,6 +11,6 @@ export class NavBarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
-
 }

@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { DisplayDataComponent } from './display-data/display-data.component';
 import { CompanyListComponent } from './company-list/company-list.component';
 import { MatTableModule } from '@angular/material/table';
+import { MatSort } from '@angular/material';
 import { LoginComponent } from './login/login.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,97 +13,133 @@ import { RouterModule, Routes } from '@angular/router';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatIconModule} from '@angular/material/icon';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FormCompanyComponent } from './form-company/form-company.component';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormSectionComponent } from './form-section/form-section.component';
-import { SectionListComponent } from './section-list/section-list.component'; 
+import { SectionListComponent } from './section-list/section-list.component';
 import { StudentListComponent } from './student-list/student-list.component';
 import { FormStudentComponent } from './form-student/form-student.component';
-import { StudentService } from './service/student.service';
 import { CriterionListComponent } from './criterion-list/criterion-list.component';
 import { FormCriterionComponent } from './form-criterion/form-criterion.component';
 import { CompanyResolver } from './form-company/company-resolver';
 import { StudentResolver } from './form-student/student-resolver';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatListModule} from '@angular/material/list';
-import {MatRadioModule} from '@angular/material/radio'; 
+import { MatMenuModule } from '@angular/material/menu';
+import { MatListModule } from '@angular/material/list';
+import { MatRadioModule } from '@angular/material/radio';
 import { OfferDetailsComponent } from './offer-details/offer-details.component';
 import { ApiModule } from './api/api.module';
+import { SectionResolver } from './form-section/section-resolver';
+import { CriterionResolver } from './form-criterion/criterion-resolver';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { from } from 'rxjs';
+import { CompanyOfferComponent } from './company-offer/company-offer.component';
+import { CompanyOfferDetailsComponent } from './company-offer-details/company-offer-details.component';
+import { CompanyProfilComponent } from './company-profil/company-profil.component';
+import { NavBarCompanyComponent } from './nav-bar-company/nav-bar-company.component';
+import { FormOfferComponent } from './form-offer/form-offer.component';
+import { OfferListComponent } from './offer-list/offer-list.component';
+import { OfferResolver } from './form-offer/offer-resolver';
 
+
+
+// Lancement visual studio swagger http://localhost:49351/swagger/v1/swagger.json non sécurisé
 const routes: Routes = [
   {
-    path:'welcome',
-    component:LoginComponent,
+    path: 'login',
+    component: LoginComponent,
   },
   {
-  path: '',
-    redirectTo: '/welcome',
+    path: '',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
   {
-    path:'signup',
+    path: 'signup',
     component: SignUpComponent,
   },
   {
-    path : 'companies',
-    component : CompanyListComponent,
+    path: 'companies',
+    component: CompanyListComponent,
   },
   {
-    path : 'sections',
-    component : SectionListComponent,
+    path: 'sections',
+    component: SectionListComponent,
   },
   {
-    path : 'formcompany',
-    component : FormCompanyComponent,
+    path: 'formcompany',
+    component: FormCompanyComponent,
   },
   {
-    path : 'formcompany/:id',
-    component : FormCompanyComponent,
-    resolve : {company: CompanyResolver}
+    path: 'formcompany/:id',
+    component: FormCompanyComponent,
+    resolve: { company: CompanyResolver }
   },
   {
-    path : 'addsection',
-    component : FormSectionComponent,
+    path: 'formsection',
+    component: FormSectionComponent,
   },
   {
-    path : 'students',
-    component : StudentListComponent,
+    path: 'formsection/:id',
+    component: FormSectionComponent,
+    resolve: { section: SectionResolver }
   },
   {
-    path : 'formstudent',
-    component : FormStudentComponent,
+    path: 'students',
+    component: StudentListComponent,
   },
   {
-    path : 'formstudent/:id',
-    component : FormStudentComponent,
-    resolve : {student: StudentResolver}
+    path: 'formstudent',
+    component: FormStudentComponent,
   },
   {
-    path : 'criterions',
-    component : CriterionListComponent,
+    path: 'formstudent/:id',
+    component: FormStudentComponent,
+    resolve: { student: StudentResolver }
   },
   {
-    path : 'formcriterion',
-    component : FormCriterionComponent,
+    path: 'criterions',
+    component: CriterionListComponent,
   },
   {
-    path : 'formcriterion/:id',
-    component : FormCriterionComponent,
-   //TODO: resolve : {criterion: CriterionResolver}
+    path: 'formcriterion',
+    component: FormCriterionComponent,
   },
   {
-    path : 'offerdetails', // TODO: id
-    component : OfferDetailsComponent,
+    path: 'formcriterion/:id',
+    component: FormCriterionComponent,
+    resolve: { criterion: CriterionResolver }
   },
+  {
+    path: 'formoffer',
+    component: FormOfferComponent,
+  },
+  {
+    path: 'formoffer/:id',
+    component: FormOfferComponent,
+    resolve: { offer: OfferResolver }
+  },
+  {
+    path: 'offerdetails', // TODO: id
+    component: OfferDetailsComponent,
+  },
+  {
+    path: 'companyprofil',
+    component: CompanyProfilComponent,
+  },
+  {
+    path: 'companyoffer',
+    component: CompanyOfferComponent,
+  },
+
   
-  
-  
+
+
+
 ];
 
 @NgModule({
@@ -121,22 +158,29 @@ const routes: Routes = [
     FormCriterionComponent,
     NavBarComponent,
     OfferDetailsComponent,
+    CompanyOfferComponent,
+    CompanyOfferDetailsComponent,
+    CompanyProfilComponent,
+    NavBarCompanyComponent,
+    FormOfferComponent,
+    OfferListComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    ApiModule.forRoot({rootUrl: 'https://localhost:5001'}), //https://api20191130111944.azurewebsites.net
+    ApiModule.forRoot({ rootUrl: 'https://localhost:44386' }),//https://localhost:5001 https://api20191130111944.azurewebsites.net
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     MatTableModule,
     MatCheckboxModule,
     MatRadioModule,
     MatInputModule,
     MatListModule,
     MatMenuModule,
+    MatPaginatorModule,
     MatButtonModule,
     MatSelectModule,
     NgxDatatableModule,
@@ -147,7 +191,7 @@ const routes: Routes = [
     )
   ],
   providers: [
-],
+  ],
   bootstrap: [AppComponent],
   entryComponents: [FormCompanyComponent]
 })

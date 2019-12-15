@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { StudentForm } from '../model/student';
-import { ActivatedRoute } from '@angular/router';
-import { StudentService } from '../service/student.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Student, SectionDTO, StudentDTO, StudentForm } from '../api/models';
+import { SectionService, StudentService } from '../api/services';
 
 @Component({
   selector: 'app-form-student',
@@ -11,35 +11,30 @@ import { StudentService } from '../service/student.service';
 })
 export class FormStudentComponent implements OnInit {
   form: FormGroup;
-  postCodes: Array<string>;
-  studentModel: StudentForm;
-  sections: Array<string>;
+  studentModel: StudentDTO;
+  isACreation: boolean;
+  sections: Array<SectionDTO>
 
   constructor(
     private route: ActivatedRoute, 
-    private studentService: StudentService
+    private studentService: StudentService,
+    private sectionService: SectionService,
+    private router: Router,
   ) {
+    this.isACreation = true;
     this.form = this.createFormGroup();
-    this.studentModel = {
-      name : null, 
-      address : {
-        locality: null,
-        postCode: null,
-        street: null,
-        streetNumber: null,
-      }
-    } as StudentForm;
    }
 
   ngOnInit() {
     this.route.data
-    //TODO: appeler le service pour récupérer sur base de l'id le détail de la compagnie
-    //this.service.getHero(params.get('id')))
-    .subscribe((data: {student: StudentForm} ) => {
-      this.studentModel = data.student;
-      //TODO: patcher le formulaire : https://angular.io/guide/reactive-forms
-      this.form.patchValue(this.studentModel);
-    });
+      .subscribe((data: { student: StudentDTO }) => {
+        if (data.student != undefined) {
+          this.studentModel = data.student;
+          this.form.patchValue(this.studentModel);
+          this.isACreation = false;
+        }
+      });
+      this.getAllSections();
   }
 
   addStudent() {}
@@ -52,13 +47,13 @@ export class FormStudentComponent implements OnInit {
           Validators.email
         ]
       ),
-      password: new FormControl('',),
-      name: new FormControl('',
+      //password: new FormControl('',),
+      lastName: new FormControl('',
         [
           Validators.required,
         ]
       ),
-      firstname: new FormControl('',
+      firstName: new FormControl('',
       [
         Validators.required,
       ]
@@ -69,8 +64,35 @@ export class FormStudentComponent implements OnInit {
         street: new FormControl(''),
         streetNumber: new FormControl(''),
       }),
-      phone: new FormControl(''),
-      section: new FormControl('')
+      //phoneNumber: new FormControl(''),
+      section: new FormControl('', 
+      [
+        Validators.required,
+      ]),
+      secretQuestion: new FormControl(''),
+      answerSecret: new FormControl(''),
     });
   }
+
+  getAllSections(): void{
+    this.sectionService
+      .getSection()
+      .subscribe((data) => this.sections = data);
+  }
+
+  updateStudent(): void {
+    console.log("clic")
+    let studentUpdated: StudentForm = this.form.value;
+    if (this.isACreation) {
+      this.studentService
+        .postStudent(studentUpdated)
+        .subscribe(() =>
+          this.router.navigate(["/students"])
+        );
+    } else {
+      /* sectionUpdated.id = this.sectionModel.id; //TODO: soucis api sectionId
+      this.sectionService.putSection(sectionUpdated)
+        .subscribe(() => this.router.navigate(["/sections"])); */
+  }
+}
 }

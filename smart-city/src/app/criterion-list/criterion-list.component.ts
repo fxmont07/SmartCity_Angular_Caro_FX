@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CriterionTable } from '../model/criterion';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CriterionService } from '../service/criterion.service';
+import { CriterionDTO } from '../api/models';
+import { CriterionService } from '../api/services';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-criterion-list',
@@ -10,27 +12,44 @@ import { CriterionService } from '../service/criterion.service';
 })
 
 export class CriterionListComponent implements OnInit {
-  criterions: Array<CriterionTable>;
+  criterions: Array<CriterionDTO>;
   headers: Array<string>;
-  constructor(private router : Router, private route : ActivatedRoute, private criterionService : CriterionService) { 
-    this.headers = criterionService.getHeadersCriterion();
-    this.criterions = criterionService.getCriterionsTable(); 
+
+  constructor(private router: Router,
+    private criterionService: CriterionService) {
+    this.headers = new Array<string>();
+    this.criterions = new Array<CriterionDTO>();
   }
 
   ngOnInit() {
+    this.headers = this.getHeaders();
+    this.getAllCriterion()
+      .subscribe(
+        data => this.criterions = data
+      );
   }
 
-  addCriterion() {
+  addCriterion(): void {
     this.router.navigate(["/formcriterion"]);
   }
 
-  editCriterion(criterion: CriterionTable){
-    this.router.navigate(["/formcriterion/", criterion.id] ); // Si cv pas cest , et pas +
+  editCriterion(criterion: CriterionTable): void {
+    this.router.navigate(["/formcriterion/", criterion.id]);
   }
 
-  deleteCriterion(event) {
-    this.criterions = this.criterions.filter(c => c.id != event.id);
-    this.criterions=[...this.criterions];
+  deleteCriterion(event: CriterionDTO): void {
+    this.criterionService.deleteCriterion(event)
+      .subscribe(() => {
+        this.criterions = this.criterions.filter(c => c.id != event.id);
+        this.criterions = [...this.criterions];
+      });
   }
 
+  getAllCriterion(): Observable<CriterionDTO[]> {
+    return this.criterionService.getCriterion();
+  }
+
+  getHeaders(): Array<string> {
+    return ["id", "description", "sectionId"]; // TODO: "section"
+  }
 }
