@@ -4,6 +4,7 @@ export { CriterionService } from './services/criterion.service';
 export { CriterionOfferService } from './services/criterion-offer.service';
 export { CriterionStudentService } from './services/criterion-student.service';
 export { EvaluationService } from './services/evaluation.service';
+export { LoginService } from './services/login.service';
 export { OfferService } from './services/offer.service';
 export { SectionService } from './services/section.service';
 export { StudentService } from './services/student.service';

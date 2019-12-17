@@ -7,12 +7,13 @@ import { StrictHttpResponse as __StrictHttpResponse } from '../strict-http-respo
 import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
-import { CriterionOfferDTO } from '../models/criterion-offer-dto';
 import { CriterionOffer } from '../models/criterion-offer';
+import { CriterionOfferDTO } from '../models/criterion-offer-dto';
 @Injectable({
   providedIn: 'root',
 })
 class CriterionOfferService extends __BaseService {
+  static readonly getCriterionOfferPath = '/CriterionOffer';
   static readonly getCriterionOfferOfferIdPath = '/CriterionOffer/{offerId}';
   static readonly postCriterionOfferAddPath = '/CriterionOffer/add';
 
@@ -21,6 +22,39 @@ class CriterionOfferService extends __BaseService {
     http: HttpClient
   ) {
     super(config, http);
+  }
+
+  /**
+   * @return Success
+   */
+  getCriterionOfferResponse(): __Observable<__StrictHttpResponse<Array<CriterionOffer>>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/CriterionOffer`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<Array<CriterionOffer>>;
+      })
+    );
+  }
+  /**
+   * @return Success
+   */
+  getCriterionOffer(): __Observable<Array<CriterionOffer>> {
+    return this.getCriterionOfferResponse().pipe(
+      __map(_r => _r.body as Array<CriterionOffer>)
+    );
   }
 
   /**

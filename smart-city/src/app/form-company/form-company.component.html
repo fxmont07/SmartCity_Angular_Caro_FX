@@ -3,7 +3,7 @@
 <button mat-raised-button color="primary" routerLink="/companies">Retour</button>
 <div id="wrapper">
     <h1>Formulaire de l'entreprise</h1>
-    <form  (ngSubmit)="updateCompany()" [formGroup]="form">
+    <form (ngSubmit)="updateCompany()" [formGroup]="form">
         <mat-form-field class="elem-form">
             <input type="text" matInput placeholder="Email" required formControlName="email">
             <mat-error *ngIf="form.get('email').hasError('email')">
@@ -13,7 +13,7 @@
                 Champs requis
             </mat-error>
         </mat-form-field>
-    
+
         <mat-form-field class="elem-form">
             <input type="password" matInput placeholder="Mot de passe" required formControlName="password">
             <mat-error *ngIf="form.get('password').hasError('required')">
@@ -23,27 +23,27 @@
                 Minimum 8 caractères
             </mat-error>
         </mat-form-field>
-        
+
         <mat-form-field class="elem-form">
-            <input type="text" matInput placeholder="Nom"  required formControlName="name">
+            <input type="text" matInput placeholder="Nom" required formControlName="name">
             <mat-error *ngIf="form.get('name').hasError('required')">
                 Champs requis
             </mat-error>
         </mat-form-field>
-    
+
         <span formGroupName="address">
             <mat-form-field class="elem-form">
-                <input matInput placeholder="Localité" formControlName="locality">
+                <input matInput placeholder="Localité" formControlName="locality" required>
             </mat-form-field>
-    
+
             <mat-form-field class="elem-form">
-                <input matInput placeholder="Code Postal"  formControlName="postCode">
+                <input matInput placeholder="Code Postal" formControlName="postCode" required>
             </mat-form-field>
-            
+
             <mat-form-field class="elem-form">
-                <input matInput placeholder="Rue"  formControlName="street">
+                <input matInput placeholder="Rue" formControlName="street">
             </mat-form-field>
-    
+
             <mat-form-field class="elem-form">
                 <input matInput placeholder="Numéro de la rue" formControlName="streetNumber">
             </mat-form-field>
@@ -52,16 +52,20 @@
                 <input matInput placeholder="Pays" formControlName="country" required>
             </mat-form-field>
         </span>
-    
+
         <mat-form-field class="elem-form">
-            <span matPrefix>+32 &nbsp;</span>
-            <input type="tel" matInput placeholder="Telephone"  formControlName="phone">
+            <span matPrefix>+ &nbsp;</span>
+            <input type="tel" matInput placeholder="Telephone" formControlName="phone">
         </mat-form-field>
-    
+
         <mat-form-field class="elem-form">
             <textarea matInput placeholder="Description" formControlName="description"></textarea>
         </mat-form-field>
-    
+
+        <mat-checkbox formControlName="isPremium">Premium</mat-checkbox>
+
+        <br>
+
         <button id=button mat-raised-button color="primary" [disabled]="!form.valid">Valider</button>
     </form>
 </div>

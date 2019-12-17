@@ -9,6 +9,7 @@ import { CriterionService } from './services/criterion.service';
 import { CriterionOfferService } from './services/criterion-offer.service';
 import { CriterionStudentService } from './services/criterion-student.service';
 import { EvaluationService } from './services/evaluation.service';
+import { LoginService } from './services/login.service';
 import { OfferService } from './services/offer.service';
 import { SectionService } from './services/section.service';
 import { StudentService } from './services/student.service';
@@ -32,6 +33,7 @@ import { StudentService } from './services/student.service';
     CriterionOfferService,
     CriterionStudentService,
     EvaluationService,
+    LoginService,
     OfferService,
     SectionService,
     StudentService

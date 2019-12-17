@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
-import { CompanyForm, CompanyTable } from '../model/company';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CompanyService } from '../api/services';
+import { CompanyForm } from '../api/models';
 
 
 @Component({
@@ -11,28 +11,32 @@ import { CompanyService } from '../api/services';
   styleUrls: ['./form-company.component.css']
 })
 export class FormCompanyComponent implements OnInit {
-  
+
   form: FormGroup;
-  companyModel: CompanyTable;
-  isACreation : boolean;
+  companyModel: CompanyForm;
+  isACreation: boolean;
 
   constructor(
     private route: ActivatedRoute,
-    private companyService : CompanyService) {
+    private companyService: CompanyService,
+    private router: Router,
+  ) {
 
     this.form = this.createFormGroup();
     this.isACreation = true;
   }
 
   ngOnInit() {
+    this.form.get('isPremium').setValue(false);
     this.route.data
-      .subscribe((data: {company: CompanyTable}) => {
-        if(data.company != undefined) {
+      .subscribe((data: { company: CompanyForm }) => {
+        if (data.company != undefined) {
           this.companyModel = data.company;
-          console.log(this.companyModel);
           this.form.patchValue(this.companyModel);
+          this.form.get('address').patchValue(this.companyModel.address);
           this.isACreation = false;
-        } 
+          console.log(this.form.value);
+        }
       });
   }
 
@@ -56,25 +60,35 @@ export class FormCompanyComponent implements OnInit {
         ]
       ),
       address: new FormGroup({
-        locality: new FormControl(''),
-        postCode: new FormControl(''),
+        locality: new FormControl('', 
+        [
+          Validators.required,
+        ]),
+        postCode: new FormControl('',
+        [
+          Validators.required,
+        ]),
         street: new FormControl(''),
         streetNumber: new FormControl(''),
         country: new FormControl('', Validators.required)
       }),
       phone: new FormControl(''),
+      isPremium: new FormControl(''),
       description: new FormControl('')
     });
   }
 
   updateCompany() {
-    const companyUpdated = this.form.value;
-    console.log(companyUpdated);
-    if(this.isACreation) {
-      console.log("coucou")
-      this.companyService.postCompanyAdd(companyUpdated);
+    let companyUpdated: CompanyForm = this.form.value;
+    //companyUpdated.isPremium = this.form.get('isPremium').value ? 1 : 0;
+    if (this.isACreation) {
+      console.log(companyUpdated);
+      this.companyService.postCompany(companyUpdated)
+        .subscribe(() => {
+          this.router.navigate(["/companies "]);
+        });
     } else {
-      //this.companyService.update(companyUpdated)
+      //this.companyService.(companyUpdated)
     }
   }
 }

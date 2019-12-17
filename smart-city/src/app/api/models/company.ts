@@ -2,16 +2,17 @@
 import { Address } from './address';
 import { Evaluation } from './evaluation';
 import { Offer } from './offer';
+import { ApplicationUser } from './application-user';
 export interface Company {
-  description?: string;
-  id?: number;
-  password?: string;
-  name?: string;
-  phoneNumber?: string;
-  email?: string;
-  isPremium?: number;
   addressId?: number;
+  id?: number;
+  phoneNumber?: string;
+  description?: string;
+  isPremium?: boolean;
+  name?: string;
   address?: Address;
   evaluation?: Array<Evaluation>;
   offer?: Array<Offer>;
+  applicationIdentityId?: string;
+  applicationIdentity?: ApplicationUser;
 }

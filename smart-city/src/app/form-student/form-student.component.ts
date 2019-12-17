@@ -16,14 +16,14 @@ export class FormStudentComponent implements OnInit {
   sections: Array<SectionDTO>
 
   constructor(
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private studentService: StudentService,
     private sectionService: SectionService,
     private router: Router,
   ) {
     this.isACreation = true;
     this.form = this.createFormGroup();
-   }
+  }
 
   ngOnInit() {
     this.route.data
@@ -34,10 +34,10 @@ export class FormStudentComponent implements OnInit {
           this.isACreation = false;
         }
       });
-      this.getAllSections();
+    this.getAllSections();
   }
 
-  addStudent() {}
+  addStudent() { }
 
   createFormGroup() {
     return new FormGroup({
@@ -54,10 +54,10 @@ export class FormStudentComponent implements OnInit {
         ]
       ),
       firstName: new FormControl('',
-      [
-        Validators.required,
-      ]
-    ),
+        [
+          Validators.required,
+        ]
+      ),
       address: new FormGroup({
         locality: new FormControl(''),
         postCode: new FormControl(''),
@@ -65,16 +65,16 @@ export class FormStudentComponent implements OnInit {
         streetNumber: new FormControl(''),
       }),
       //phoneNumber: new FormControl(''),
-      section: new FormControl('', 
-      [
-        Validators.required,
-      ]),
+      section: new FormControl('',
+        [
+          Validators.required,
+        ]),
       secretQuestion: new FormControl(''),
       answerSecret: new FormControl(''),
     });
   }
 
-  getAllSections(): void{
+  getAllSections(): void {
     this.sectionService
       .getSection()
       .subscribe((data) => this.sections = data);
@@ -93,6 +93,6 @@ export class FormStudentComponent implements OnInit {
       /* sectionUpdated.id = this.sectionModel.id; //TODO: soucis api sectionId
       this.sectionService.putSection(sectionUpdated)
         .subscribe(() => this.router.navigate(["/sections"])); */
+    }
   }
-}
 }

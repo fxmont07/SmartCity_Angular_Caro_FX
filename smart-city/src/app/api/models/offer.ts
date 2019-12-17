@@ -10,7 +10,7 @@ export interface Offer {
   other?: string;
   addressId?: number;
   titleJob?: string;
-  sectionid?: number;
+  sectionId?: number;
   address?: Address;
   company?: Company;
   section?: Section;

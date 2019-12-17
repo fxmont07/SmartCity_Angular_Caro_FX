@@ -7,5 +7,6 @@ export interface CompanyForm {
   name?: string;
   phoneNumber?: string;
   description?: string;
+  isPremium?: boolean;
   address?: AddressDTO;
 }

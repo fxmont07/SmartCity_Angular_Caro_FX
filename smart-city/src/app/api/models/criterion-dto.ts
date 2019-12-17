@@ -2,5 +2,5 @@
 export interface CriterionDTO {
   id?: number;
   description?: string;
-  sectionId?: number;
+  section?: string;
 }

@@ -13,7 +13,7 @@ import { CompanyService } from '../api/services';
     providedIn: 'root'
 })
 
-export class CompanyResolver implements Resolve<CompanyTable> {
+export class CompanyResolver implements Resolve<CompanyForm> {
   constructor(
     private companyService: CompanyService,
     private router: Router

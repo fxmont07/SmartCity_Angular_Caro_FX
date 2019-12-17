@@ -1,22 +1,22 @@
 /* tslint:disable */
 import { Address } from './address';
+import { Section } from './section';
 import { CriterionStudent } from './criterion-student';
 import { Evaluation } from './evaluation';
+import { ApplicationUser } from './application-user';
 export interface Student {
-  secretQuestion?: string;
+  sectionId?: number;
   id?: number;
-  lastName?: string;
   firstName?: string;
   phoneNumber?: string;
-  password?: string;
-  avatar?: string;
-  creationDate?: string;
-  email?: string;
+  secretQuestion?: string;
   answerSecret?: string;
-  cv?: string;
   addressId?: number;
-  sectionId?: number;
+  lastName?: string;
   address?: Address;
+  section?: Section;
   criterionStudent?: Array<CriterionStudent>;
   evaluation?: Array<Evaluation>;
+  applicationIdentityId?: string;
+  applicationIdentity?: ApplicationUser;
 }

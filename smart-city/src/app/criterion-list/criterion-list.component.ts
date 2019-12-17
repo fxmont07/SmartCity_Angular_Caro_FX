@@ -23,10 +23,10 @@ export class CriterionListComponent implements OnInit {
 
   ngOnInit() {
     this.headers = this.getHeaders();
-    this.getAllCriterion()
+   /*  this.getAllCriterion()
       .subscribe(
         data => this.criterions = data
-      );
+      ); */
   }
 
   addCriterion(): void {
@@ -37,17 +37,17 @@ export class CriterionListComponent implements OnInit {
     this.router.navigate(["/formcriterion/", criterion.id]);
   }
 
-  deleteCriterion(event: CriterionDTO): void {
+  /* deleteCriterion(event: CriterionDTO): void {
     this.criterionService.deleteCriterion(event)
       .subscribe(() => {
         this.criterions = this.criterions.filter(c => c.id != event.id);
         this.criterions = [...this.criterions];
       });
-  }
+  } */
 
-  getAllCriterion(): Observable<CriterionDTO[]> {
+  /* getAllCriterion(): Observable<CriterionDTO[]> {
     return this.criterionService.getCriterion();
-  }
+  } */
 
   getHeaders(): Array<string> {
     return ["id", "description", "sectionId"]; // TODO: "section"

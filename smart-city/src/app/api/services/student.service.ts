@@ -21,6 +21,7 @@ class StudentService extends __BaseService {
   static readonly deleteStudentPath = '/Student';
   static readonly getStudentStudentIdPath = '/Student/{studentId}';
   static readonly getStudentOfferStudentIdPath = '/Student/offer/{studentId}';
+  static readonly postStudentAccountPath = '/Student/Account';
 
   constructor(
     config: __Configuration,
@@ -201,6 +202,42 @@ class StudentService extends __BaseService {
   getStudentOfferStudentId(studentId: number): __Observable<Array<Offer>> {
     return this.getStudentOfferStudentIdResponse(studentId).pipe(
       __map(_r => _r.body as Array<Offer>)
+    );
+  }
+
+  /**
+   * @param body undefined
+   * @return Success
+   */
+  postStudentAccountResponse(body?: StudentForm): __Observable<__StrictHttpResponse<Student>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = body;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/Student/Account`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<Student>;
+      })
+    );
+  }
+  /**
+   * @param body undefined
+   * @return Success
+   */
+  postStudentAccount(body?: StudentForm): __Observable<Student> {
+    return this.postStudentAccountResponse(body).pipe(
+      __map(_r => _r.body as Student)
     );
   }
 }
