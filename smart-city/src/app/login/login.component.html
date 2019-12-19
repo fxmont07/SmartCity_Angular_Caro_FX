@@ -1,7 +1,7 @@
 <p>login works!</p>
 
 <div>
-    <form [formGroup]="form">
+    <form [formGroup]="form" (ngSubmit)="logIn()">
         <mat-form-field class="example-full-width">
           <input matInput placeholder="Email" required formControlName="email">
           <mat-error *ngIf="form.get('email').hasError('email')">
@@ -12,7 +12,7 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-            <input type="password" matInput placeholder="Mot de passe" formControlName="password">
+            <input type="password" matInput placeholder="Mot de passe" required formControlName="password">
             <mat-error *ngIf="form.get('password').hasError('required')">
               Champs requis
           </mat-error>
@@ -21,6 +21,6 @@
           </mat-error>
         </mat-form-field>
     </form>
-    <button mat-raised-button color="primary" [disabled]="!form.valid">Se connecter</button>
+    <button mat-raised-button color="primary" [disabled]="!form.valid" (click)="logIn()">Se connecter</button>
     <button mat-raised-button color="accent" routerLink="/signup">S'inscrire</button>
 </div>

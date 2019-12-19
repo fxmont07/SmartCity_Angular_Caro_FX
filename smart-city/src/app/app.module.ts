@@ -1,20 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ViewChild } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DisplayDataComponent } from './display-data/display-data.component';
 import { CompanyListComponent } from './company-list/company-list.component';
 import { MatTableModule } from '@angular/material/table';
-import { MatSort } from '@angular/material';
 import { LoginComponent } from './login/login.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule, Routes } from '@angular/router';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { MatSelectModule } from '@angular/material/select';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FormCompanyComponent } from './form-company/form-company.component';
@@ -36,7 +34,6 @@ import { ApiModule } from './api/api.module';
 import { SectionResolver } from './form-section/section-resolver';
 import { CriterionResolver } from './form-criterion/criterion-resolver';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { from } from 'rxjs';
 import { CompanyOfferComponent } from './company-offer/company-offer.component';
 import { CompanyOfferDetailsComponent } from './company-offer-details/company-offer-details.component';
 import { CompanyProfilComponent } from './company-profil/company-profil.component';
@@ -44,6 +41,7 @@ import { NavBarCompanyComponent } from './nav-bar-company/nav-bar-company.compon
 import { FormOfferComponent } from './form-offer/form-offer.component';
 import { OfferListComponent } from './offer-list/offer-list.component';
 import { OfferResolver } from './form-offer/offer-resolver';
+import { TokenInterceptor } from './auth/token-interceptor';
 
 
 
@@ -135,11 +133,6 @@ const routes: Routes = [
     path: 'companyoffer',
     component: CompanyOfferComponent,
   },
-
-  
-
-
-
 ];
 
 @NgModule({
@@ -187,10 +180,15 @@ const routes: Routes = [
     RouterModule,
     RouterModule.forRoot(
       routes,
-      { enableTracing: true } // <-- debugging purposes only
+     // { enableTracing: true } // <-- debugging purposes only
     )
   ],
   providers: [
+    {
+    provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
   entryComponents: [FormCompanyComponent]

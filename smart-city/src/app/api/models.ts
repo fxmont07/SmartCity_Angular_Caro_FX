@@ -14,6 +14,8 @@ export { CompanyForm } from './models/company-form';
 export { CriterionDTO } from './models/criterion-dto';
 export { CriterionOfferDTO } from './models/criterion-offer-dto';
 export { CriterionStudentDTO } from './models/criterion-student-dto';
+export { LoginDTO } from './models/login-dto';
+export { TokenDTO } from './models/token-dto';
 export { OfferDTO } from './models/offer-dto';
 export { OfferForm } from './models/offer-form';
 export { SectionDTO } from './models/section-dto';

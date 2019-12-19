@@ -7,8 +7,8 @@ import { StrictHttpResponse as __StrictHttpResponse } from '../strict-http-respo
 import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
-import { Student } from '../models/student';
-import { CompanyForm } from '../models/company-form';
+import { TokenDTO } from '../models/token-dto';
+import { LoginDTO } from '../models/login-dto';
 @Injectable({
   providedIn: 'root',
 })
@@ -26,7 +26,7 @@ class LoginService extends __BaseService {
    * @param body undefined
    * @return Success
    */
-  postLoginResponse(body?: CompanyForm): __Observable<__StrictHttpResponse<Student>> {
+  postLoginResponse(body?: LoginDTO): __Observable<__StrictHttpResponse<TokenDTO>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -44,7 +44,7 @@ class LoginService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Student>;
+        return _r as __StrictHttpResponse<TokenDTO>;
       })
     );
   }
@@ -52,9 +52,9 @@ class LoginService extends __BaseService {
    * @param body undefined
    * @return Success
    */
-  postLogin(body?: CompanyForm): __Observable<Student> {
+  postLogin(body?: LoginDTO): __Observable<TokenDTO> {
     return this.postLoginResponse(body).pipe(
-      __map(_r => _r.body as Student)
+      __map(_r => _r.body as TokenDTO)
     );
   }
 }
