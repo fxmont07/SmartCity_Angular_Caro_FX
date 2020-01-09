@@ -35,7 +35,7 @@ export class CompanyListComponent implements OnInit {
   }
 
   editCompany(company: CompanyTable) {
-    this.router.navigate(["/formcompany/", company.id]);
+    this.router.navigate(["/formcompanyupdate/", company.id]);
   }
 
   deleteCompany(event: CompanyTable) {

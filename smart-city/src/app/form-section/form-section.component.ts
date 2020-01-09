@@ -50,7 +50,7 @@ export class FormSectionComponent implements OnInit {
     let sectionUpdated: SectionDTO = this.form.value;
     if (this.isACreation) {
       this.sectionService
-        .postSectionAdd(sectionUpdated)
+        .postSection(sectionUpdated)
         .subscribe(() =>
           this.router.navigate(["/sections"])
         );

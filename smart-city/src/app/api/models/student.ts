@@ -5,15 +5,12 @@ import { CriterionStudent } from './criterion-student';
 import { Evaluation } from './evaluation';
 import { ApplicationUser } from './application-user';
 export interface Student {
-  sectionId?: number;
+  address?: Address;
   id?: number;
   firstName?: string;
-  phoneNumber?: string;
-  secretQuestion?: string;
-  answerSecret?: string;
   addressId?: number;
+  sectionId?: number;
   lastName?: string;
-  address?: Address;
   section?: Section;
   criterionStudent?: Array<CriterionStudent>;
   evaluation?: Array<Evaluation>;

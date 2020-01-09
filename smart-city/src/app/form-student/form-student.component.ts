@@ -47,7 +47,12 @@ export class FormStudentComponent implements OnInit {
           Validators.email
         ]
       ),
-      //password: new FormControl('',),
+      password: new FormControl('', [
+        Validators.required
+      ]),
+      confirmPassword: new FormControl('', [
+        Validators.required
+      ]),
       lastName: new FormControl('',
         [
           Validators.required,
@@ -59,18 +64,23 @@ export class FormStudentComponent implements OnInit {
         ]
       ),
       address: new FormGroup({
-        locality: new FormControl(''),
-        postCode: new FormControl(''),
+        locality: new FormControl('', [
+          Validators.required]),
+        postCode: new FormControl('', [
+          Validators.required,
+          Validators.pattern("[1-9][0-9]{3}")
+        ]),
         street: new FormControl(''),
         streetNumber: new FormControl(''),
+        country: new FormControl('', [
+          Validators.required
+        ]),
       }),
-      //phoneNumber: new FormControl(''),
       section: new FormControl('',
         [
           Validators.required,
         ]),
-      secretQuestion: new FormControl(''),
-      answerSecret: new FormControl(''),
+
     });
   }
 

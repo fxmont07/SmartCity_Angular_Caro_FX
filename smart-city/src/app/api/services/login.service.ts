@@ -13,6 +13,7 @@ import { LoginDTO } from '../models/login-dto';
   providedIn: 'root',
 })
 class LoginService extends __BaseService {
+  static readonly getLoginEmailPath = '/Login/{email}';
   static readonly postLoginPath = '/Login';
 
   constructor(
@@ -20,6 +21,42 @@ class LoginService extends __BaseService {
     http: HttpClient
   ) {
     super(config, http);
+  }
+
+  /**
+   * @param email undefined
+   * @return Success
+   */
+  getLoginEmailResponse(email: string): __Observable<__StrictHttpResponse<boolean>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/Login/${email}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'text'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return (_r as HttpResponse<any>).clone({ body: (_r as HttpResponse<any>).body === 'true' }) as __StrictHttpResponse<boolean>
+      })
+    );
+  }
+  /**
+   * @param email undefined
+   * @return Success
+   */
+  getLoginEmail(email: string): __Observable<boolean> {
+    return this.getLoginEmailResponse(email).pipe(
+      __map(_r => _r.body as boolean)
+    );
   }
 
   /**

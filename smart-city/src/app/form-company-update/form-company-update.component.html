@@ -1,39 +1,9 @@
-<p>form-company works!</p>
+<p>form-company-update works!</p>
 
 <button mat-raised-button color="primary" routerLink="/companies">Retour</button>
 <div id="wrapper">
     <h1>Formulaire de l'entreprise</h1>
     <form (ngSubmit)="updateCompany()" [formGroup]="form">
-        <mat-form-field class="elem-form">
-            <input type="text" matInput placeholder="Email" required formControlName="email">
-            <mat-error *ngIf="form.get('email').hasError('email')">
-                Format d'email non valide
-            </mat-error>
-            <mat-error *ngIf="form.get('email').hasError('required')">
-                Champs requis
-            </mat-error>
-        </mat-form-field>
-        
-        <mat-form-field class="elem-form">
-            <input type="password" matInput placeholder="Mot de passe" required formControlName="password">
-            <mat-error *ngIf="form.get('password').hasError('required')">
-                Champs requis
-            </mat-error>
-            <mat-error *ngIf="form.get('password').hasError('minlength')">
-                Minimum 8 caractères
-            </mat-error>
-        </mat-form-field>
-        
-        <mat-form-field class="elem-form">
-            <input type="password" matInput placeholder="Confirmation du mot de passe" required formControlName="confirmPassword">
-            <mat-error *ngIf="form.get('password').hasError('required')">
-                Champs requis
-            </mat-error>
-            <mat-error *ngIf="form.get('password').hasError('minlength')">
-                Minimum 8 caractères
-            </mat-error>
-        </mat-form-field>
-
         <mat-form-field class="elem-form">
             <input type="text" matInput placeholder="Nom" required formControlName="name">
             <mat-error *ngIf="form.get('name').hasError('required')">
@@ -76,6 +46,6 @@
 
         <br>
 
-        <button id=button mat-raised-button color="primary" [disabled]="!form.valid ">Valider</button>
+        <button id=button mat-raised-button color="primary" [disabled]="!form.valid">Valider</button>
     </form>
 </div>

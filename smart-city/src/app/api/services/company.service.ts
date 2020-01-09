@@ -9,6 +9,7 @@ import { map as __map, filter as __filter } from 'rxjs/operators';
 
 import { CompanyTable } from '../models/company-table';
 import { CompanyForm } from '../models/company-form';
+import { CompanyEditForm } from '../models/company-edit-form';
 import { Company } from '../models/company';
 @Injectable({
   providedIn: 'root',
@@ -16,6 +17,7 @@ import { Company } from '../models/company';
 class CompanyService extends __BaseService {
   static readonly getCompanyPath = '/Company';
   static readonly postCompanyPath = '/Company';
+  static readonly putCompanyPath = '/Company';
   static readonly deleteCompanyPath = '/Company';
   static readonly getCompanyCompanyIdPath = '/Company/{companyId}';
 
@@ -61,9 +63,8 @@ class CompanyService extends __BaseService {
 
   /**
    * @param body undefined
-   * @return Success
    */
-  postCompanyResponse(body?: CompanyForm): __Observable<__StrictHttpResponse<CompanyForm>> {
+  postCompanyResponse(body?: CompanyForm): __Observable<__StrictHttpResponse<null>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -81,17 +82,50 @@ class CompanyService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<CompanyForm>;
+        return _r as __StrictHttpResponse<null>;
       })
     );
   }
   /**
    * @param body undefined
-   * @return Success
    */
-  postCompany(body?: CompanyForm): __Observable<CompanyForm> {
+  postCompany(body?: CompanyForm): __Observable<null> {
     return this.postCompanyResponse(body).pipe(
-      __map(_r => _r.body as CompanyForm)
+      __map(_r => _r.body as null)
+    );
+  }
+
+  /**
+   * @param body undefined
+   */
+  putCompanyResponse(body?: CompanyEditForm): __Observable<__StrictHttpResponse<null>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = body;
+    let req = new HttpRequest<any>(
+      'PUT',
+      this.rootUrl + `/Company`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<null>;
+      })
+    );
+  }
+  /**
+   * @param body undefined
+   */
+  putCompany(body?: CompanyEditForm): __Observable<null> {
+    return this.putCompanyResponse(body).pipe(
+      __map(_r => _r.body as null)
     );
   }
 

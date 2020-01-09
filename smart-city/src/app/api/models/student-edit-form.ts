@@ -1,10 +1,7 @@
 /* tslint:disable */
 import { AddressDTO } from './address-dto';
-export interface StudentDTO {
-  id?: number;
-  email: string;
+export interface StudentEditForm {
   lastName: string;
   firstName: string;
   address: AddressDTO;
-  sectionName: string;
 }

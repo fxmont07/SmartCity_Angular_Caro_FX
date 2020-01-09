@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { CompanyForm, CompanyEditForm } from '../api/models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CompanyService } from '../api/services';
-import { CompanyForm } from '../api/models';
-
 
 @Component({
-  selector: 'app-form-company',
-  templateUrl: './form-company.component.html',
-  styleUrls: ['./form-company.component.css']
+  selector: 'app-form-company-update',
+  templateUrl: './form-company-update.component.html',
+  styleUrls: ['./form-company-update.component.css']
 })
-export class FormCompanyComponent implements OnInit {
+export class FormCompanyUpdateComponent implements OnInit {
 
   form: FormGroup;
   companyModel: CompanyForm;
@@ -34,34 +33,12 @@ export class FormCompanyComponent implements OnInit {
           this.companyModel = data.company;
           this.form.patchValue(this.companyModel);
           this.form.get('address').patchValue(this.companyModel.address);
-          this.isACreation = false;
-          console.log(this.form.value);
-        }
+          this.isACreation = false;        }
       });
   }
 
   createFormGroup() {
     return new FormGroup({
-      email: new FormControl('',
-        [
-          Validators.required,
-          Validators.email
-        ]
-      ),
-
-      password: new FormControl('',
-        [
-          Validators.required,
-          Validators.minLength(8)
-        ]
-      ),
-      confirmPassword : new FormControl('',
-        [
-          Validators.required,
-          Validators.minLength(8)
-        ]),
-
-
       name: new FormControl('',
         [
           Validators.required,
@@ -88,19 +65,21 @@ export class FormCompanyComponent implements OnInit {
 
   updateCompany() {
     let companyUpdated: CompanyForm = this.form.value;
+    //companyUpdated.isPremium = this.form.get('isPremium').value ? 1 : 0;
     if (this.isACreation) {
+      let companyUpdated: CompanyForm = this.form.value;
       console.log(companyUpdated);
-      this.companyService.postCompany(companyUpdated)
+      this.companyService
+        .postCompany(companyUpdated)
         .subscribe(() => {
-          this.router.navigate(["/companies "]);
+           this.router.navigate(["/companies "]);
         });
-    } 
+    } else {
+      let companyUpdated: CompanyEditForm = this.form.value;
+      companyUpdated.id = this.companyModel.id;
+      this.companyService.putCompany(companyUpdated)
+      .subscribe(() => this.router.navigate(["/companies"]));
+    }
   }
 
-  //TODO: Verifier les 2 mdp 
-  checkPassword() {
-    return this.form.get("password") === this.form.get("confirmPassword");
-  }
 }
-
-

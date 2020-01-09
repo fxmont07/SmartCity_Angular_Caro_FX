@@ -13,6 +13,26 @@
                 Champs requis
             </mat-error>
         </mat-form-field>
+
+        <mat-form-field class="elem-form">
+            <input type="password" matInput placeholder="Mot de passe" required formControlName="password">
+            <mat-error *ngIf="form.get('password').hasError('required')">
+                Champs requis
+            </mat-error>
+            <mat-error *ngIf="form.get('password').hasError('minlength')">
+                Minimum 8 caractères
+            </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field class="elem-form">
+            <input type="password" matInput placeholder="Confirmation du mot de passe" required formControlName="confirmPassword">
+            <mat-error *ngIf="form.get('password').hasError('required')">
+                Champs requis
+            </mat-error>
+            <mat-error *ngIf="form.get('password').hasError('minlength')">
+                Minimum 8 caractères
+            </mat-error>
+        </mat-form-field>
     
         <mat-form-field class="elem-form">
             <input type="text" matInput placeholder="Nom"  required formControlName="lastName">
@@ -31,11 +51,20 @@
         <span formGroupName="address">
 
             <mat-form-field class="elem-form">
-                <input matInput placeholder="Localité" formControlName="locality">
+                <input matInput placeholder="Localité" formControlName="locality" required>
+                <mat-error *ngIf="form.get('address').get('locality').hasError('required')">
+                    Champs requis
+                </mat-error>
             </mat-form-field>
     
             <mat-form-field class="elem-form">
-                <input matInput placeholder="Code Postal"  formControlName="postCode">
+                <input matInput placeholder="Code Postal"  formControlName="postCode" required>
+                <mat-error *ngIf="form.get('address').get('postCode')">
+                    Champs requis
+                </mat-error>
+                <mat-error *ngIf="form.get('address').get('postCode').errors.pattern">
+                    4 chiffres
+                </mat-error>
             </mat-form-field>
             
             <mat-form-field class="elem-form">
@@ -46,20 +75,11 @@
                 <input matInput placeholder="Numéro de la rue" formControlName="streetNumber">
             </mat-form-field>
 
+            <mat-form-field class="elem-form">
+                <input matInput placeholder="Pays" formControlName="country" required>
+            </mat-form-field>
+
         </span>
-    
-      <!--   <mat-form-field class="elem-form">
-            <span matPrefix>+32 &nbsp;</span>
-            <input type="tel" matInput placeholder="Telephone" formControlName="phoneNumber">
-        </mat-form-field> -->
-
-        <mat-form-field class="elem-form">
-            <input type="tel" matInput placeholder="Question Secrete" formControlName="secretQuestion">
-        </mat-form-field>
-
-        <mat-form-field class="elem-form">
-            <input type="tel" matInput placeholder="Réponse Secrete" formControlName="answerSecret">
-        </mat-form-field>
 
         <mat-label>Sections *</mat-label>
         <mat-select formControlName="section">

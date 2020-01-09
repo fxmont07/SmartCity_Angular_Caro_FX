@@ -14,10 +14,10 @@ import { Section } from '../models/section';
 })
 class SectionService extends __BaseService {
   static readonly getSectionPath = '/Section';
+  static readonly postSectionPath = '/Section';
   static readonly putSectionPath = '/Section';
   static readonly deleteSectionPath = '/Section';
   static readonly getSectionSectionIdPath = '/Section/{sectionId}';
-  static readonly postSectionAddPath = '/Section/add';
 
   constructor(
     config: __Configuration,
@@ -56,6 +56,40 @@ class SectionService extends __BaseService {
   getSection(): __Observable<Array<SectionDTO>> {
     return this.getSectionResponse().pipe(
       __map(_r => _r.body as Array<SectionDTO>)
+    );
+  }
+
+  /**
+   * @param body undefined
+   */
+  postSectionResponse(body?: SectionDTO): __Observable<__StrictHttpResponse<null>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = body;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/Section`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<null>;
+      })
+    );
+  }
+  /**
+   * @param body undefined
+   */
+  postSection(body?: SectionDTO): __Observable<null> {
+    return this.postSectionResponse(body).pipe(
+      __map(_r => _r.body as null)
     );
   }
 
@@ -160,40 +194,6 @@ class SectionService extends __BaseService {
   getSectionSectionId(sectionId: number): __Observable<SectionDTO> {
     return this.getSectionSectionIdResponse(sectionId).pipe(
       __map(_r => _r.body as SectionDTO)
-    );
-  }
-
-  /**
-   * @param body undefined
-   */
-  postSectionAddResponse(body?: Section): __Observable<__StrictHttpResponse<null>> {
-    let __params = this.newParams();
-    let __headers = new HttpHeaders();
-    let __body: any = null;
-    __body = body;
-    let req = new HttpRequest<any>(
-      'POST',
-      this.rootUrl + `/Section/add`,
-      __body,
-      {
-        headers: __headers,
-        params: __params,
-        responseType: 'json'
-      });
-
-    return this.http.request<any>(req).pipe(
-      __filter(_r => _r instanceof HttpResponse),
-      __map((_r) => {
-        return _r as __StrictHttpResponse<null>;
-      })
-    );
-  }
-  /**
-   * @param body undefined
-   */
-  postSectionAdd(body?: Section): __Observable<null> {
-    return this.postSectionAddResponse(body).pipe(
-      __map(_r => _r.body as null)
     );
   }
 }

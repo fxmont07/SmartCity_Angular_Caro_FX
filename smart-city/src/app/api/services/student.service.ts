@@ -12,6 +12,7 @@ import { Student } from '../models/student';
 import { StudentForm } from '../models/student-form';
 import { StudentDTO } from '../models/student-dto';
 import { Offer } from '../models/offer';
+import { StudentEditForm } from '../models/student-edit-form';
 @Injectable({
   providedIn: 'root',
 })
@@ -21,7 +22,7 @@ class StudentService extends __BaseService {
   static readonly deleteStudentPath = '/Student';
   static readonly getStudentStudentIdPath = '/Student/{studentId}';
   static readonly getStudentOfferStudentIdPath = '/Student/offer/{studentId}';
-  static readonly postStudentAccountPath = '/Student/Account';
+  static readonly putStudentIdPath = '/Student/{id}';
 
   constructor(
     config: __Configuration,
@@ -206,17 +207,21 @@ class StudentService extends __BaseService {
   }
 
   /**
-   * @param body undefined
-   * @return Success
+   * @param params The `StudentService.PutStudentIdParams` containing the following parameters:
+   *
+   * - `id`:
+   *
+   * - `body`:
    */
-  postStudentAccountResponse(body?: StudentForm): __Observable<__StrictHttpResponse<Student>> {
+  putStudentIdResponse(params: StudentService.PutStudentIdParams): __Observable<__StrictHttpResponse<null>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
-    __body = body;
+
+    __body = params.body;
     let req = new HttpRequest<any>(
-      'POST',
-      this.rootUrl + `/Student/Account`,
+      'PUT',
+      this.rootUrl + `/Student/${params.id}`,
       __body,
       {
         headers: __headers,
@@ -227,22 +232,33 @@ class StudentService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Student>;
+        return _r as __StrictHttpResponse<null>;
       })
     );
   }
   /**
-   * @param body undefined
-   * @return Success
+   * @param params The `StudentService.PutStudentIdParams` containing the following parameters:
+   *
+   * - `id`:
+   *
+   * - `body`:
    */
-  postStudentAccount(body?: StudentForm): __Observable<Student> {
-    return this.postStudentAccountResponse(body).pipe(
-      __map(_r => _r.body as Student)
+  putStudentId(params: StudentService.PutStudentIdParams): __Observable<null> {
+    return this.putStudentIdResponse(params).pipe(
+      __map(_r => _r.body as null)
     );
   }
 }
 
 module StudentService {
+
+  /**
+   * Parameters for putStudentId
+   */
+  export interface PutStudentIdParams {
+    id: number;
+    body?: StudentEditForm;
+  }
 }
 
 export { StudentService }

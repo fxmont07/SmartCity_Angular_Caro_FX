@@ -10,6 +10,7 @@ import { map as __map, filter as __filter } from 'rxjs/operators';
 import { OfferDTO } from '../models/offer-dto';
 import { OfferForm } from '../models/offer-form';
 import { Offer } from '../models/offer';
+import { OfferDetails } from '../models/offer-details';
 @Injectable({
   providedIn: 'root',
 })
@@ -19,6 +20,7 @@ class OfferService extends __BaseService {
   static readonly putOfferPath = '/Offer';
   static readonly deleteOfferPath = '/Offer';
   static readonly getOfferIdOfferPath = '/Offer/{idOffer}';
+  static readonly getOfferOfferdetailsIdOfferPath = '/Offer/offerdetails/{idOffer}';
   static readonly getOfferByCompanyIdCompanyPath = '/Offer/ByCompany/{idCompany}';
 
   constructor(
@@ -196,6 +198,42 @@ class OfferService extends __BaseService {
   getOfferIdOffer(idOffer: number): __Observable<OfferForm> {
     return this.getOfferIdOfferResponse(idOffer).pipe(
       __map(_r => _r.body as OfferForm)
+    );
+  }
+
+  /**
+   * @param idOffer undefined
+   * @return Success
+   */
+  getOfferOfferdetailsIdOfferResponse(idOffer: number): __Observable<__StrictHttpResponse<OfferDetails>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/Offer/offerdetails/${idOffer}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<OfferDetails>;
+      })
+    );
+  }
+  /**
+   * @param idOffer undefined
+   * @return Success
+   */
+  getOfferOfferdetailsIdOffer(idOffer: number): __Observable<OfferDetails> {
+    return this.getOfferOfferdetailsIdOfferResponse(idOffer).pipe(
+      __map(_r => _r.body as OfferDetails)
     );
   }
 

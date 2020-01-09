@@ -1,11 +1,11 @@
 /* tslint:disable */
+import { CompanyDetails } from './company-details';
 import { AddressDTO } from './address-dto';
-export interface OfferForm {
+export interface OfferDetails {
   id?: number;
   titleJob: string;
   description: string;
   other?: string;
-  address: AddressDTO;
-  companyId: number;
-  sectionId: number;
+  company: CompanyDetails;
+  address?: AddressDTO;
 }

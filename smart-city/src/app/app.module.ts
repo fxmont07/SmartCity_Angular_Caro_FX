@@ -42,6 +42,8 @@ import { FormOfferComponent } from './form-offer/form-offer.component';
 import { OfferListComponent } from './offer-list/offer-list.component';
 import { OfferResolver } from './form-offer/offer-resolver';
 import { TokenInterceptor } from './auth/token-interceptor';
+import { FormCompanyUpdateComponent } from './form-company-update/form-company-update.component';
+import { CompanyUpdateResolver } from './form-company-update/company-update-resolver';
 
 
 
@@ -76,6 +78,11 @@ const routes: Routes = [
     path: 'formcompany/:id',
     component: FormCompanyComponent,
     resolve: { company: CompanyResolver }
+  },
+  {
+    path: 'formcompanyupdate/:id',
+    component: FormCompanyUpdateComponent,
+    resolve: { company: CompanyUpdateResolver }
   },
   {
     path: 'formsection',
@@ -157,6 +164,7 @@ const routes: Routes = [
     NavBarCompanyComponent,
     FormOfferComponent,
     OfferListComponent,
+    FormCompanyUpdateComponent,
   ],
   imports: [
     BrowserModule,

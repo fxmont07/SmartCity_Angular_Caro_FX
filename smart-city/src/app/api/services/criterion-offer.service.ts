@@ -14,8 +14,8 @@ import { CriterionOfferDTO } from '../models/criterion-offer-dto';
 })
 class CriterionOfferService extends __BaseService {
   static readonly getCriterionOfferPath = '/CriterionOffer';
+  static readonly postCriterionOfferPath = '/CriterionOffer';
   static readonly getCriterionOfferOfferIdPath = '/CriterionOffer/{offerId}';
-  static readonly postCriterionOfferAddPath = '/CriterionOffer/add';
 
   constructor(
     config: __Configuration,
@@ -58,6 +58,42 @@ class CriterionOfferService extends __BaseService {
   }
 
   /**
+   * @param body undefined
+   * @return Success
+   */
+  postCriterionOfferResponse(body?: CriterionOffer): __Observable<__StrictHttpResponse<CriterionOffer>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = body;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/CriterionOffer`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<CriterionOffer>;
+      })
+    );
+  }
+  /**
+   * @param body undefined
+   * @return Success
+   */
+  postCriterionOffer(body?: CriterionOffer): __Observable<CriterionOffer> {
+    return this.postCriterionOfferResponse(body).pipe(
+      __map(_r => _r.body as CriterionOffer)
+    );
+  }
+
+  /**
    * @param offerId undefined
    * @return Success
    */
@@ -90,42 +126,6 @@ class CriterionOfferService extends __BaseService {
   getCriterionOfferOfferId(offerId: number): __Observable<CriterionOfferDTO> {
     return this.getCriterionOfferOfferIdResponse(offerId).pipe(
       __map(_r => _r.body as CriterionOfferDTO)
-    );
-  }
-
-  /**
-   * @param body undefined
-   * @return Success
-   */
-  postCriterionOfferAddResponse(body?: CriterionOffer): __Observable<__StrictHttpResponse<CriterionOffer>> {
-    let __params = this.newParams();
-    let __headers = new HttpHeaders();
-    let __body: any = null;
-    __body = body;
-    let req = new HttpRequest<any>(
-      'POST',
-      this.rootUrl + `/CriterionOffer/add`,
-      __body,
-      {
-        headers: __headers,
-        params: __params,
-        responseType: 'json'
-      });
-
-    return this.http.request<any>(req).pipe(
-      __filter(_r => _r instanceof HttpResponse),
-      __map((_r) => {
-        return _r as __StrictHttpResponse<CriterionOffer>;
-      })
-    );
-  }
-  /**
-   * @param body undefined
-   * @return Success
-   */
-  postCriterionOfferAdd(body?: CriterionOffer): __Observable<CriterionOffer> {
-    return this.postCriterionOfferAddResponse(body).pipe(
-      __map(_r => _r.body as CriterionOffer)
     );
   }
 }

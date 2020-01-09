@@ -14,12 +14,12 @@ import { CriterionDTO } from '../models/criterion-dto';
 })
 class CriterionService extends __BaseService {
   static readonly getCriterionPath = '/Criterion';
+  static readonly postCriterionPath = '/Criterion';
   static readonly putCriterionPath = '/Criterion';
   static readonly deleteCriterionPath = '/Criterion';
   static readonly getCriterionPageSizeIndexPath = '/Criterion/{pageSize}/{index}';
   static readonly getCriterionIdPath = '/Criterion/{id}';
   static readonly getCriterionBySectionIdSectionPath = '/Criterion/BySection/{idSection}';
-  static readonly postCriterionAddPath = '/Criterion/add';
 
   constructor(
     config: __Configuration,
@@ -58,6 +58,40 @@ class CriterionService extends __BaseService {
   getCriterion(): __Observable<Array<Criterion>> {
     return this.getCriterionResponse().pipe(
       __map(_r => _r.body as Array<Criterion>)
+    );
+  }
+
+  /**
+   * @param body undefined
+   */
+  postCriterionResponse(body?: Criterion): __Observable<__StrictHttpResponse<null>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = body;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/Criterion`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<null>;
+      })
+    );
+  }
+  /**
+   * @param body undefined
+   */
+  postCriterion(body?: Criterion): __Observable<null> {
+    return this.postCriterionResponse(body).pipe(
+      __map(_r => _r.body as null)
     );
   }
 
@@ -245,40 +279,6 @@ class CriterionService extends __BaseService {
   getCriterionBySectionIdSection(idSection: number): __Observable<CriterionDTO> {
     return this.getCriterionBySectionIdSectionResponse(idSection).pipe(
       __map(_r => _r.body as CriterionDTO)
-    );
-  }
-
-  /**
-   * @param body undefined
-   */
-  postCriterionAddResponse(body?: Criterion): __Observable<__StrictHttpResponse<null>> {
-    let __params = this.newParams();
-    let __headers = new HttpHeaders();
-    let __body: any = null;
-    __body = body;
-    let req = new HttpRequest<any>(
-      'POST',
-      this.rootUrl + `/Criterion/add`,
-      __body,
-      {
-        headers: __headers,
-        params: __params,
-        responseType: 'json'
-      });
-
-    return this.http.request<any>(req).pipe(
-      __filter(_r => _r instanceof HttpResponse),
-      __map((_r) => {
-        return _r as __StrictHttpResponse<null>;
-      })
-    );
-  }
-  /**
-   * @param body undefined
-   */
-  postCriterionAdd(body?: Criterion): __Observable<null> {
-    return this.postCriterionAddResponse(body).pipe(
-      __map(_r => _r.body as null)
     );
   }
 }

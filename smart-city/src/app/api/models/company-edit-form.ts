@@ -1,10 +1,7 @@
 /* tslint:disable */
 import { AddressDTO } from './address-dto';
-export interface CompanyForm {
+export interface CompanyEditForm {
   id?: number;
-  email: string;
-  password: string;
-  confirmPassword: string;
   name: string;
   phoneNumber?: string;
   description?: string;

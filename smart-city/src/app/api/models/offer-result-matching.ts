@@ -1,11 +1,11 @@
 /* tslint:disable */
 import { AddressDTO } from './address-dto';
-export interface OfferForm {
-  id?: number;
+export interface OfferResultMatching {
+  offerId?: number;
   titleJob: string;
   description: string;
-  other?: string;
   address: AddressDTO;
-  companyId: number;
-  sectionId: number;
+  company: string;
+  isPremium: boolean;
+  rating?: number;
 }
