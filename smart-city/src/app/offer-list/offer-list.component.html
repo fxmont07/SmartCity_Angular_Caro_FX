@@ -1,1 +1,11 @@
 <p>offer-list works!</p>
+
+<app-display-data
+    [data]="offers"
+    [colNames]="headers"
+    (deleteEvent)="deleteOffer($event)"
+    (editEvent)="editOffer($event)"
+    (addEvent)="addOffer()"
+>
+
+</app-display-data>

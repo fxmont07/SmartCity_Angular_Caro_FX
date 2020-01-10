@@ -1,44 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { OfferForm, SectionDTO, CompanyTable } from '../api/models';
+import { SectionDTO, CompanyTable } from '../api/models';
 import { ActivatedRoute, Router } from '@angular/router';
-import { OfferService, SectionService, CompanyService, AddressContollerService } from '../api/services';
+import { OfferService, SectionService, CompanyService } from '../api/services';
 
 @Component({
-  selector: 'app-form-offer',
-  templateUrl: './form-offer.component.html',
-  styleUrls: ['./form-offer.component.css']
+  selector: 'app-form-offer-company',
+  templateUrl: './form-offer-company.component.html',
+  styleUrls: ['./form-offer-company.component.css']
 })
-export class FormOfferComponent implements OnInit {
+export class FormOfferCompanyComponent implements OnInit {
+
   form: FormGroup;
   offerModel: any; //TODO: soucis avec le OfferForm pas de champs Address
-  isACreation: boolean;
   sections: Array<SectionDTO>;
   companies: Array<CompanyTable>;
 
   constructor(
-    private route: ActivatedRoute,
     private offerService: OfferService,
     private sectionService: SectionService,
     private companyService : CompanyService,
     private router: Router) {
 
     this.form = this.createFormGroup();
-    this.isACreation = true;
   }
 
   ngOnInit() {
-    this.route.data
-      .subscribe((data: { offer: any }) => {
-
-        if (data.offer != undefined) {
-          this.offerModel = data.offer;
-          
-          this.form.patchValue(this.offerModel);
-          this.form.get('addressDTO').patchValue(this.offerModel.address);
-          this.isACreation = false;
-        }
-      });
       this.getAllSections();
       this.getAllCompanies();
   }
@@ -79,10 +66,6 @@ export class FormOfferComponent implements OnInit {
         [
           Validators.required,
         ]),
-      company : new FormControl('',
-        [
-          Validators.required,
-        ]),
     });
   }
 
@@ -90,20 +73,12 @@ export class FormOfferComponent implements OnInit {
     let offerUpdated = this.form.value;
     
     offerUpdated.Address = offerUpdated.addressDTO;
-    
-    if (this.isACreation) {
-      offerUpdated.companyId = offerUpdated.company.id;
-      offerUpdated.sectionId = offerUpdated.section.id;
-      this.offerService
-        .postOffer(offerUpdated)
-        .subscribe(() => this.router.navigate(["/companyoffer"]));
-    } else {
-      offerUpdated.id = this.offerModel.id;
-      offerUpdated.companyId = this.offerModel.companyId;
-      offerUpdated.sectionId = this.offerModel.sectionId;
-      this.offerService
-        .putOffer(offerUpdated)
-        .subscribe(() => this.router.navigate(["/companyoffer"]))
-    }
+    offerUpdated.companyId = offerUpdated.company.id;//TODO prendre l'id de la company
+    offerUpdated.sectionId = offerUpdated.section.id;
+    this.offerService
+      .postOffer(offerUpdated)
+      .subscribe(() => this.router.navigate(["/companyoffer"]));
+  
   }
+
 }

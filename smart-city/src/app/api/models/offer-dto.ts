@@ -4,7 +4,7 @@ export interface OfferDTO {
   titleJob: string;
   description: string;
   other?: string;
-  addressId: number;
-  companyId: number;
-  sectionid: number;
+  address: string;
+  company: string;
+  section: string;
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OfferTable } from '../model/offer';
-import { OfferDTO } from '../api/models';
+import { OfferDTO, Offer } from '../api/models';
 import { Observable } from 'rxjs';
 import { OfferService } from '../api/services';
 import { Router } from '@angular/router';
@@ -36,7 +36,7 @@ export class CompanyOfferComponent implements OnInit {
     this.router.navigate(["/formoffer/", offer.id]);
   }
 
-  deleteCompanyOffer(event: OfferDTO) {
+  deleteCompanyOffer(event: Offer) { //TODO modif de offerDTO en offer
     this.offerService.deleteOffer(event).
         subscribe(() => {
           this.companyOffers = this.companyOffers.filter(c => c.id != event.id);
@@ -49,7 +49,7 @@ export class CompanyOfferComponent implements OnInit {
     return this.offerService.getOffer();
   }
 
-  getHeaders(): Array<string> {
-    return ["id", "titleJob", "description", "other", "addressId", "companyId", "sectionid"]; // Todo plus les id mais les string
+  getHeaders(): string[] {
+    return ["id", "titleJob", "description", "other", "address", "company", "section"];// Todo plus les id mais les string
   }
 }

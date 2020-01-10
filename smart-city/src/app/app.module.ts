@@ -44,6 +44,8 @@ import { OfferResolver } from './form-offer/offer-resolver';
 import { TokenInterceptor } from './auth/token-interceptor';
 import { FormCompanyUpdateComponent } from './form-company-update/form-company-update.component';
 import { CompanyUpdateResolver } from './form-company-update/company-update-resolver';
+import { FormOfferCompanyComponent } from './form-offer-company/form-offer-company.component';
+import { FormOfferUpdateComponent } from './form-offer-update/form-offer-update.component';
 
 
 
@@ -124,8 +126,12 @@ const routes: Routes = [
     component: FormOfferComponent,
   },
   {
+    path: 'formofferCompany',
+    component: FormOfferCompanyComponent,
+  },
+  {
     path: 'formoffer/:id',
-    component: FormOfferComponent,
+    component: FormOfferUpdateComponent,
     resolve: { offer: OfferResolver }
   },
   {
@@ -140,6 +146,10 @@ const routes: Routes = [
     path: 'companyoffer',
     component: CompanyOfferComponent,
   },
+  {
+    path: 'offerList',
+    component : OfferListComponent,
+  }
 ];
 
 @NgModule({
@@ -165,12 +175,14 @@ const routes: Routes = [
     FormOfferComponent,
     OfferListComponent,
     FormCompanyUpdateComponent,
+    FormOfferCompanyComponent,
+    FormOfferUpdateComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    ApiModule.forRoot({ rootUrl: 'https://localhost:44386' }),//https://localhost:5001 https://api20191130111944.azurewebsites.net
+    ApiModule.forRoot({ rootUrl: 'https://localhost:5001' }),//https://localhost:44386 https://api20191130111944.azurewebsites.net
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,

@@ -1,3 +1,4 @@
+<p>form-offer-update works!</p>
 <button mat-raised-button color="primary" routerLink="/companyoffer">Retour</button>
 <div id="wrapper">
     <h1>Formulaire de l'offre</h1>
@@ -44,18 +45,6 @@
             </mat-form-field>
             
         </span>
-        <mat-label>Sections *</mat-label>
-        <mat-select formControlName="section">
-            <mat-option *ngFor="let section of sections" [value]="section" required>
-                {{section.name}}
-            </mat-option>
-        </mat-select>
-        <mat-label>Company *</mat-label>
-        <mat-select formControlName="company">
-            <mat-option *ngFor="let company of companies" [value]="company" required>
-                {{company.name}}
-            </mat-option>
-        </mat-select>
         <button id=button mat-raised-button color="primary" [disabled]="!form.valid">Valider</button>
     </form>
 </div>
