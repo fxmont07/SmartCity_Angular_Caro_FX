@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { StudentDTO, SectionDTO, StudentForm, StudentEditForm } from '../api/models';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Student, SectionDTO, StudentDTO, StudentForm } from '../api/models';
-import { SectionService, StudentService } from '../api/services';
+import { StudentService, SectionService } from '../api/services';
 
 @Component({
-  selector: 'app-form-student',
-  templateUrl: './form-student.component.html',
-  styleUrls: ['./form-student.component.css']
+  selector: 'app-form-student-update',
+  templateUrl: './form-student-update.component.html',
+  styleUrls: ['./form-student-update.component.css']
 })
-export class FormStudentComponent implements OnInit {
+export class FormStudentUpdateComponent implements OnInit {
   form: FormGroup;
   studentModel: StudentDTO;
-  isACreation: boolean;
   sections: Array<SectionDTO>
 
   constructor(
@@ -21,36 +20,21 @@ export class FormStudentComponent implements OnInit {
     private sectionService: SectionService,
     private router: Router,
   ) {
-    this.isACreation = true;
     this.form = this.createFormGroup();
   }
-
   ngOnInit() {
     this.route.data
-      .subscribe((data: { student: StudentDTO }) => {
-        if (data.student != undefined) {
-          this.studentModel = data.student;
-          this.form.patchValue(this.studentModel);
-          this.isACreation = false;
-        }
-      });
-    this.getAllSections();
+    .subscribe((data: { student: StudentDTO }) => {
+      if (data.student != undefined) {
+        this.studentModel = data.student;
+        this.form.patchValue(this.studentModel);
+      }
+    });
+  this.getAllSections();
   }
 
   createFormGroup() {
     return new FormGroup({
-      email: new FormControl('',
-        [
-          Validators.required,
-          Validators.email
-        ]
-      ),
-      password: new FormControl('', [
-        Validators.required
-      ]),
-      confirmPassword: new FormControl('', [
-        Validators.required
-      ]),
       lastName: new FormControl('',
         [
           Validators.required,
@@ -88,14 +72,16 @@ export class FormStudentComponent implements OnInit {
   }
 
   updateStudent(): void {
-    console.log("clic")
-    let studentUpdated: StudentForm = this.form.value;
-    if (this.isACreation) {
+     // Put Ok
+      let studentUpdated: StudentEditForm = this.form.value;
+      studentUpdated.id = this.studentModel.id;
+      studentUpdated.section = studentUpdated.section['name'];
+      console.log(studentUpdated);
       this.studentService
-        .postStudent(studentUpdated)
+        .putStudent(studentUpdated)
         .subscribe(() =>
           this.router.navigate(["/students"])
         );
     }
-  }
+  
 }

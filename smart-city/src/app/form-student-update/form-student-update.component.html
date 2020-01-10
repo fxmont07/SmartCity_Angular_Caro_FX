@@ -4,36 +4,7 @@
 <div id="wrapper">
 <h1>Formulaire de l'étudiant</h1>
 <form (ngSubmit)="updateStudent()" [formGroup]="form">
-        <mat-form-field class="elem-form">
-            <input type="text" matInput placeholder="Email" required formControlName="email">
-            <mat-error *ngIf="form.get('email').hasError('email')">
-                Format d'email non valide
-            </mat-error>
-            <mat-error *ngIf="form.get('email').hasError('required')">
-                Champs requis
-            </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="elem-form">
-            <input type="password" matInput placeholder="Mot de passe" required formControlName="password">
-            <mat-error *ngIf="form.get('password').hasError('required')">
-                Champs requis
-            </mat-error>
-            <mat-error *ngIf="form.get('password').hasError('minlength')">
-                Minimum 8 caractères
-            </mat-error>
-        </mat-form-field>
-        
-        <mat-form-field class="elem-form">
-            <input type="password" matInput placeholder="Confirmation du mot de passe" required formControlName="confirmPassword">
-            <mat-error *ngIf="form.get('password').hasError('required')">
-                Champs requis
-            </mat-error>
-            <mat-error *ngIf="form.get('password').hasError('minlength')">
-                Minimum 8 caractères
-            </mat-error>
-        </mat-form-field>
-    
+       
         <mat-form-field class="elem-form">
             <input type="text" matInput placeholder="Nom"  required formControlName="lastName">
             <mat-error *ngIf="form.get('lastName').hasError('required')">

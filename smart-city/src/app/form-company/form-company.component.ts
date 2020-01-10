@@ -92,7 +92,7 @@ export class FormCompanyComponent implements OnInit {
       console.log(companyUpdated);
       this.companyService.postCompany(companyUpdated)
         .subscribe(() => {
-          this.router.navigate(["/companies "]);
+          this.router.navigate(["/companies"]);
         });
     } 
   }

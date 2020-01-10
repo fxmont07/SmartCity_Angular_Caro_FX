@@ -44,6 +44,7 @@ import { OfferResolver } from './form-offer/offer-resolver';
 import { TokenInterceptor } from './auth/token-interceptor';
 import { FormCompanyUpdateComponent } from './form-company-update/form-company-update.component';
 import { CompanyUpdateResolver } from './form-company-update/company-update-resolver';
+import { FormStudentUpdateComponent } from './form-student-update/form-student-update.component';
 
 
 
@@ -107,6 +108,11 @@ const routes: Routes = [
     resolve: { student: StudentResolver }
   },
   {
+    path: 'formstudentupdate/:id',
+    component: FormStudentUpdateComponent,
+    resolve: { student: StudentResolver }
+  },
+  {
     path: 'criterions',
     component: CriterionListComponent,
   },
@@ -165,6 +171,7 @@ const routes: Routes = [
     FormOfferComponent,
     OfferListComponent,
     FormCompanyUpdateComponent,
+    FormStudentUpdateComponent,
   ],
   imports: [
     BrowserModule,

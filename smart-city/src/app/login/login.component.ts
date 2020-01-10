@@ -3,6 +3,7 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { RouterEvent, Router } from '@angular/router';
 import { LoginDTO, TokenDTO } from '../api/models';
 import { LoginService } from '../api/services';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
   loginModel: LoginDTO;
   constructor(
     private router: Router,
-    private loginService: LoginService) {
+    private loginService: LoginService,
+    private authService: AuthService) {
     this.form = this.createFormGroup();
   }
 
@@ -41,22 +43,33 @@ export class LoginComponent implements OnInit {
 
   logIn() {
     this.loginModel = this.form.value;
-    this.loginService.postLogin(this.loginModel).subscribe((token: TokenDTO) =>
+    this.loginService.postLogin(this.loginModel).subscribe((token: TokenDTO) => {
 
-      this.saveToken(token)
-      // Local storage pas de délais (dico) string, JSON stringify / parse
-      // Session stop apres fermeture navigature
-    );
-
+      this.saveToken(token);
+      this.authService.manageToken(token.accessToken);
+      if(this.authService.getRole() == "Company") {
+        this.updateRoute("/companyoffer");
+        console.log('true');
+      } else {
+        this.updateRoute("/companies");
+        console.log('true');
+      }
+     } );
+  
   }
 
   private saveToken(token: TokenDTO): void {
     localStorage.setItem("Token", JSON.stringify(token));
   }
 
+  private updateRoute(route) {
+    this.router.navigate([route]);
+  }
+
   //TODO: dans la barre de nav le bouton
   logOut() {
-    localStorage.removeItem("Token");
-    //Redirect login
+    
+    this.authService.logOut();
+    this.updateRoute("/login");
   }
 }

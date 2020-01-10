@@ -25,5 +25,5 @@ export { OfferDetails } from './models/offer-details';
 export { SectionDTO } from './models/section-dto';
 export { StudentTable } from './models/student-table';
 export { StudentForm } from './models/student-form';
-export { StudentDTO } from './models/student-dto';
 export { StudentEditForm } from './models/student-edit-form';
+export { StudentDTO } from './models/student-dto';

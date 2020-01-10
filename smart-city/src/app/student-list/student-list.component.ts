@@ -39,7 +39,7 @@ export class StudentListComponent implements OnInit {
   }
 
   editStudent(student: StudentTable){
-    this.router.navigate(["/formstudent/", student.id] );
+    this.router.navigate(["/formstudentupdate/", student.id] );
   }
 
   deleteStudent(event) {

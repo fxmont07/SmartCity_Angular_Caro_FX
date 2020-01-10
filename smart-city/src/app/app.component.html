@@ -1,4 +1,3 @@
-<app-nav-bar></app-nav-bar>
-<app-nav-bar-company></app-nav-bar-company>
-
+<app-nav-bar *ngIf="isAdmin()"></app-nav-bar>
+<app-nav-bar-company *ngIf="isCompany()"></app-nav-bar-company>
 <router-outlet></router-outlet>
