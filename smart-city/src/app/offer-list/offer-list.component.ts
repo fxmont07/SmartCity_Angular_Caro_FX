@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { OfferDTO, Offer } from '../api/models';
+import { OfferService } from '../api/services';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-offer-list',
@@ -6,10 +11,46 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./offer-list.component.css']
 })
 export class OfferListComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+  
+  offers : Array<OfferDTO>;
+  headers: Array<string>;
+  
+  constructor(private router : Router, private offerService: OfferService) { 
+    this.headers = new Array<string>();
+    this.offers = new Array<OfferDTO>();
   }
 
+  ngOnInit() {
+    this.headers = this.getHeaders();
+    this.getAllOffer().subscribe(
+      data => {
+        this.offers = data;
+      }
+    );
+  }
+
+  getHeaders(): string[] {
+    return ["id", "titleJob", "description", "other", "address", "company", "section"];
+  }
+
+  getAllOffer() : Observable<OfferDTO[]>{
+    return this.offerService.getOffer();
+  }
+
+  deleteOffer(event : Offer){ //ATTENTION MODIF DE OFFER DTO EN OFFER
+    console.log(event);
+    this.offerService.deleteOffer(event).subscribe(
+      () => {
+        this.offers = this.offers.filter(offer => offer.id != event.id);
+      }
+    );
+  }
+
+  editOffer(event : OfferDTO){
+    this.router.navigate(["/formoffer" , event.id]);
+  }
+
+  addOffer(){
+    this.router.navigate(["/formoffer"]); //TODO Vérifier si c'est un admin ou une company et donc en fct naviger vers la bonne page
+  }
 }
