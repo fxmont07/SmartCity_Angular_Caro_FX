@@ -56,6 +56,7 @@ export class FormSectionComponent implements OnInit {
         );
     } else {
       sectionUpdated.id = this.sectionModel.id; //TODO: soucis api sectionId
+      sectionUpdated.rowVersion = this.sectionModel.rowVersion;
       this.sectionService.putSection(sectionUpdated)
         .subscribe(() => this.router.navigate(["/sections"]));
     }
