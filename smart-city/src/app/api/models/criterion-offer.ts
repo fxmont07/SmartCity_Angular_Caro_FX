@@ -7,4 +7,5 @@ export interface CriterionOffer {
   isMandatory?: number;
   criterion?: Criterion;
   offer?: Offer;
+  rowVersion?: string;
 }

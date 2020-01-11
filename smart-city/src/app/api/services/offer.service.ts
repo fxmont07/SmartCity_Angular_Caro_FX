@@ -9,7 +9,6 @@ import { map as __map, filter as __filter } from 'rxjs/operators';
 
 import { OfferDTO } from '../models/offer-dto';
 import { OfferForm } from '../models/offer-form';
-import { Offer } from '../models/offer';
 import { OfferDetails } from '../models/offer-details';
 @Injectable({
   providedIn: 'root',
@@ -134,7 +133,7 @@ class OfferService extends __BaseService {
   /**
    * @param body undefined
    */
-  deleteOfferResponse(body?: Offer): __Observable<__StrictHttpResponse<null>> {
+  deleteOfferResponse(body?: OfferDTO): __Observable<__StrictHttpResponse<null>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -159,7 +158,7 @@ class OfferService extends __BaseService {
   /**
    * @param body undefined
    */
-  deleteOffer(body?: Offer): __Observable<null> {
+  deleteOffer(body?: OfferDTO): __Observable<null> {
     return this.deleteOfferResponse(body).pipe(
       __map(_r => _r.body as null)
     );

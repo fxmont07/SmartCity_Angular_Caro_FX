@@ -7,4 +7,5 @@ export interface CriterionStudent {
   isMandatory?: number;
   criterion?: Criterion;
   student?: Student;
+  rowVersion?: string;
 }

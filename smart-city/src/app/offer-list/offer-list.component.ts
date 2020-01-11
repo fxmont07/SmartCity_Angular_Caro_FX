@@ -37,14 +37,14 @@ export class OfferListComponent implements OnInit {
     return this.offerService.getOffer();
   }
 
-  deleteOffer(event : Offer){ //ATTENTION MODIF DE OFFER DTO EN OFFER
+ /*  deleteOffer(event : Offer){ //ATTENTION MODIF DE OFFER DTO EN OFFER
     console.log(event);
     this.offerService.deleteOffer(event).subscribe(
       () => {
         this.offers = this.offers.filter(offer => offer.id != event.id);
       }
     );
-  }
+  } */
 
   editOffer(event : OfferDTO){
     this.router.navigate(["/formoffer" , event.id]);

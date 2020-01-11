@@ -96,7 +96,7 @@ class SectionService extends __BaseService {
   /**
    * @param body undefined
    */
-  putSectionResponse(body?: Section): __Observable<__StrictHttpResponse<null>> {
+  putSectionResponse(body?: SectionDTO): __Observable<__StrictHttpResponse<null>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -121,7 +121,7 @@ class SectionService extends __BaseService {
   /**
    * @param body undefined
    */
-  putSection(body?: Section): __Observable<null> {
+  putSection(body?: SectionDTO): __Observable<null> {
     return this.putSectionResponse(body).pipe(
       __map(_r => _r.body as null)
     );

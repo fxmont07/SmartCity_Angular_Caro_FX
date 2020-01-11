@@ -9,4 +9,5 @@ export interface Evaluation {
   studentId?: number;
   company?: Company;
   student?: Student;
+  rowVersion?: string;
 }

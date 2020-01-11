@@ -17,7 +17,12 @@
     >
     </mat-row>
 </mat-table>
-<!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+<mat-paginator 
+  [pageSizeOptions]="[5, 10, 20,200]" 
+  showFirstLastButtons 
+  (page)='infoPage()' 
+  [pageSize]="5">
+</mat-paginator>
 <div id="wrapperButtons">
   <button mat-raised-button color="primary" (click)="addElement()">Ajouter</button>
   <button mat-raised-button color="accent" (click)="editElement()">Modifier</button>

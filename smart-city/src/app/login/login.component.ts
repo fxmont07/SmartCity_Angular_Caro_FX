@@ -49,10 +49,8 @@ export class LoginComponent implements OnInit {
       this.authService.manageToken(token.accessToken);
       if(this.authService.getRole() == "Company") {
         this.updateRoute("/companyoffer");
-        console.log('true');
       } else {
         this.updateRoute("/companies");
-        console.log('true');
       }
      } );
   
@@ -68,7 +66,6 @@ export class LoginComponent implements OnInit {
 
   //TODO: dans la barre de nav le bouton
   logOut() {
-    
     this.authService.logOut();
     this.updateRoute("/login");
   }

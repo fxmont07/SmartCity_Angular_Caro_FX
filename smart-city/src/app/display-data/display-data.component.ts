@@ -26,10 +26,11 @@ export class DisplayDataComponent implements OnInit {
   @Output() addEvent = new EventEmitter<any>();
   @Output() editEvent = new EventEmitter<any>();
   @Output() deleteEvent = new EventEmitter<any>();
+  @Output() pageEvent = new EventEmitter();
   selection = new SelectionModel<any>(false, []);
   selectedElement: any;
 
- // @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort
   constructor() {
     this.colToDisplay = new Array<string>(); 
@@ -39,7 +40,7 @@ export class DisplayDataComponent implements OnInit {
   ngOnInit() {
     this.colToDisplay = this.colNames.slice();
     this.tableModel.sort = this.sort;
-   // this.tableModel.paginator = this.paginator;
+    this.tableModel.paginator = this.paginator;
   }
 
   selectElement(row) {
@@ -58,8 +59,11 @@ export class DisplayDataComponent implements OnInit {
     this.deleteEvent.emit(this.selectedElement);
   }
 
+  infoPage() {
+    this.pageEvent.emit([this.paginator.pageSize, this.paginator.pageIndex]);
+  }
+
   applyFilter(value: string) {
     const research = value.trim().toLowerCase();
-    this.tableModel.filter = research;
   }
 }

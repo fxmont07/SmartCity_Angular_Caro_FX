@@ -9,4 +9,5 @@ export interface Criterion {
   section?: Section;
   criterionOffer?: Array<CriterionOffer>;
   criterionStudent?: Array<CriterionStudent>;
+  rowVersion?: string;
 }

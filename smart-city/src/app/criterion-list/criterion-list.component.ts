@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CriterionTable } from '../model/criterion';
+import { CriterionTable, CriterionTableValue } from '../model/criterion';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CriterionDTO } from '../api/models';
 import { CriterionService } from '../api/services';
@@ -23,10 +23,10 @@ export class CriterionListComponent implements OnInit {
 
   ngOnInit() {
     this.headers = this.getHeaders();
-   /*  this.getAllCriterion()
+    this.criterionService.getCriterionPageSizeIndex({pageSize: 5, index: 0})
       .subscribe(
         data => this.criterions = data
-      ); */
+      );
   }
 
   addCriterion(): void {
@@ -37,6 +37,21 @@ export class CriterionListComponent implements OnInit {
     this.router.navigate(["/formcriterion/", criterion.id]);
   }
 
+  page(x) {
+    console.log("list :" + x[0] + " --- " + x[1]);
+    this.getPageCriterion(x[0] , x[1]);
+  }
+
+  getPageCriterion(size: number, index: number) {
+    this.criterionService.getCriterionPageSizeIndex({pageSize: size,index: index})
+    .subscribe(data =>{
+      console.log(data);
+      data => 
+      this.criterions = [];
+      this.criterions = data;
+  });
+  }
+  //Todo: Soucis onCascade
   /* deleteCriterion(event: CriterionDTO): void {
     this.criterionService.deleteCriterion(event)
       .subscribe(() => {
@@ -45,11 +60,7 @@ export class CriterionListComponent implements OnInit {
       });
   } */
 
-  /* getAllCriterion(): Observable<CriterionDTO[]> {
-    return this.criterionService.getCriterion();
-  } */
-
   getHeaders(): Array<string> {
-    return ["id", "description", "sectionId"]; // TODO: "section"
+    return ["id", "description", "section"];
   }
 }

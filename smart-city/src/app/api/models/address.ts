@@ -12,4 +12,5 @@ export interface Address {
   company?: Array<Company>;
   offer?: Array<Offer>;
   student?: Array<Student>;
+  rowVersion?: string;
 }

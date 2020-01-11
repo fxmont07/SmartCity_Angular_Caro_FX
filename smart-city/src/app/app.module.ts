@@ -14,7 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+//import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FormCompanyComponent } from './form-company/form-company.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormSectionComponent } from './form-section/form-section.component';
@@ -46,6 +46,7 @@ import { FormCompanyUpdateComponent } from './form-company-update/form-company-u
 import { CompanyUpdateResolver } from './form-company-update/company-update-resolver';
 import { FormOfferCompanyComponent } from './form-offer-company/form-offer-company.component';
 import { FormOfferUpdateComponent } from './form-offer-update/form-offer-update.component';
+import { FormStudentUpdateComponent } from './form-student-update/form-student-update.component';
 
 
 
@@ -169,6 +170,7 @@ const routes: Routes = [
     SectionListComponent,
     StudentListComponent,
     FormStudentComponent,
+    FormStudentUpdateComponent,
     CriterionListComponent,
     FormCriterionComponent,
     NavBarComponent,
@@ -187,7 +189,7 @@ const routes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    ApiModule.forRoot({ rootUrl: 'https://localhost:5001' }),//https://localhost:44386 https://api20191130111944.azurewebsites.net
+    ApiModule.forRoot({ rootUrl: 'https://localhost:44386' }),//https://localhost:44386 https://api20191130111944.azurewebsites.net
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
@@ -201,7 +203,7 @@ const routes: Routes = [
     MatPaginatorModule,
     MatButtonModule,
     MatSelectModule,
-    NgxDatatableModule,
+    //NgxDatatableModule,
     RouterModule,
     RouterModule.forRoot(
       routes,

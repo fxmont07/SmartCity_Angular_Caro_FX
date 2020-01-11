@@ -8,4 +8,5 @@ export interface Section {
   criterion?: Array<Criterion>;
   offer?: Array<Offer>;
   student?: Array<Student>;
+  rowVersion?: string;
 }

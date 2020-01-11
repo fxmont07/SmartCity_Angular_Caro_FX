@@ -36,14 +36,14 @@ export class CompanyOfferComponent implements OnInit {
     this.router.navigate(["/formoffer/", offer.id]);
   }
 
-  deleteCompanyOffer(event: Offer) { //TODO modif de offerDTO en offer
+  /* deleteCompanyOffer(event: Offer) { //TODO modif de offerDTO en offer
     this.offerService.deleteOffer(event).
         subscribe(() => {
           this.companyOffers = this.companyOffers.filter(c => c.id != event.id);
           this.companyOffers = [...this.companyOffers];
         })
 
-  }
+  } */
 
   getAllCompanies(): Observable<OfferDTO[]> {
     return this.offerService.getOffer();
