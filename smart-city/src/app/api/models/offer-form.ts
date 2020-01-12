@@ -8,4 +8,5 @@ export interface OfferForm {
   address: AddressDTO;
   companyId: number;
   sectionId: number;
+  rowVersion?: string;
 }

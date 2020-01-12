@@ -6,4 +6,5 @@ export interface StudentEditForm {
   firstName: string;
   address: AddressDTO;
   section?: string;
+  rowVersion?: string;
 }

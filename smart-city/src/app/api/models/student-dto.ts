@@ -7,4 +7,5 @@ export interface StudentDTO {
   firstName: string;
   address: AddressDTO;
   sectionName: string;
+  rowVersion?: string;
 }

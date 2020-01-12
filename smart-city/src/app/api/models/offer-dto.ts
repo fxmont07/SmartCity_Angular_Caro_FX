@@ -7,4 +7,5 @@ export interface OfferDTO {
   address: string;
   company: string;
   section: string;
+  rowVersion?: string;
 }
