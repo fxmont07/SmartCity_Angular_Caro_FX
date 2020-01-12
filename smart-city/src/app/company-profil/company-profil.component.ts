@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CompanyService } from '../api/services';
+import { CompanyEditForm } from '../api/models';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-company-profil',
@@ -9,14 +11,20 @@ import { CompanyService } from '../api/services';
 })
 export class CompanyProfilComponent implements OnInit {
   form: FormGroup;
+  companyMode: CompanyEditForm;
 
   constructor(
-    private companyService : CompanyService) {
+    private companyService : CompanyService,
+    private authService: AuthService) {
 
       this.form = this.createFormGroup();
      }
 
   ngOnInit() {
+    console.log(this.authService.getUserId())
+    this.companyService.getCompanyCompanyId(
+      this.authService.getUserId())
+      .subscribe(data => console.log(data));
   }
 
   createFormGroup() {
@@ -40,6 +48,5 @@ export class CompanyProfilComponent implements OnInit {
 
   updateCompany() {
     const companyUpdated = this.form.value;
-    console.log(companyUpdated);
   }
 }

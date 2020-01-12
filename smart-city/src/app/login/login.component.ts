@@ -57,14 +57,13 @@ export class LoginComponent implements OnInit {
   }
 
   private saveToken(token: TokenDTO): void {
-    localStorage.setItem("Token", JSON.stringify(token));
+    this.authService.setToken(token);
   }
 
   private updateRoute(route) {
     this.router.navigate([route]);
   }
 
-  //TODO: dans la barre de nav le bouton
   logOut() {
     this.authService.logOut();
     this.updateRoute("/login");

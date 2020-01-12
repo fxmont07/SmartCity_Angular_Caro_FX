@@ -92,8 +92,9 @@ export class FormCompanyComponent implements OnInit {
     console.log(companyUpdated);
     this.companyService.postCompany(companyUpdated)
       .subscribe(() => {
-        console.log("click");
+        let route = this.authService.isAdmin() ? "/companies" : "/login";
         this.router.navigate(["/companies"]);
+        
       });
 
   }
