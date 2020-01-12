@@ -1,6 +1,7 @@
 <p>login works!</p>
 
 <div>
+  <p id="error">{{error}}</p>
     <form [formGroup]="form" (ngSubmit)="logIn()">
         <mat-form-field class="example-full-width">
           <input matInput placeholder="Email" required formControlName="email">
@@ -21,6 +22,6 @@
           </mat-error>
         </mat-form-field>
     </form>
-    <button mat-raised-button color="primary" [disabled]="!form.valid" (click)="logIn()">Se connecter</button>
+    <button mat-raised-button color="primary" [disabled]="!form.valid" (click)="login()">Se connecter</button>
     <button mat-raised-button color="accent" routerLink="/formcompany">S'inscrire</button>
 </div>

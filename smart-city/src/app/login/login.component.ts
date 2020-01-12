@@ -13,6 +13,7 @@ import { AuthService } from '../auth/auth.service';
 export class LoginComponent implements OnInit {
   form: FormGroup;
   loginModel: LoginDTO;
+  error: string;
   constructor(
     private router: Router,
     private loginService: LoginService,
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-
+      this.error ="";
   }
 
   createFormGroup() {
@@ -41,20 +42,26 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  logIn() {
+  login() {
     this.loginModel = this.form.value;
-    this.loginService.postLogin(this.loginModel).subscribe((token: TokenDTO) => {
+    this.loginService.postLogin(this.loginModel)
+      .subscribe(
+        (token: TokenDTO) => {
 
-      this.saveToken(token);
-      this.authService.manageToken(token.accessToken);
-      if(this.authService.getRole() == "Company") {
-        this.updateRoute("/companyoffer");
-      } else {
-        this.updateRoute("/companies");
-      }
-     } );
-  
-  }
+        this.saveToken(token);
+        this.authService.manageToken(token.accessToken);
+        if (this.authService.getRole() == "Company") {
+          this.updateRoute("/companyoffer");
+        } else {
+          this.updateRoute("/companies");
+        }
+      },
+      error => {
+        this.error = error["error"];
+        console.log(error["error"]);
+      },
+      );
+    }
 
   private saveToken(token: TokenDTO): void {
     this.authService.setToken(token);
