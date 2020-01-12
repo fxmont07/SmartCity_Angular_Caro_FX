@@ -35,8 +35,6 @@ export class FormCriterionComponent implements OnInit {
         if (data.criterion != undefined) {
           this.criterionModel = data.criterion;
           this.form.patchValue(this.criterionModel);
-
-          //TODO: patch la section
           this.isACreation = false;
         }
       });

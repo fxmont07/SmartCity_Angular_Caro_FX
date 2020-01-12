@@ -40,7 +40,7 @@
             </mat-form-field>
     
             <mat-form-field class="elem-form">
-                <input matInput placeholder="Numéro de la rue" formControlName="number">
+                <input matInput placeholder="Numéro de la rue" formControlName="streetNumber">
             </mat-form-field>
 
             <mat-form-field class="elem-form">
@@ -51,7 +51,7 @@
 
         <mat-label>Sections *</mat-label>
         <mat-select formControlName="section">
-            <mat-option *ngFor="let section of sections" [value]="section" required>
+            <mat-option *ngFor="let section of sections" [value]="section.name" required>
                 {{section.name}}
             </mat-option>
         </mat-select>
