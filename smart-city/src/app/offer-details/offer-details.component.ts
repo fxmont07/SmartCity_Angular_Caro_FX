@@ -28,7 +28,6 @@ export class OfferDetailsComponent implements OnInit {
 
   setIsMandatoryWithIndex(index, value) {
     index.isMandatory = value;
-    console.log(index);
   }
   
 }

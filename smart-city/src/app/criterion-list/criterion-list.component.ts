@@ -38,15 +38,12 @@ export class CriterionListComponent implements OnInit {
   }
 
   page(x) {
-    console.log("list :" + x[0] + " --- " + x[1]);
     this.getPageCriterion(x[0] , x[1]);
   }
 
   getPageCriterion(size: number, index: number) {
     this.criterionService.getCriterionPageSizeIndex({pageSize: size,index: index})
     .subscribe(data =>{
-      console.log(data);
-      data => 
       this.criterions = [];
       this.criterions = data;
   });
