@@ -7,4 +7,5 @@ export interface CompanyEditForm {
   description?: string;
   isPremium: boolean;
   address: AddressDTO;
+  rowVersion?: string;
 }

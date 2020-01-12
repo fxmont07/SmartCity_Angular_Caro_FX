@@ -3,4 +3,5 @@ export interface CriterionDTO {
   id?: number;
   description: string;
   section: string;
+  rowVersion?: string;
 }

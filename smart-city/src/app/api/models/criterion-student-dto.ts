@@ -4,4 +4,5 @@ export interface CriterionStudentDTO {
   studentId: number;
   isMandatory: number;
   description?: string;
+  rowVersion?: string;
 }

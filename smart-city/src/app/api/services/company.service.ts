@@ -167,7 +167,7 @@ class CompanyService extends __BaseService {
    * @param companyId undefined
    * @return Success
    */
-  getCompanyCompanyIdResponse(companyId: number): __Observable<__StrictHttpResponse<CompanyForm>> {
+  getCompanyCompanyIdResponse(companyId: number): __Observable<__StrictHttpResponse<CompanyEditForm>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -185,7 +185,7 @@ class CompanyService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<CompanyForm>;
+        return _r as __StrictHttpResponse<CompanyEditForm>;
       })
     );
   }
@@ -193,9 +193,9 @@ class CompanyService extends __BaseService {
    * @param companyId undefined
    * @return Success
    */
-  getCompanyCompanyId(companyId: number): __Observable<CompanyForm> {
+  getCompanyCompanyId(companyId: number): __Observable<CompanyEditForm> {
     return this.getCompanyCompanyIdResponse(companyId).pipe(
-      __map(_r => _r.body as CompanyForm)
+      __map(_r => _r.body as CompanyEditForm)
     );
   }
 }
