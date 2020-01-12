@@ -11,7 +11,7 @@ import { StudentService, SectionService } from '../api/services';
 })
 export class FormStudentUpdateComponent implements OnInit {
   form: FormGroup;
-  studentModel: StudentDTO;
+  studentModel: StudentEditForm;
   sections: Array<SectionDTO>
 
   constructor(
@@ -24,7 +24,7 @@ export class FormStudentUpdateComponent implements OnInit {
   }
   ngOnInit() {
     this.route.data
-    .subscribe((data: { student: StudentDTO }) => {
+    .subscribe((data: { student: StudentEditForm }) => {
       if (data.student != undefined) {
         this.studentModel = data.student;
         this.form.patchValue(this.studentModel);
@@ -72,11 +72,12 @@ export class FormStudentUpdateComponent implements OnInit {
   }
 
   updateStudent(): void {
-     // Put Ok
       let studentUpdated: StudentEditForm = this.form.value;
+      
       studentUpdated.id = this.studentModel.id;
       studentUpdated.section = studentUpdated.section['name'];
-      console.log(studentUpdated);
+      studentUpdated.rowVersion = this.studentModel.rowVersion;
+
       this.studentService
         .putStudent(studentUpdated)
         .subscribe(() =>
