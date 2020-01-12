@@ -62,22 +62,10 @@ export class FormCompanyUpdateComponent implements OnInit {
   }
 
   updateCompany() {
-    // let companyUpdated: CompanyForm = this.form.value;
-    // //companyUpdated.isPremium = this.form.get('isPremium').value ? 1 : 0;
-    // if (this.isACreation) {
-    //   let companyUpdated: CompanyForm = this.form.value;
-    //   console.log(companyUpdated);
-    //   this.companyService
-    //     .postCompany(companyUpdated)
-    //     .subscribe(() => {
-    //        this.router.navigate(["/companies "]);
-    //     });
-    // } else {
       let companyUpdated: CompanyEditForm = this.form.value;
       companyUpdated.id = this.companyModel.id;
       this.companyService.putCompany(companyUpdated)
       .subscribe(() => this.router.navigate(["/companies"]));
-    //}
   }
 
 }

@@ -3,6 +3,7 @@
 <button mat-raised-button color="primary" routerLink="/companies">Retour</button>
 <div id="wrapper">
     <h1>Formulaire de l'entreprise</h1>
+    <p id="error">{{error}}</p>
     <form (ngSubmit)="updateCompany()" [formGroup]="form">
         <mat-form-field class="elem-form">
             <input type="text" matInput placeholder="Email" required formControlName="email">

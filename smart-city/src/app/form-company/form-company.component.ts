@@ -16,6 +16,7 @@ export class FormCompanyComponent implements OnInit {
   form: FormGroup;
   companyModel: CompanyForm;
   isACreation: boolean;
+  error: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,6 +40,7 @@ export class FormCompanyComponent implements OnInit {
           console.log(this.form.value);
         }
       });
+      this.error = "";
   }
 
   createFormGroup() {
@@ -93,10 +95,12 @@ export class FormCompanyComponent implements OnInit {
     this.companyService.postCompany(companyUpdated)
       .subscribe(() => {
         let route = this.authService.isAdmin() ? "/companies" : "/login";
-        this.router.navigate(["/companies"]);
+        this.router.navigate([route]);
         
+      },
+      error => {
+        this.error = error["error"] == "" ? error["error"] : "Mdps non identique";
       });
-
   }
 
   //TODO: Verifier les 2 mdp 
