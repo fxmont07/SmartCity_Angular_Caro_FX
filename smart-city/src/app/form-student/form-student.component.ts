@@ -13,7 +13,7 @@ export class FormStudentComponent implements OnInit {
   form: FormGroup;
   studentModel: StudentDTO;
   isACreation: boolean;
-  sections: Array<SectionDTO>
+  sections: Array<string>
 
   constructor(
     private route: ActivatedRoute,
@@ -30,8 +30,8 @@ export class FormStudentComponent implements OnInit {
       .subscribe((data: { student: StudentDTO }) => {
         if (data.student != undefined) {
           this.studentModel = data.student;
+
           this.form.patchValue(this.studentModel);
-          this.isACreation = false;
         }
       });
     this.getAllSections();
@@ -84,18 +84,16 @@ export class FormStudentComponent implements OnInit {
   getAllSections(): void {
     this.sectionService
       .getSection()
-      .subscribe((data) => this.sections = data);
+      .subscribe((data) => this.sections = data.map(d => d.name));
   }
 
   updateStudent(): void {
-    console.log("clic")
     let studentUpdated: StudentForm = this.form.value;
-    if (this.isACreation) {
-      this.studentService
-        .postStudent(studentUpdated)
-        .subscribe(() =>
-          this.router.navigate(["/students"])
-        );
-    }
+    console.log(studentUpdated);
+    this.studentService
+      .postStudent(studentUpdated)
+      .subscribe(() =>
+        this.router.navigate(["/students"])
+      );
   }
 }

@@ -14,7 +14,8 @@ export class AppComponent {
   constructor(
     private route: Router,
     private authService: AuthService,
-    private loginService: LoginService) { }
+    private loginService: LoginService,
+  ) { }
 
   isLoginView() {
     return this.route.url == "/login";
@@ -24,11 +25,13 @@ export class AppComponent {
     return this.authService.getRole();
   }
 
-  public isCompany(): boolean {
-    return this.getRole() == "Company";
+  private isCompany(): boolean {
+    return this.authService.isCompany();
   }
 
-  public isAdmin(): boolean {
-    return this.getRole() == "Admin";
+  private isAdmin(): boolean {
+    return this.authService.isAdmin();
   }
+
+  
 }

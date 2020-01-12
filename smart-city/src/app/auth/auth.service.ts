@@ -36,10 +36,18 @@ export class AuthService {
     return this.userId;
   }
 
-  logOut() {
+  public logOut(): void {
     localStorage.removeItem("Token");
     this.role =null;
     this.appId =null;
     this.userId =null;
+  }
+
+  public isCompany(): boolean {
+    return this.getRole() == "Company";
+  }
+
+  public isAdmin(): boolean {
+    return this.getRole() == "Admin";
   }
 }

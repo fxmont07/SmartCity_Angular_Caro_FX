@@ -81,7 +81,7 @@
         <mat-label>Sections *</mat-label>
         <mat-select formControlName="section">
             <mat-option *ngFor="let section of sections" [value]="section" required>
-                {{section.name}}
+                {{section}}
             </mat-option>
         </mat-select>
         <button id="button" mat-raised-button color="primary" [disabled]="!form.valid">Valider</button>

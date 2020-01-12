@@ -72,7 +72,7 @@
             <textarea matInput placeholder="Description" formControlName="description"></textarea>
         </mat-form-field>
 
-        <mat-checkbox formControlName="isPremium">Premium</mat-checkbox>
+        <mat-checkbox formControlName="isPremium" *ngIf=isAdmin()>Premium</mat-checkbox>
 
         <br>
 

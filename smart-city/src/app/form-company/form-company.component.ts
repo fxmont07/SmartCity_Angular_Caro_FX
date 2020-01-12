@@ -3,6 +3,7 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CompanyService } from '../api/services';
 import { CompanyForm } from '../api/models';
+import { AuthService } from '../auth/auth.service';
 
 
 @Component({
@@ -20,10 +21,10 @@ export class FormCompanyComponent implements OnInit {
     private route: ActivatedRoute,
     private companyService: CompanyService,
     private router: Router,
+    private authService: AuthService
   ) {
 
     this.form = this.createFormGroup();
-    this.isACreation = true;
   }
 
   ngOnInit() {
@@ -55,7 +56,7 @@ export class FormCompanyComponent implements OnInit {
           Validators.minLength(8)
         ]
       ),
-      confirmPassword : new FormControl('',
+      confirmPassword: new FormControl('',
         [
           Validators.required,
           Validators.minLength(8)
@@ -68,14 +69,14 @@ export class FormCompanyComponent implements OnInit {
         ]
       ),
       address: new FormGroup({
-        locality: new FormControl('', 
-        [
-          Validators.required,
-        ]),
+        locality: new FormControl('',
+          [
+            Validators.required,
+          ]),
         postCode: new FormControl('',
-        [
-          Validators.required,
-        ]),
+          [
+            Validators.required,
+          ]),
         street: new FormControl(''),
         streetNumber: new FormControl(''),
         country: new FormControl('', Validators.required)
@@ -88,18 +89,22 @@ export class FormCompanyComponent implements OnInit {
 
   updateCompany() {
     let companyUpdated: CompanyForm = this.form.value;
-    if (this.isACreation) {
-      console.log(companyUpdated);
-      this.companyService.postCompany(companyUpdated)
-        .subscribe(() => {
-          this.router.navigate(["/companies"]);
-        });
-    } 
+    console.log(companyUpdated);
+    this.companyService.postCompany(companyUpdated)
+      .subscribe(() => {
+        console.log("click");
+        this.router.navigate(["/companies"]);
+      });
+
   }
 
   //TODO: Verifier les 2 mdp 
   checkPassword() {
     return this.form.get("password") === this.form.get("confirmPassword");
+  }
+
+  isAdmin() {
+    return this.authService.isAdmin();
   }
 }
 
