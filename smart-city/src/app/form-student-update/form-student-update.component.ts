@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { StudentDTO, SectionDTO, StudentForm, StudentEditForm } from '../api/models';
+import { StudentDTO, SectionDTO, StudentEditForm } from '../api/models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StudentService, SectionService } from '../api/services';
 

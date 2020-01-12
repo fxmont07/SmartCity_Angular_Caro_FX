@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OfferTable } from '../model/offer';
-import { OfferDTO, Offer } from '../api/models';
+import { OfferDTO } from '../api/models';
 import { Observable } from 'rxjs';
 import { OfferService } from '../api/services';
 import { Router } from '@angular/router';

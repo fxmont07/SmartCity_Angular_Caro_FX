@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Student, SectionDTO, StudentDTO, StudentForm } from '../api/models';
+import { StudentDTO, StudentForm } from '../api/models';
 import { SectionService, StudentService } from '../api/services';
 
 @Component({

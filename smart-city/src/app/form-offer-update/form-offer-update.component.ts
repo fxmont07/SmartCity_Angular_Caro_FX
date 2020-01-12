@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { OfferService, SectionService, CompanyService } from '../api/services';
+import { OfferService } from '../api/services';
 import { OfferForm } from '../api/models';
 
 @Component({

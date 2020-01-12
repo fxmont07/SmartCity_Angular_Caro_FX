@@ -1,10 +1,10 @@
-<p>criterion-list works!</p>
-
-<app-display-data [data]="criterions" [colNames]="headers" 
-
-(editEvent)="editCriterion($event)"
-(deleteEvent)="deleteCriterion($event)" 
-(addEvent)="addCriterion($event)"
-(pageEvent)="page($event)">
+<app-display-data 
+    [data]="criterions" 
+    [colNames]="headers" 
+    (editEvent)="editCriterion($event)"
+    (deleteEvent)="deleteCriterion($event)" 
+    (addEvent)="addCriterion()"
+    (pageEvent)="page($event)"
+    >
 
 </app-display-data>

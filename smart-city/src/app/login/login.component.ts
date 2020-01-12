@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
-import { RouterEvent, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { LoginDTO, TokenDTO } from '../api/models';
 import { LoginService } from '../api/services';
 import { AuthService } from '../auth/auth.service';

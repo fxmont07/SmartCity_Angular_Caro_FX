@@ -3,7 +3,6 @@ import { CriterionTable, CriterionTableValue } from '../model/criterion';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CriterionDTO } from '../api/models';
 import { CriterionService } from '../api/services';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-criterion-list',
@@ -48,14 +47,14 @@ export class CriterionListComponent implements OnInit {
       this.criterions = data;
   });
   }
-  //Todo: Soucis onCascade
-  /* deleteCriterion(event: CriterionDTO): void {
+  
+  deleteCriterion(event: CriterionDTO): void {
     this.criterionService.deleteCriterion(event)
       .subscribe(() => {
         this.criterions = this.criterions.filter(c => c.id != event.id);
         this.criterions = [...this.criterions];
       });
-  } */
+  }
 
   getHeaders(): Array<string> {
     return ["id", "description", "section"];

@@ -211,7 +211,7 @@ const routes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    ApiModule.forRoot({ rootUrl: 'https://localhost:44386' }),//https://localhost:44386 https://api20191130111944.azurewebsites.net
+    ApiModule.forRoot({ rootUrl: 'https://smartcitycarofx.azurewebsites.net' }),//https://localhost:44386 https://api20191130111944.azurewebsites.net
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
