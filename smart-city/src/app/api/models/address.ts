@@ -5,7 +5,7 @@ import { Student } from './student';
 export interface Address {
   id?: number;
   street?: string;
-  number?: string;
+  streetNumber?: string;
   locality?: string;
   postCode?: string;
   country?: string;

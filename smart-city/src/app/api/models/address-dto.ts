@@ -2,7 +2,7 @@
 export interface AddressDTO {
   id?: number;
   street?: string;
-  number?: string;
+  streetNumber?: string;
   locality: string;
   postCode: string;
   country: string;

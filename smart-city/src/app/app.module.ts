@@ -47,6 +47,7 @@ import { CompanyUpdateResolver } from './form-company-update/company-update-reso
 import { FormOfferCompanyComponent } from './form-offer-company/form-offer-company.component';
 import { FormOfferUpdateComponent } from './form-offer-update/form-offer-update.component';
 import { FormStudentUpdateComponent } from './form-student-update/form-student-update.component';
+import { AuthGuardGuard } from './auth-guard.guard';
 
 
 
@@ -64,6 +65,7 @@ const routes: Routes = [
   {
     path: 'signup',
     component: SignUpComponent,
+    canActivate: [AuthGuardGuard],
   },
   {
     path: 'companies',

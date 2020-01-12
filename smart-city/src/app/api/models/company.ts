@@ -6,7 +6,6 @@ import { ApplicationUser } from './application-user';
 export interface Company {
   address?: Address;
   id?: number;
-  phoneNumber?: string;
   description?: string;
   isPremium?: boolean;
   addressId?: number;

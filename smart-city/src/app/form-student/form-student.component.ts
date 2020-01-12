@@ -14,6 +14,7 @@ export class FormStudentComponent implements OnInit {
   studentModel: StudentDTO;
   isACreation: boolean;
   sections: Array<string>
+  error: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,7 +22,6 @@ export class FormStudentComponent implements OnInit {
     private sectionService: SectionService,
     private router: Router,
   ) {
-    this.isACreation = true;
     this.form = this.createFormGroup();
   }
 
@@ -93,7 +93,9 @@ export class FormStudentComponent implements OnInit {
     this.studentService
       .postStudent(studentUpdated)
       .subscribe(() =>
-        this.router.navigate(["/students"])
-      );
+        this.router.navigate(["/students"]),
+        error => {
+          this.error = error["error"] == "" ? error["error"] : "Mdps non identique";
+        });
   }
 }

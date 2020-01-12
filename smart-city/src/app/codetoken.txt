@@ -1,0 +1,10 @@
+ public getTokenString(): string {
+    return localStorage.getItem('Token');
+  }
+  public getToken(): TokenDTO {
+    return JSON.parse(localStorage.getItem('Token'));
+  }
+  public setToken(token): void {
+    localStorage.setItem("Token", JSON.stringify(token));
+    this.token = token;
+  }
