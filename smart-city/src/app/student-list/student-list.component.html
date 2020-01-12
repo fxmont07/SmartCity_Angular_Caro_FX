@@ -1,10 +1,11 @@
 <p>student-list works!</p>
 
 
-<app-display-data [data]="students" [colNames]="headers" 
-
-(editEvent)="editStudent($event)"
-(deleteEvent)="deleteStudent($event)" 
-(addEvent)="addStudent($event)">
+<app-display-data 
+    [data]="students" 
+    [colNames]="headers"
+    (editEvent)="editStudent($event)"
+    (deleteEvent)="deleteStudent($event)" 
+    (addEvent)="addStudent()">
 
 </app-display-data>

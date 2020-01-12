@@ -12,7 +12,7 @@ import { CompanyService } from '../api/services';
 export class FormCompanyUpdateComponent implements OnInit {
 
   form: FormGroup;
-  companyModel: CompanyForm;
+  companyModel: CompanyEditForm;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,7 +26,7 @@ export class FormCompanyUpdateComponent implements OnInit {
   ngOnInit() {
     this.form.get('isPremium').setValue(false);
     this.route.data
-      .subscribe((data: { company: CompanyForm }) => {
+      .subscribe((data: { company: CompanyEditForm }) => {
         if (data.company != undefined) {
           this.companyModel = data.company;
           this.form.patchValue(this.companyModel);
@@ -75,6 +75,7 @@ export class FormCompanyUpdateComponent implements OnInit {
     // } else {
       let companyUpdated: CompanyEditForm = this.form.value;
       companyUpdated.id = this.companyModel.id;
+      companyUpdated.rowVersion = this.companyModel.rowVersion;
       this.companyService.putCompany(companyUpdated)
       .subscribe(() => this.router.navigate(["/companies"]));
     //}

@@ -65,6 +65,7 @@ export class FormCriterionComponent implements OnInit {
         .subscribe(() => this.router.navigate(["/criterions"]));
     } else {
       criterionUpdated.id = this.criterionModel.id;
+      criterionUpdated.rowVersion = this.criterionModel.rowVersion;
       this.criterionService
         .putCriterion(criterionUpdated)
         .subscribe(() => this.router.navigate(["/criterions"]))
