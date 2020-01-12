@@ -16,3 +16,8 @@ div {
     display: block;
     margin-bottom: 10px;
 }
+
+#error {
+    color: red;
+    text-align: center;
+}
