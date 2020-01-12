@@ -70,10 +70,12 @@ const routes: Routes = [
   {
     path: 'companies',
     component: CompanyListComponent,
+    canActivate: [AuthGuardGuard],
   },
   {
     path: 'sections',
     component: SectionListComponent,
+    canActivate: [AuthGuardGuard],
   },
   {
     path: 'formcompany',
@@ -82,81 +84,99 @@ const routes: Routes = [
   {
     path: 'formcompany/:id',
     component: FormCompanyComponent,
-    resolve: { company: CompanyResolver }
+    resolve: { company: CompanyResolver },
+    canActivate: [AuthGuardGuard],
   },
   {
     path: 'formcompanyupdate/:id',
     component: FormCompanyUpdateComponent,
-    resolve: { company: CompanyUpdateResolver }
+    resolve: { company: CompanyUpdateResolver },
+    canActivate: [AuthGuardGuard],
   },
   {
     path: 'formsection',
     component: FormSectionComponent,
+    canActivate: [AuthGuardGuard],
   },
   {
     path: 'formsection/:id',
     component: FormSectionComponent,
-    resolve: { section: SectionResolver }
+    resolve: { section: SectionResolver },
+    canActivate: [AuthGuardGuard],
   },
   {
     path: 'students',
     component: StudentListComponent,
+    canActivate: [AuthGuardGuard],
   },
   {
     path: 'formstudent',
     component: FormStudentComponent,
+    canActivate: [AuthGuardGuard],
   },
   {
     path: 'formstudent/:id',
     component: FormStudentComponent,
-    resolve: { student: StudentResolver }
+    resolve: { student: StudentResolver },
+    canActivate: [AuthGuardGuard],
   },
   {
     path: 'formstudentupdate/:id',
     component: FormStudentUpdateComponent,
-    resolve: { student: StudentResolver }
+    resolve: { student: StudentResolver },
+    canActivate: [AuthGuardGuard],
   },
   {
     path: 'criterions',
     component: CriterionListComponent,
+    canActivate: [AuthGuardGuard],
   },
   {
     path: 'formcriterion',
     component: FormCriterionComponent,
+    canActivate: [AuthGuardGuard],
   },
   {
     path: 'formcriterion/:id',
     component: FormCriterionComponent,
-    resolve: { criterion: CriterionResolver }
+    resolve: { criterion: CriterionResolver },
+    canActivate: [AuthGuardGuard],
   },
   {
     path: 'formoffer',
     component: FormOfferComponent,
+    canActivate: [AuthGuardGuard],
   },
   {
     path: 'formofferCompany',
     component: FormOfferCompanyComponent,
+    canActivate: [AuthGuardGuard],
   },
   {
     path: 'formoffer/:id',
     component: FormOfferUpdateComponent,
-    resolve: { offer: OfferResolver }
+    resolve: { offer: OfferResolver },
+    canActivate: [AuthGuardGuard],
   },
   {
     path: 'offerdetails', // TODO: id
     component: OfferDetailsComponent,
+    canActivate: [AuthGuardGuard],
   },
   {
     path: 'companyprofil',
     component: CompanyProfilComponent,
+    canActivate: [AuthGuardGuard],
   },
   {
     path: 'companyoffer',
     component: CompanyOfferComponent,
+    canActivate: [AuthGuardGuard],
   },
   {
     path: 'offerList',
     component : OfferListComponent,
+    canActivate: [AuthGuardGuard],
   }
 ];
 

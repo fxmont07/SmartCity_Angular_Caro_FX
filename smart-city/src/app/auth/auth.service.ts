@@ -23,15 +23,10 @@ export class AuthService {
   }
 
   public isAuthenticated(): boolean { // use dans le guard redirect vers login ou autre
-    // get the token
-    const token = this.getToken();
-    // return a boolean reflecting 
-    // whether or not the token is expired
-    //return tokenNotExpired(null, token);
-    console.log(token);
-    console.log()
-    console.log(token != null && token != undefined)
-    return this.isCompany() || this.isAdmin();
+    
+    const token = this.getTokenString();
+
+    return this.getTokenString() != null;
   }
 
   public manageToken(token): void {
