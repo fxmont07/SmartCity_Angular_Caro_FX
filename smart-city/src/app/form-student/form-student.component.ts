@@ -89,7 +89,6 @@ export class FormStudentComponent implements OnInit {
 
   updateStudent(): void {
     let studentUpdated: StudentForm = this.form.value;
-    console.log(studentUpdated);
     this.studentService
       .postStudent(studentUpdated)
       .subscribe(() =>

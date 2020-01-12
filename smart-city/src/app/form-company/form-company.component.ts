@@ -15,7 +15,6 @@ export class FormCompanyComponent implements OnInit {
 
   form: FormGroup;
   companyModel: CompanyForm;
-  isACreation: boolean;
   error: string;
 
   constructor(
@@ -36,8 +35,6 @@ export class FormCompanyComponent implements OnInit {
           this.companyModel = data.company;
           this.form.patchValue(this.companyModel);
           this.form.get('address').patchValue(this.companyModel.address);
-          this.isACreation = false;
-          console.log(this.form.value);
         }
       });
       this.error = "";
@@ -91,7 +88,6 @@ export class FormCompanyComponent implements OnInit {
 
   updateCompany() {
     let companyUpdated: CompanyForm = this.form.value;
-    console.log(companyUpdated);
     this.companyService.postCompany(companyUpdated)
       .subscribe(() => {
         let route = this.authService.isAdmin() ? "/companies" : "/login";

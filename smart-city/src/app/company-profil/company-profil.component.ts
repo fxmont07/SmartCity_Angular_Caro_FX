@@ -11,7 +11,7 @@ import { AuthService } from '../auth/auth.service';
 })
 export class CompanyProfilComponent implements OnInit {
   form: FormGroup;
-  companyMode: CompanyEditForm;
+  companyModel: CompanyEditForm;
 
   constructor(
     private companyService : CompanyService,
@@ -21,10 +21,13 @@ export class CompanyProfilComponent implements OnInit {
      }
 
   ngOnInit() {
-    console.log(this.authService.getUserId())
     this.companyService.getCompanyCompanyId(
       this.authService.getUserId())
-      .subscribe(data => console.log(data));
+      .subscribe(data => {
+        this.companyModel = data;
+        this.form.patchValue(this.companyModel);
+          this.form.get('address').patchValue(this.companyModel.address);
+      });
   }
 
   createFormGroup() {
