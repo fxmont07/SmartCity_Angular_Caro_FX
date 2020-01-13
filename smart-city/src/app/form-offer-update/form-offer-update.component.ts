@@ -60,14 +60,12 @@ export class FormOfferUpdateComponent implements OnInit {
 
   updateOffer() {
     let offerUpdated = this.form.value;
-
-    offerUpdated.Address = offerUpdated.address;
-
+    
+    //offerUpdated.Address = offerUpdated.address;
     offerUpdated.id = this.offerModel.id;
     offerUpdated.companyId = this.offerModel.companyId;
     offerUpdated.sectionId = this.offerModel.sectionId;
     offerUpdated.rowVersion = this.offerModel.rowVersion;
-    
     this.offerService
       .putOffer(offerUpdated)
       .subscribe(() => this.router.navigate(["/companyoffer"]))

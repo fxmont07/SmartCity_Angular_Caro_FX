@@ -68,5 +68,4 @@ export class FormCompanyUpdateComponent implements OnInit {
       this.companyService.putCompany(companyUpdated)
       .subscribe(() => this.router.navigate(["/companies"]));
   }
-
 }
