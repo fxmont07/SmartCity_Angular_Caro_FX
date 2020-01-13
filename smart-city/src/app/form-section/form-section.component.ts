@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SectionForm } from '../model/section';
-import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { SectionService } from '../api/services';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SectionDTO } from '../api/models';

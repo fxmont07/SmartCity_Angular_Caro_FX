@@ -1,4 +1,3 @@
-<p>form-offer-update works!</p>
 <button mat-raised-button color="primary" routerLink="/companyoffer">Retour</button>
 <div id="wrapper">
     <h1>Formulaire de l'offre</h1>
@@ -22,14 +21,14 @@
             <textarea type="text" matInput placeholder="Autre" formControlName="other"></textarea>
         </mat-form-field>
 
-        <span formGroupName="addressDTO">
+        <span formGroupName="address">
 
             <mat-form-field class="elem-form">
                 <input type="text" matInput placeholder="Rue" formControlName="street">
             </mat-form-field>
             
             <mat-form-field class="elem-form">
-                <input type="text" matInput placeholder="Numéro" formControlName="number">
+                <input type="text" matInput placeholder="Numéro" formControlName="streetNumber">
             </mat-form-field>
 
             <mat-form-field class="elem-form">

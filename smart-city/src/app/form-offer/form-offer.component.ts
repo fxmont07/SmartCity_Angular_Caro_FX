@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { OfferForm, SectionDTO, CompanyTable } from '../api/models';
+import { SectionDTO, CompanyTable } from '../api/models';
 import { ActivatedRoute, Router } from '@angular/router';
-import { OfferService, SectionService, CompanyService, AddressContollerService } from '../api/services';
+import { OfferService, SectionService, CompanyService } from '../api/services';
 
 @Component({
   selector: 'app-form-offer',

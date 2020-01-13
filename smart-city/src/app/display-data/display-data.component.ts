@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';

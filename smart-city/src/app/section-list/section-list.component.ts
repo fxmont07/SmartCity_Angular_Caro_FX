@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SectionTable } from '../model/section';
 import { SectionService } from '../api/services';
 import { Observable } from 'rxjs';
 import { SectionDTO } from '../api/models';

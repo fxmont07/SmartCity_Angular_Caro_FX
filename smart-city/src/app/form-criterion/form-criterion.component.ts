@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { CriterionForm } from '../model/criterion';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { CriterionDTO, SectionDTO } from '../api/models';
 import { CriterionService, SectionService } from '../api/services';
 
@@ -35,8 +33,6 @@ export class FormCriterionComponent implements OnInit {
         if (data.criterion != undefined) {
           this.criterionModel = data.criterion;
           this.form.patchValue(this.criterionModel);
-
-          //TODO: patch la section
           this.isACreation = false;
         }
       });

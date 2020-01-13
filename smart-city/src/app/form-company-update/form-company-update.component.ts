@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
-import { CompanyForm, CompanyEditForm } from '../api/models';
+import { CompanyEditForm } from '../api/models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CompanyService } from '../api/services';
 

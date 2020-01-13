@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { OfferService, SectionService, CompanyService } from '../api/services';
+import { OfferService } from '../api/services';
+import { OfferForm } from '../api/models';
 
 @Component({
   selector: 'app-form-offer-update',
@@ -11,7 +12,7 @@ import { OfferService, SectionService, CompanyService } from '../api/services';
 export class FormOfferUpdateComponent implements OnInit {
 
   form: FormGroup;
-  offerModel: any; //TODO: soucis avec le OfferForm pas de champs Address
+  offerModel: OfferForm; //TODO: soucis avec le OfferForm pas de champs Address
 
   constructor(
     private route: ActivatedRoute,
@@ -23,13 +24,12 @@ export class FormOfferUpdateComponent implements OnInit {
 
   ngOnInit() {
     this.route.data
-      .subscribe((data: { offer: any }) => {
+      .subscribe((data: { offer: OfferForm }) => {
 
         if (data.offer != undefined) {
           this.offerModel = data.offer;
-
           this.form.patchValue(this.offerModel);
-          this.form.get('addressDTO').patchValue(this.offerModel.address);
+          this.form.get('address').patchValue(this.offerModel.address);
         }
       });
   }
@@ -48,9 +48,9 @@ export class FormOfferUpdateComponent implements OnInit {
         ]
       ),
       other: new FormControl(''),
-      addressDTO: new FormGroup({
+      address: new FormGroup({
         street: new FormControl(''),
-        number: new FormControl(''),
+        streetNumber: new FormControl(''),
         locality: new FormControl(''), //TODO: vérif si obligatoire
         postCode: new FormControl(''),
         country: new FormControl(''),
@@ -61,7 +61,7 @@ export class FormOfferUpdateComponent implements OnInit {
   updateOffer() {
     let offerUpdated = this.form.value;
 
-    offerUpdated.Address = offerUpdated.addressDTO;
+    offerUpdated.Address = offerUpdated.address;
 
     offerUpdated.id = this.offerModel.id;
     offerUpdated.companyId = this.offerModel.companyId;

@@ -1,5 +1,3 @@
-<p>form-company-update works!</p>
-
 <button mat-raised-button color="primary" routerLink="/companies">Retour</button>
 <div id="wrapper">
     <h1>Formulaire de l'entreprise</h1>
@@ -25,18 +23,13 @@
             </mat-form-field>
 
             <mat-form-field class="elem-form">
-                <input matInput placeholder="Numéro de la rue" formControlName="number">
+                <input matInput placeholder="Numéro de la rue" formControlName="streetNumber">
             </mat-form-field>
 
             <mat-form-field class="elem-form">
                 <input matInput placeholder="Pays" formControlName="country" required>
             </mat-form-field>
         </span>
-
-        <mat-form-field class="elem-form">
-            <span matPrefix>+ &nbsp;</span>
-            <input type="tel" matInput placeholder="Telephone" formControlName="phone">
-        </mat-form-field>
 
         <mat-form-field class="elem-form">
             <textarea matInput placeholder="Description" formControlName="description"></textarea>

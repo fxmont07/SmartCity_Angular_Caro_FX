@@ -1,9 +1,8 @@
-<p>company-offer works!</p>
-
-<app-display-data [data]="companyOffers" [colNames]="headers" 
-
+<app-display-data 
+    [data]="companyOffers" 
+    [colNames]="headers" 
     (editEvent)="editCompanyOffer($event)"
     (deleteEvent)="deleteCompanyOffer($event)" 
-    (addEvent)="addCompanyOffer($event)">
+    (addEvent)="addCompanyOffer()">
 
 </app-display-data>

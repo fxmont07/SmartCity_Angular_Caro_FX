@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
-import { FormCompanyComponent } from '../form-company/form-company.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CompanyService } from '../api/services';
-import { VirtualTimeScheduler, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CompanyTable } from '../api/models';
 
 
@@ -16,7 +14,7 @@ export class CompanyListComponent implements OnInit {
   companies: Array<CompanyTable>;
   headers: Array<string>;
 
-  constructor(private router: Router, private route: ActivatedRoute, private serviceCompany: CompanyService) {
+  constructor(private router: Router, private serviceCompany: CompanyService) {
     this.headers = new Array<string>();
     this.companies = new Array<CompanyTable>();
   }

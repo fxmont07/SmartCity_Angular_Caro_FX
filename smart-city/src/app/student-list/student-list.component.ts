@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
-import { Router, ActivatedRoute } from '@angular/router';
-import { StudentService, SectionService } from '../api/services';
+import { Router } from '@angular/router';
+import { StudentService } from '../api/services';
 import { Observable } from 'rxjs';
 import { StudentTable } from '../api/models';
-
 
 
 @Component({
@@ -18,9 +16,7 @@ export class StudentListComponent implements OnInit {
 
   constructor(
     private router : Router,
-    private route : ActivatedRoute, 
-    private studentService : StudentService,
-    private sectionService : SectionService) { 
+    private studentService : StudentService) { 
       this.headers = new Array<string>();
       this.students = new Array<StudentTable>();
     }
